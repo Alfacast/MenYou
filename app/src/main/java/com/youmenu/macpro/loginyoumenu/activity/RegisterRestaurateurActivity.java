@@ -103,7 +103,7 @@ public class RegisterRestaurateurActivity extends Activity {
 
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(),
-                        LoginActivity.class);
+                        LoginClientActivity.class);
                 startActivity(i);
                 finish();
             }
@@ -155,7 +155,7 @@ public class RegisterRestaurateurActivity extends Activity {
                         // Launch login activity
                         Intent intent = new Intent(
                                 RegisterRestaurateurActivity.this,
-                                LoginActivity.class);
+                                LoginClientActivity.class);
                         startActivity(intent);
                         finish();
                     } else {

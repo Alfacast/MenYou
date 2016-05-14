@@ -92,7 +92,7 @@ public class MainActivity extends Activity {
         dbr.deleteUsers();
 
         // Launching the login activity
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        Intent intent = new Intent(MainActivity.this, LoginClientActivity.class);
         startActivity(intent);
         finish();
     }

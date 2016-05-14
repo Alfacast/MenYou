@@ -89,7 +89,7 @@ public class RegisterActivity extends Activity {
 
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(),
-                        LoginActivity.class);
+                        LoginClientActivity.class);
                 startActivity(i);
                 finish();
             }
@@ -139,7 +139,7 @@ public class RegisterActivity extends Activity {
                         // Launch login activity
                         Intent intent = new Intent(
                                 RegisterActivity.this,
-                                LoginActivity.class);
+                                LoginClientActivity.class);
                         startActivity(intent);
                         finish();
                     } else {

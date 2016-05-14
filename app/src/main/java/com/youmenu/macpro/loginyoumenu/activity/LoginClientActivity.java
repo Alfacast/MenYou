@@ -27,8 +27,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginActivity extends Activity {
-    private static final String TAG = LoginActivity.class.getSimpleName();
+public class LoginClientActivity extends Activity {
+    private static final String TAG = LoginClientActivity.class.getSimpleName();
     private Button btnLogin;
     private Button btnLinkToRegister;
     private Button btnRegisterRestaurateur; //Button for Restaurateur
@@ -42,7 +42,7 @@ public class LoginActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_client);
 
         inputEmail = (EditText) findViewById(R.id.email);
         inputPassword = (EditText) findViewById(R.id.password);
@@ -64,7 +64,7 @@ public class LoginActivity extends Activity {
         // Check if user is already logged in or not
         if (session.isLoggedIn()) {
             // User is already logged in. Take him to main activity
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            Intent intent = new Intent(LoginClientActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
         }
@@ -92,7 +92,7 @@ public class LoginActivity extends Activity {
 
         // Link to Register Screen
         btnLinkToRegister.setOnClickListener(new View.OnClickListener() {
-
+            @Override
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(),
                         RegisterActivity.class);
@@ -177,7 +177,7 @@ public class LoginActivity extends Activity {
 
 
                         // Launch main activity
-                        Intent intent = new Intent(LoginActivity.this,
+                        Intent intent = new Intent(LoginClientActivity.this,
                                 MainActivity.class);
                         startActivity(intent);
                         finish();
