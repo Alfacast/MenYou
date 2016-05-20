@@ -17,7 +17,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.youmenu.macpro.loginyoumenu.R;
 import com.youmenu.macpro.loginyoumenu.app.AppConfig;
 import com.youmenu.macpro.loginyoumenu.app.AppController;
-import com.youmenu.macpro.loginyoumenu.helper.SQLiteHandler;
+import com.youmenu.macpro.loginyoumenu.helper.SQLiteHandlerUser;
 import com.youmenu.macpro.loginyoumenu.helper.SessionManager;
 
 import org.json.JSONException;
@@ -26,8 +26,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegisterActivity extends Activity {
-    private static final String TAG = RegisterActivity.class.getSimpleName();
+public class RegisterUserActivity extends Activity {
+    private static final String TAG = RegisterUserActivity.class.getSimpleName();
     private Button btnRegister;
     private Button btnLinkToLogin;
     private EditText inputFullName;
@@ -35,12 +35,12 @@ public class RegisterActivity extends Activity {
     private EditText inputPassword;
     private ProgressDialog pDialog;
     private SessionManager session;
-    private SQLiteHandler db;
+    private SQLiteHandlerUser db;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_register_user);
 
         inputFullName = (EditText) findViewById(R.id.name);
         inputEmail = (EditText) findViewById(R.id.email);
@@ -56,13 +56,13 @@ public class RegisterActivity extends Activity {
         session = new SessionManager(getApplicationContext());
 
         // SQLite database handler
-        db = new SQLiteHandler(getApplicationContext());
+        db = new SQLiteHandlerUser(getApplicationContext());
 
         // Check if user is already logged in or not
         if (session.isLoggedIn()) {
             // User is already logged in. Take him to main activity
-            Intent intent = new Intent(RegisterActivity.this,
-                    MainActivity.class);
+            Intent intent = new Intent(RegisterUserActivity.this,
+                    MainUserActivity.class);
             startActivity(intent);
             finish();
         }
@@ -89,7 +89,7 @@ public class RegisterActivity extends Activity {
 
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(),
-                        LoginClientActivity.class);
+                        LoginActivity.class);
                 startActivity(i);
                 finish();
             }
@@ -138,8 +138,8 @@ public class RegisterActivity extends Activity {
 
                         // Launch login activity
                         Intent intent = new Intent(
-                                RegisterActivity.this,
-                                LoginClientActivity.class);
+                                RegisterUserActivity.this,
+                                LoginActivity.class);
                         startActivity(intent);
                         finish();
                     } else {

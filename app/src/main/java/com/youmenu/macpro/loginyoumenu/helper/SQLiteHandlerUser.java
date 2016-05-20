@@ -9,16 +9,16 @@ import android.util.Log;
 
 import java.util.HashMap;
 
-public class SQLiteHandler extends SQLiteOpenHelper {
+public class SQLiteHandlerUser extends SQLiteOpenHelper {
 
-    private static final String TAG = SQLiteHandler.class.getSimpleName();
+    private static final String TAG = SQLiteHandlerUser.class.getSimpleName();
 
     // All Static variables
     // Database Version
     private static final int DATABASE_VERSION = 1;
 
     // Database Name
-    private static final String DATABASE_NAME = "youmenulogin";
+    private static final String DATABASE_NAME = "menuYouLoginUser";
 
     // Login table name
     private static final String TABLE_USER = "user";
@@ -30,7 +30,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     private static final String KEY_UID = "uid";
     private static final String KEY_CREATED_AT = "created_at";
 
-    public SQLiteHandler(Context context) {
+    public SQLiteHandlerUser(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 

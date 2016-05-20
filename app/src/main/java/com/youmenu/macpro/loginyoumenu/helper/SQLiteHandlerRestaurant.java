@@ -18,7 +18,7 @@ public class SQLiteHandlerRestaurant extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
 
-    private static final String DATABASE_NAME = "youmenulogin";
+    private static final String DATABASE_NAME = "menuYouLoginRistorante";
 
     private static  final String TABLE_USER = "ristorante";
 

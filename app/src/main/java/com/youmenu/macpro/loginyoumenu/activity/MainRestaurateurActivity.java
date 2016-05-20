@@ -10,40 +10,40 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.youmenu.macpro.loginyoumenu.R;
-import com.youmenu.macpro.loginyoumenu.helper.SQLiteHandler;
 import com.youmenu.macpro.loginyoumenu.helper.SQLiteHandlerRestaurant;
 import com.youmenu.macpro.loginyoumenu.helper.SessionManager;
 
 import java.util.HashMap;
 
-public class MainActivity extends Activity {
-    private static final String TAG = MainActivity.class.getSimpleName();
+public class MainRestaurateurActivity extends Activity {
+
+    private static final String TAG = MainRestaurateurActivity.class.getSimpleName();
 
     private TextView txtName;
-    private TextView txtEmail;
+    private TextView txtPartitaIva;
     private Button btnLogout;
 
-    private SQLiteHandler db;
+
     private SessionManager session;
     private SQLiteHandlerRestaurant dbr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_restaurateur);
 
         txtName = (TextView) findViewById(R.id.name);
-        txtEmail = (TextView) findViewById(R.id.email);
+        txtPartitaIva = (TextView) findViewById(R.id.partitaIva);
         btnLogout = (Button) findViewById(R.id.btnLogout);
 
-        // SqLite database handler
-        db = new SQLiteHandler(getApplicationContext());
-        dbr = new SQLiteHandlerRestaurant(getApplicationContext());
 
+        dbr = new SQLiteHandlerRestaurant(getApplicationContext());
 
 
         // session manager
         session = new SessionManager(getApplicationContext());
+
+
 
         if (!session.isLoggedIn()) {
             logoutUser();
@@ -51,18 +51,16 @@ public class MainActivity extends Activity {
 
 
         // Recuperare dati utente da SQLite
-        HashMap<String, String> user = dbr.getUserDetails();
-        String name = user.get("name");
-        String email = user.get("email");
-        String partitaIva = user.get("partitaIva");
+        HashMap<String, String> ristorante = dbr.getUserDetails();
+        String name = ristorante.get("name");
+        String partitaIva = ristorante.get("partitaIva");
 
-        Log.d(TAG, "db cliente");
+        Log.d(TAG, "db ristorante");
 
 
         // Displaying the user details on the screen
         txtName.setText(name);
-        txtEmail.setText(partitaIva);
-
+        txtPartitaIva.setText(partitaIva);
 
 
         // Logout button click event
@@ -73,12 +71,6 @@ public class MainActivity extends Activity {
                 logoutUser();
             }
         });
-
-
-
-
-
-
     }
 
     /**
@@ -92,7 +84,7 @@ public class MainActivity extends Activity {
         dbr.deleteUsers();
 
         // Launching the login activity
-        Intent intent = new Intent(MainActivity.this, LoginClientActivity.class);
+        Intent intent = new Intent(MainRestaurateurActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
     }

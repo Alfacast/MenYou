@@ -19,7 +19,7 @@ public class SessionManager {
     int PRIVATE_MODE = 0;
 
     // Shared preferences file name
-    private static final String PREF_NAME = "Ciao Coglione!!";
+    private static final String PREF_NAME = "Ben Tornato!!";
 
     private static final String KEY_IS_LOGGED_IN = "isLoggedIn";
 

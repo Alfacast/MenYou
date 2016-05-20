@@ -2,12 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/bg_login"
+    android:background="@drawable/logo"
     android:gravity="center"
     android:padding="10dp"
     android:weightSum="1"
     android:visibility="visible"
     android:orientation="vertical">
+
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -23,7 +24,9 @@
             android:visibility="visible"
             android:adjustViewBounds="false"
             android:layout_gravity="center" />
+
     </FrameLayout>
+
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -70,6 +73,19 @@
             android:text="@string/btn_login"
             android:textColor="@color/btn_login" />
 
+        <!-- Link to Login Screen -->
+
+
+        <Button
+            android:id="@+id/btnLoginFacebook"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dip"
+            android:background="#1f8fff"
+            android:text="@string/btn_link_to_facebook"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="15dp" />
 
 
         <Button
@@ -80,7 +96,7 @@
             android:background="@null"
             android:text="@string/btn_link_to_register_client"
             android:textAllCaps="false"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="15dp" />
 
         <Button
@@ -91,7 +107,7 @@
             android:background="@null"
             android:text="@string/btn_link_to_register_restaurateur"
             android:textAllCaps="false"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="15dp" />
     </LinearLayout>
 

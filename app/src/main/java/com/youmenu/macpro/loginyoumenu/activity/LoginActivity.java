@@ -17,7 +17,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.youmenu.macpro.loginyoumenu.R;
 import com.youmenu.macpro.loginyoumenu.app.AppConfig;
 import com.youmenu.macpro.loginyoumenu.app.AppController;
-import com.youmenu.macpro.loginyoumenu.helper.SQLiteHandler;
+import com.youmenu.macpro.loginyoumenu.helper.SQLiteHandlerUser;
 import com.youmenu.macpro.loginyoumenu.helper.SQLiteHandlerRestaurant;
 import com.youmenu.macpro.loginyoumenu.helper.SessionManager;
 
@@ -27,8 +27,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginClientActivity extends Activity {
-    private static final String TAG = LoginClientActivity.class.getSimpleName();
+public class LoginActivity extends Activity {
+    private static final String TAG = LoginActivity.class.getSimpleName();
     private Button btnLogin;
     private Button btnLinkToRegister;
     private Button btnRegisterRestaurateur; //Button for Restaurateur
@@ -36,13 +36,13 @@ public class LoginClientActivity extends Activity {
     private EditText inputPassword;
     private ProgressDialog pDialog;
     private SessionManager session;
-    private SQLiteHandler db;
+    private SQLiteHandlerUser db;
     private SQLiteHandlerRestaurant dbr;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_client);
+        setContentView(R.layout.activity_login);
 
         inputEmail = (EditText) findViewById(R.id.email);
         inputPassword = (EditText) findViewById(R.id.password);
@@ -55,7 +55,7 @@ public class LoginClientActivity extends Activity {
         pDialog.setCancelable(false);
 
         // SQLite database handler
-        db = new SQLiteHandler(getApplicationContext());
+        db = new SQLiteHandlerUser(getApplicationContext());
         dbr = new SQLiteHandlerRestaurant(getApplicationContext());
 
         // Session manager
@@ -64,7 +64,7 @@ public class LoginClientActivity extends Activity {
         // Check if user is already logged in or not
         if (session.isLoggedIn()) {
             // User is already logged in. Take him to main activity
-            Intent intent = new Intent(LoginClientActivity.this, MainActivity.class);
+            Intent intent = new Intent(LoginActivity.this, MainUserActivity.class);
             startActivity(intent);
             finish();
         }
@@ -83,7 +83,7 @@ public class LoginClientActivity extends Activity {
                 } else {
                     // Prompt user to enter credentials
                     Toast.makeText(getApplicationContext(),
-                            "Please inserire i dati!", Toast.LENGTH_LONG)
+                            "Inserire i dati!", Toast.LENGTH_LONG)
                             .show();
                 }
             }
@@ -95,7 +95,7 @@ public class LoginClientActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(),
-                        RegisterActivity.class);
+                        RegisterUserActivity.class);
                 startActivity(i);
                 finish();
             }
@@ -119,7 +119,7 @@ public class LoginClientActivity extends Activity {
      * */
     private void checkLogin(final String email, final String password) {
         // Tag used to cancel the request
-        String tag_string_req = "req_login";
+        String tag_string_req = "req_login"; //??
 
         pDialog.setMessage("Logging in ...");
         showDialog();
@@ -164,29 +164,33 @@ public class LoginClientActivity extends Activity {
                         if(partitaIva.toString() == "null"){
                             Log.d(TAG,"partitaIva è null ");
                             db.addUser(name, email, uid, created_at);
+                            // Launch main activity
+                            Intent intent = new Intent(LoginActivity.this,
+                                    MainUserActivity.class);
+                            startActivity(intent);
+                            finish();
 
                         }else{
                             Log.d(TAG,"partitaIva non è null ");
                             dbr.addUser(name, address, partitaIva, email, tel, uid, created_at);
+                            // Launch main activity
+                            Intent intent = new Intent(LoginActivity.this,
+                                    MainRestaurateurActivity.class);
+                            startActivity(intent);
+                            finish();
                         }
-
-
 
                         Log.d(TAG,"partita iva è: " + partitaIva.toString());
 
 
-
-                        // Launch main activity
-                        Intent intent = new Intent(LoginClientActivity.this,
-                                MainActivity.class);
-                        startActivity(intent);
-                        finish();
                     } else {
                         // Error in login. Get the error message
+
                         String errorMsg = jObj.getString("error_msg");
                         Toast.makeText(getApplicationContext(),
                                 errorMsg, Toast.LENGTH_LONG).show();
                     }
+
                 } catch (JSONException e) {
                     // JSON error
                     e.printStackTrace();

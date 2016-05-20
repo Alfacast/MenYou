@@ -73,7 +73,7 @@ public class RegisterRestaurateurActivity extends Activity {
         if (session.isLoggedIn()) {
             // User is already logged in. Take him to main activity
             Intent intent = new Intent(RegisterRestaurateurActivity.this,
-                    MainActivity.class);
+                    MainUserActivity.class);
             startActivity(intent);
             finish();
         }
@@ -103,7 +103,7 @@ public class RegisterRestaurateurActivity extends Activity {
 
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(),
-                        LoginClientActivity.class);
+                        LoginActivity.class);
                 startActivity(i);
                 finish();
             }
@@ -155,7 +155,7 @@ public class RegisterRestaurateurActivity extends Activity {
                         // Launch login activity
                         Intent intent = new Intent(
                                 RegisterRestaurateurActivity.this,
-                                LoginClientActivity.class);
+                                LoginActivity.class);
                         startActivity(intent);
                         finish();
                     } else {
