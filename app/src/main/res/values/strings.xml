@@ -9,7 +9,7 @@
     <string name="btn_register">REGISTER</string>
     <string name="btn_link_to_register_client">Non sei registrato? Iscriviti ora.</string>
     <string name="btn_link_to_register_restaurateur">Vuoi inserire un Menu? Iscriviti ora.</string>
-    <string name="btn_link_to_facebook">Login with Facebook</string>
+    <string name="btn_link_to_facebook">Login con Facebook</string>
     <string name="btn_link_to_login">Sei registrato! Fai il Login.</string>
     <string name="welcome">Welcome</string>
     <string name="btn_logout">LOGOUT</string>
