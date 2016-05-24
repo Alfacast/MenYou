@@ -14,6 +14,6 @@ public class AppConfig {
         // Server restaurant register url
         public static String URL_RESTAURANTREGISTER = "http://10.0.3.2:80/youmenulogin/registerRistorante.php";
 
-        public static String URL_RESTAURANTLOGIN = "http://10.0.3.2:80/youmenulogin/registerRistorante.php";
+
     }
 
