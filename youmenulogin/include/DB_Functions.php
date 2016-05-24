@@ -83,7 +83,8 @@ class DB_Functions {
      */
     public function getUserByEmailAndPassword($email, $password) {
 
-        $stmt = $this->conn->prepare("SELECT * FROM ristorante WHERE email = ?");
+        $stmt = $this->conn->prepare("SELECT * FROM users WHERE email = ?");
+		//$stmt = $this->conn->prepare("SELECT * FROM ristorante");
         //$stmt = $this->conn->prepare("SELECT * FROM ristorante INNER JOIN users ON ristorante.email = users.email WHERE users.email = ?");
         //$stmt = $this->conn->prepare("SELECT email, encrypted_password, salt FROM ristorante, users WHERE email = ?");
 
@@ -92,7 +93,7 @@ class DB_Functions {
         if ($stmt->execute()) {
             $user = $stmt->get_result()->fetch_assoc();
             $stmt->close();
-
+			
             // verifying user password
             $salt = $user['salt'];
             $encrypted_password = $user['encrypted_password'];
@@ -107,6 +108,33 @@ class DB_Functions {
         }
     }
 
+	    public function getRistoranteByEmailAndPassword($email, $password) {
+
+        $stmt = $this->conn->prepare("SELECT * FROM ristorante WHERE email = ?");
+		//$stmt = $this->conn->prepare("SELECT * FROM ristorante");
+        //$stmt = $this->conn->prepare("SELECT * FROM ristorante INNER JOIN users ON ristorante.email = users.email WHERE users.email = ?");
+        //$stmt = $this->conn->prepare("SELECT email, encrypted_password, salt FROM ristorante, users WHERE email = ?");
+
+        $stmt->bind_param("s", $email);
+
+        if ($stmt->execute()) {
+            $user = $stmt->get_result()->fetch_assoc();
+            $stmt->close();
+			
+            // verifying user password
+            $salt = $user['salt'];
+            $encrypted_password = $user['encrypted_password'];
+            $hash = $this->checkhashSSHA($salt, $password);
+            // check for password equality
+            if ($encrypted_password == $hash) {
+                // user authentication details are correct
+                return $user;
+            }
+        } else {
+            return NULL;
+        }
+    }
+	
     /**
      * Check user is existed or not
      */

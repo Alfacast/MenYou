@@ -148,16 +148,13 @@ public class LoginActivity extends Activity {
                         Log.d(TAG, "Il json è: " + jObj.toString());
 
                         JSONObject user = jObj.getJSONObject("user");
-                        String name = user.getString("name");
 
+                        String name = user.getString("name");
                         String address = user.getString("address");
                         String partitaIva = user.getString("partitaIva");
                         String email = user.getString("email");
-
                         String tel = user.getString("telefono");
-
                         String created_at = user.getString("created_at");
-
 
                         // Inserting row in users table
 
