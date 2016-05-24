@@ -19,5 +19,11 @@
     <string name="hint_partitaIva">Partita Iva</string>
     <string name="hint_restaurantEmail">Email</string>
     <string name="hint_restaurantTel">Telefono</string>
+    <string name="title_activity_main_ristorante">MainRistoranteActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 
 </resources>
