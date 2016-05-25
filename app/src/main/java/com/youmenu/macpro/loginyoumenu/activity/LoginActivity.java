@@ -61,10 +61,12 @@ public class LoginActivity extends Activity {
         // Session manager
         session = new SessionManager(getApplicationContext());
 
+
+        // bug nella gestione di rientro
         // Check if user is already logged in or not
         if (session.isLoggedIn()) {
             // User is already logged in. Take him to main activity
-            Intent intent = new Intent(LoginActivity.this, MainUserActivity.class);
+            Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
         }
@@ -163,7 +165,7 @@ public class LoginActivity extends Activity {
                             db.addUser(name, email, uid, created_at);
                             // Launch main activity
                             Intent intent = new Intent(LoginActivity.this,
-                                    MainUserActivity.class);
+                                    MainClienteActivity.class);
                             startActivity(intent);
                             finish();
 
