@@ -172,7 +172,7 @@ public class LoginActivity extends Activity {
                             dbr.addUser(name, address, partitaIva, email, tel, uid, created_at);
                             // Launch main activity
                             Intent intent = new Intent(LoginActivity.this,
-                                    MainRestaurateurActivity.class);
+                                    MainRistoranteActivity.class);
                             startActivity(intent);
                             finish();
                         }
