@@ -32,7 +32,6 @@ public class MainRistoranteActivity extends AppCompatActivity
 
     private TextView txtName;
     private TextView txtPartitaIva;
-    private Button btnLogout;
 
 
     private SessionManager session;
@@ -45,7 +44,6 @@ public class MainRistoranteActivity extends AppCompatActivity
 
         txtName = (TextView) findViewById(R.id.name);
         txtPartitaIva = (TextView) findViewById(R.id.partitaIva);
-        btnLogout = (Button) findViewById(R.id.btnLogout);
 
 
         dbr = new SQLiteHandlerRestaurant(getApplicationContext());
@@ -73,27 +71,8 @@ public class MainRistoranteActivity extends AppCompatActivity
         txtName.setText(name);
         txtPartitaIva.setText(partitaIva);
 
-
-        // Logout button click event
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                logoutUser();
-            }
-        });
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -153,8 +132,8 @@ public class MainRistoranteActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.btnLogout) {
+                logoutUser();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
