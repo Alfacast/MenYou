@@ -5,9 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".activity.MainRestaurateurActivity"
-    tools:showIn="@layout/app_bar_main_ristorante"
-    android:background="#f90909">
+    tools:context=".activity.MainRistoranteActivity"
+    tools:showIn="@layout/app_bar_main_ristorante">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -43,7 +42,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dip"
-            android:background="@color/btn_logut_bg"
+            android:background="@color/btn_login_bg"
             android:text="@string/btn_logout"
             android:textAllCaps="false"
             android:textColor="@color/white"

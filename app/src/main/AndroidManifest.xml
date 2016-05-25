@@ -46,10 +46,6 @@
             android:label="@string/app_name"
             android:launchMode="singleTop" />
         <activity
-            android:name=".activity.MainRestaurateurActivity"
-            android:label="@string/app_name"
-            android:launchMode="singleTop" />
-        <activity
             android:name=".activity.MainRistoranteActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
