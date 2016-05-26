@@ -62,11 +62,19 @@ public class LoginActivity extends Activity {
         session = new SessionManager(getApplicationContext());
 
         // Check if user is already logged in or not
+        Log.d(TAG,"database ristorante"+dbr.getUserDetails().toString());
+        Log.d(TAG,"database cliente"+db.getUserDetails().toString());
         if (session.isLoggedIn()) {
-            // User is already logged in. Take him to main activity
-            Intent intent = new Intent(LoginActivity.this, MainUserActivity.class);
-            startActivity(intent);
-            finish();
+            if(dbr.getUserDetails().toString().contains("partitaIva")) {
+                // User is already logged in. Take him to main activity
+                Intent intent = new Intent(LoginActivity.this, MainRistoranteActivity.class);
+                startActivity(intent);
+                finish();
+            }else{
+                Intent intent = new Intent(LoginActivity.this, MainUserActivity.class);
+                startActivity(intent);
+                finish();
+            }
         }
 
         // Login button Click Event
