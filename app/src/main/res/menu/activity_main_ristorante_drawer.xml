@@ -29,7 +29,7 @@
                 android:title="Share" />
             <item
                 android:id="@+id/btnLogout"
-                android:icon="@drawable/ic_lock_lock"
+                android:icon="@drawable/ic_logout"
                 android:title="Logout" />
         </menu>
     </item>
