@@ -62,7 +62,7 @@ public class RegisterUserActivity extends Activity {
         if (session.isLoggedIn()) {
             // User is already logged in. Take him to main activity
             Intent intent = new Intent(RegisterUserActivity.this,
-                    MainUserActivity.class);
+                    MainClienteActivity.class);
             startActivity(intent);
             finish();
         }
