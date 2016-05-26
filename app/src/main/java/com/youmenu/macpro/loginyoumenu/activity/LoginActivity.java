@@ -71,7 +71,7 @@ public class LoginActivity extends Activity {
                 startActivity(intent);
                 finish();
             }else{
-                Intent intent = new Intent(LoginActivity.this, MainUserActivity.class);
+                Intent intent = new Intent(LoginActivity.this, MainClienteActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -171,7 +171,7 @@ public class LoginActivity extends Activity {
                             db.addUser(name, email, uid, created_at);
                             // Launch main activity
                             Intent intent = new Intent(LoginActivity.this,
-                                    MainUserActivity.class);
+                                    MainClienteActivity.class);
                             startActivity(intent);
                             finish();
 

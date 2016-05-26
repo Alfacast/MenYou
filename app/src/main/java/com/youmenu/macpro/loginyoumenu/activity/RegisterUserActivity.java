@@ -40,7 +40,7 @@ public class RegisterUserActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_user);
+        setContentView(R.layout.activity_register_cliente);
 
         inputFullName = (EditText) findViewById(R.id.name);
         inputEmail = (EditText) findViewById(R.id.email);
@@ -62,7 +62,7 @@ public class RegisterUserActivity extends Activity {
         if (session.isLoggedIn()) {
             // User is already logged in. Take him to main activity
             Intent intent = new Intent(RegisterUserActivity.this,
-                    MainUserActivity.class);
+                    MainClienteActivity.class);
             startActivity(intent);
             finish();
         }
