@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request.Method;
@@ -27,6 +28,13 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
+
 public class LoginActivity extends Activity {
     private static final String TAG = LoginActivity.class.getSimpleName();
     private Button btnLogin;
@@ -39,9 +47,16 @@ public class LoginActivity extends Activity {
     private SQLiteHandlerUser db;
     private SQLiteHandlerRestaurant dbr;
 
+    private CallbackManager callbackManager;
+    private LoginButton loginButton;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        callbackManager = CallbackManager.Factory.create();
+
         setContentView(R.layout.activity_login);
 
         inputEmail = (EditText) findViewById(R.id.email);
@@ -49,6 +64,33 @@ public class LoginActivity extends Activity {
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLinkToRegister = (Button) findViewById(R.id.btnLinkToRegisterScreen);
         btnRegisterRestaurateur = (Button) findViewById(R.id.btnLinkToRegisterRestaurateur);
+
+        loginButton = (LoginButton)findViewById(R.id.login_button);
+
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Toast.makeText(getApplicationContext(),"User ID:  " +
+                        loginResult.getAccessToken().getUserId() + "\n" +
+                        "Auth Token: " + loginResult.getAccessToken().getToken(), Toast.LENGTH_LONG)
+                        .show();
+            }
+
+            @Override
+            public void onCancel() {
+                Toast.makeText(getApplicationContext(),
+                        "Tentativo di login annullato", Toast.LENGTH_LONG)
+                        .show();
+            }
+
+            @Override
+            public void onError(FacebookException e) {
+
+                Toast.makeText(getApplicationContext(),
+                        "Tentativo di login fallito", Toast.LENGTH_LONG)
+                        .show();
+            }
+        });
 
         // Progress dialog
         pDialog = new ProgressDialog(this);
@@ -120,6 +162,11 @@ public class LoginActivity extends Activity {
             }
         });
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     /**

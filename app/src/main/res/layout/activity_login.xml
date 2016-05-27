@@ -76,11 +76,8 @@
             android:textColor="@color/btn_login"
             android:layout_gravity="center_horizontal" />
 
-        <!-- Link to Login Screen -->
-
-
-        <Button
-            android:id="@+id/btnLoginFacebook"
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/login_button"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dip"
