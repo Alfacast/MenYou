@@ -26,5 +26,7 @@
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_main_cliente">MainClienteActivity</string>
+    <string name="registra_attivita">Registra nuova attività</string>
+    <string name="registra_cliente">Registra nuovo cliente</string>
 
 </resources>

@@ -26,7 +26,6 @@ public class MainClienteActivity extends AppCompatActivity
 
     private TextView txtName;
     private TextView txtEmail;
-    private Button btnLogout;
 
     private SQLiteHandlerUser db;
     private SessionManager session;
@@ -39,7 +38,6 @@ public class MainClienteActivity extends AppCompatActivity
 
         txtName = (TextView) findViewById(R.id.name);
         txtEmail = (TextView) findViewById(R.id.email);
-        btnLogout = (Button) findViewById(R.id.btnLogout);
 
         // SqLite database handler
         db = new SQLiteHandlerUser(getApplicationContext());
@@ -131,17 +129,13 @@ public class MainClienteActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_account) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_preferiti) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_cerca) {
 
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.btnLogout) {
 
             logoutUser();
 
