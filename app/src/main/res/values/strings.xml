@@ -28,7 +28,9 @@
     <string name="title_activity_main_cliente">MainClienteActivity</string>
     <string name="registra_attivita">Registra nuova attività</string>
     <string name="registra_cliente">Registra nuovo cliente</string>
+    <string name="tutorial_name">Tutorial</string>
 
     <string name="facebook_app_id">1046817178707165</string>
+    <string name="title_activity_tutorial">TutorialActivity</string>
 
 </resources>
