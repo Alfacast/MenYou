@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.youmenu.macpro.loginyoumenu"
+    package="com.alfacast.menyou.login"
     android:versionCode="1"
     android:versionName="1.0">
 
@@ -14,7 +14,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".app.AppController"
+        android:name="com.alfacast.menyou.login.app.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/logomenyou"
         android:label="@string/app_name"
@@ -29,7 +29,7 @@
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
-            android:name=".activity.LoginActivity"
+            android:name="com.alfacast.menyou.login.activity.LoginActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
@@ -41,33 +41,33 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.RegisterUserActivity"
+            android:name="com.alfacast.menyou.login.activity.RegisterUserActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".activity.RegisterRestaurateurActivity"
+            android:name="com.alfacast.menyou.login.activity.RegisterRestaurateurActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".activity.MainRistoranteActivity"
+            android:name="com.alfacast.menyou.restaurant.MainRistoranteActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.MainClienteActivity"
+            android:name="com.alfacast.menyou.client.MainClienteActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.TutorialActivity"
+            android:name="com.alfacast.menyou.restaurant.TutorialActivity"
             android:label="@string/tutorial_name"
-            android:parentActivityName=".activity.MainRistoranteActivity"
+            android:parentActivityName="com.alfacast.menyou.restaurant.MainRistoranteActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.youmenu.macpro.loginyoumenu.activity.MainRistoranteActivity" />
+                android:value="com.alfacast.menyou.restaurant.MainRistoranteActivity" />
         </activity>
     </application>
 

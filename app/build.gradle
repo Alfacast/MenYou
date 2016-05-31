@@ -9,7 +9,7 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "com.youmenu.macpro.loginyoumenu"
+        applicationId "com.alfacast.menyou.login"
         minSdkVersion 14
         targetSdkVersion 23
 
