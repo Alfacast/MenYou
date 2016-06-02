@@ -69,6 +69,27 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.alfacast.menyou.restaurant.MainRistoranteActivity" />
         </activity>
+        <activity
+            android:name="com.alfacast.menyou.restaurant.InsertMenuActivity"
+            android:label="@string/Insert_menu_name"
+            android:screenOrientation="portrait"
+            android:parentActivityName="com.alfacast.menyou.restaurant.MainRistoranteActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.alfacast.menyou.restaurant.MainRistoranteActivity" />
+        </activity>
+        <activity
+            android:name="com.alfacast.menyou.restaurant.InsertPortataActivity"
+            android:label="@string/Insert_portata_name"
+            android:screenOrientation="portrait"
+            android:parentActivityName="com.alfacast.menyou.restaurant.MainRistoranteActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.alfacast.menyou.restaurant.MainRistoranteActivity" />
+        </activity>
     </application>
 
 </manifest>
