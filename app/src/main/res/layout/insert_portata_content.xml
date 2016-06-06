@@ -12,35 +12,32 @@
     tools:context="com.alfacast.menyou.restaurant.InsertPortataActivity"
     tools:showIn="@layout/insert_portata_activity">
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="vertical"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp" >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
+        <Spinner
+            android:id="@+id/categoriaPortata"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:entries="@array/categoria"/>
 
         <EditText
             android:id="@+id/namePortata"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:background="@drawable/rounded_edittext"
             android:hint="@string/hint_namePortata"
-            android:padding="10dp"
-            android:layout_marginTop="30dp"
-            android:singleLine="true"
-            android:inputType="textCapWords"
-            android:textColor="@color/input_register"
-            android:textColorHint="@color/input_register_hint" />
-
-        <EditText
-            android:id="@+id/categoriaPortata"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/rounded_edittext"
-            android:hint="@string/hint_categoriaPortata"
             android:padding="10dp"
             android:singleLine="true"
             android:inputType="textCapWords"
@@ -49,78 +46,84 @@
 
         <EditText
             android:id="@+id/descrizionePortata"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/rounded_edittext"
             android:hint="@string/hint_descrizionePortata"
+            android:inputType="text|textMultiLine"
+            android:gravity="top"
             android:padding="10dp"
             android:singleLine="true"
-            android:inputType="textCapWords"
             android:textColor="@color/input_register"
             android:textColorHint="@color/input_register_hint" />
 
         <EditText
             android:id="@+id/prezzoPortata"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:background="@drawable/rounded_edittext"
             android:hint="@string/hint_prezzoPortata"
             android:padding="10dp"
             android:singleLine="true"
-            android:inputType="textCapWords"
+            android:inputType="numberDecimal|number"
             android:textColor="@color/input_register"
             android:textColorHint="@color/input_register_hint" />
 
         <EditText
             android:id="@+id/opzioniPortata"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:background="@drawable/rounded_edittext"
             android:hint="@string/hint_opzioniPortata"
             android:padding="10dp"
             android:singleLine="true"
-            android:inputType="textCapWords"
+            android:inputType="text|textMultiLine"
             android:textColor="@color/input_register"
             android:textColorHint="@color/input_register_hint" />
+
+            <Switch
+                android:id="@+id/switchButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:textOff="No"
+                android:textOn="Si"
+                android:layout_centerInParent="true"
+                android:thumb="@drawable/customswitchselector"
+                android:track="@drawable/custom_track"
+                android:text="Portata Disponibile" />
 
         <EditText
             android:id="@+id/disponibilePortata"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/rounded_edittext"
-            android:hint="@string/hint_disponibilePortata"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:inputType="textCapWords"
-            android:textColor="@color/input_register"
-            android:textColorHint="@color/input_register_hint" />
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="invisible" />
 
-        <EditText
-            android:id="@+id/fotoPortata"
-            android:layout_width="fill_parent"
+        <Button
+            android:id="@+id/btnSelectPhoto"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/rounded_edittext"
-            android:hint="@string/hint_fotoPortata"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:inputType="textCapWords"
-            android:textColor="@color/input_register"
-            android:textColorHint="@color/input_register_hint" />
+            android:text="Inserisci foto" />
+
+        <ImageView
+            android:id="@+id/viewImage"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@drawable/rounded_spinner"
+            android:src="@drawable/ic_camera" />
 
         <Button
             android:id="@+id/btnInsertPortata"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
             android:background="@color/btn_login_bg"
             android:text="@string/btn_insert"
             android:textColor="@color/white" />
 
-    </LinearLayout>
-
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>
