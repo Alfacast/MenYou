@@ -2,6 +2,8 @@ package com.alfacast.menyou.client;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -24,10 +26,6 @@ public class MainClienteActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = MainClienteActivity.class.getSimpleName();
 
-    private TextView txtName;
-    private TextView txtEmail;
-
-    private SQLiteHandlerUser db;
     private SessionManager session;
 
     @Override
@@ -35,33 +33,12 @@ public class MainClienteActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cliente_main_activity);
 
-
-        txtName = (TextView) findViewById(R.id.name);
-        txtEmail = (TextView) findViewById(R.id.email);
-
-        // SqLite database handler
-        db = new SQLiteHandlerUser(getApplicationContext());
-
         // session manager
         session = new SessionManager(getApplicationContext());
 
         if (!session.isLoggedIn()) {
             logoutUser();
         }
-
-
-        // Recuperare dati utente da SQLite
-        HashMap<String, String> user = db.getUserDetails();
-        String name = user.get("name");
-        String email = user.get("email");
-
-
-        Log.d(TAG, "db cliente");
-
-
-        // Displaying the user details on the screen
-        txtName.setText(name);
-        txtEmail.setText(email);
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -77,13 +54,38 @@ public class MainClienteActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.addTab(tabLayout.newTab().setText("Menu"));
+        tabLayout.addTab(tabLayout.newTab().setText("Ristoranti"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+        final PagerAdapter adapter = new PagerAdapter
+                (getSupportFragmentManager(), tabLayout.getTabCount());
+        viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
     }
 
     private void logoutUser() {
         session.setLogin(false);
-
-        //dbr.deleteUsers();
-        db.deleteUsers();
 
         // Launching the login activity
         Intent intent = new Intent(MainClienteActivity.this, LoginActivity.class);

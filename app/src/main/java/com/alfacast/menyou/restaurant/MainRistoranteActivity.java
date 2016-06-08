@@ -124,7 +124,9 @@ public class MainRistoranteActivity extends AppCompatActivity
         } else if (id == R.id.nav_menu) {
 
         } else if (id == R.id.nav_menu_add) {
-
+            Intent i = new Intent(getApplicationContext(),
+                    InsertMenuActivity.class);
+            startActivity(i);
         } else if (id == R.id.nav_help) {
             Intent i = new Intent(getApplicationContext(),
                     TutorialActivity.class);

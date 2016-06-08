@@ -139,7 +139,8 @@ public class RegisterRestaurateurActivity extends Activity {
                         String uid = jObj.getString("uid");
 
                         JSONObject user = jObj.getJSONObject("user");
-                        String name = user.getString("name");
+                        String id_database = "";
+                        String nome = user.getString("nome");
                         String address = user.getString("address");
                         String partitaIva = user.getString("partitaIva");
                         String email = user.getString("email");
@@ -149,7 +150,7 @@ public class RegisterRestaurateurActivity extends Activity {
                                 .getString("created_at");
 
                         // Inserting row in users table
-                        db.addUser(name, address, partitaIva, email, tel, uid, created_at);
+                        //db.addUser(id_database,name, address, partitaIva, email, tel, uid, created_at);
 
                         Toast.makeText(getApplicationContext(), "User successfully registered. Try login now!", Toast.LENGTH_LONG).show();
 

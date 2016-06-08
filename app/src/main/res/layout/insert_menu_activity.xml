@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.alfacast.menyou.client.MainClienteActivity">
+    tools:context="com.alfacast.menyou.restaurant.InsertMenuActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -16,12 +16,11 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            android:background="@color/btn_login_bg"/>
+            android:background="@color/btn_login_bg"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/nav_bar_content_main_cliente" />
+    <include layout="@layout/insert_menu_content" />
 
 </android.support.design.widget.CoordinatorLayout>
-

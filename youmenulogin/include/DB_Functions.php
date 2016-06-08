@@ -54,7 +54,7 @@ class DB_Functions {
      * Storing new ristorante
      * returns ristorante details
      */    
-      public function storeRistorante($name, $address, $partitIva, $email, $telefono, $password) {
+      public function storeristorante($name, $address, $partitIva, $email, $telefono, $password) {
         $uuid = uniqid('', true);
         $hash = $this->hashSSHA($password);
         $encrypted_password = $hash["encrypted"];
@@ -77,7 +77,56 @@ class DB_Functions {
             return false;
         }
     }
-
+     /**
+     * Storing new menu
+     * returns ristorante details
+     */    
+      public function storeMenu($name) {
+        $uuid = uniqid('', true);
+        
+        $stmt = $this->conn->prepare("INSERT INTO menu( unique_id, nome, created_at) VALUES(?, ?, NOW())");
+        $stmt->bind_param("ss", $uuid, $name);
+        $result = $stmt->execute();
+        $stmt->close();
+        
+        if ($result) {
+            $stmt = $this->conn->prepare("SELECT * FROM menu WHERE nome = ?");
+            $stmt->bind_param("s", $name);
+            $stmt->execute();
+            $menu = $stmt->get_result()->fetch_assoc();
+            $stmt->close();
+ 
+            return $menu;
+        } else {
+            return false;
+        }
+    }
+	
+	     /**
+     * Storing new portata
+     * returns ristorante details
+     */    
+      public function storePortata($name, $categoria, $descrizione, $prezzo, $opzioni, $disponibile, $foto) {
+        $uuid = uniqid('', true);
+        
+        $stmt = $this->conn->prepare("INSERT INTO portata( unique_id, nome, categoria, descrizione, prezzo, opzioni, disponibile, foto, created_at) VALUES(?, ?, ?, ?, ?, ?, ?, ?, NOW())");
+        $stmt->bind_param("ssssssss", $uuid, $name, $categoria, $descrizione, $prezzo, $opzioni, $disponibile, $foto);
+        $result = $stmt->execute();
+        $stmt->close();
+        
+        if ($result) {
+            $stmt = $this->conn->prepare("SELECT * FROM portata WHERE nome = ?");
+            $stmt->bind_param("s", $name);
+            $stmt->execute();
+            $portata = $stmt->get_result()->fetch_assoc();
+            $stmt->close();
+ 
+            return $portata;
+        } else {
+            return false;
+        }
+    }
+	
     /**
      * Get user by email and password
      */
@@ -108,7 +157,7 @@ class DB_Functions {
         }
     }
 
-	    public function getRistoranteByEmailAndPassword($email, $password) {
+	    public function getristoranteByEmailAndPassword($email, $password) {
 
         $stmt = $this->conn->prepare("SELECT * FROM ristorante WHERE email = ?");
 		//$stmt = $this->conn->prepare("SELECT * FROM ristorante");
@@ -161,7 +210,7 @@ class DB_Functions {
      /**
      * Check ristorante is existed or not
      */
-    public function isRistoranteExisted($email) {
+    public function isristoranteExisted($email) {
         $stmt = $this->conn->prepare("SELECT email from ristorante WHERE email = ?");
  
         $stmt->bind_param("s", $email);
@@ -180,7 +229,52 @@ class DB_Functions {
             return false;
         }
     }
-
+     /**
+     * Check menu is existed or not
+     */
+    public function isMenuExisted($nome) {
+        $stmt = $this->conn->prepare("SELECT nome from menu WHERE nome = ?");
+ 
+        $stmt->bind_param("s", $nome);
+ 
+        $stmt->execute();
+ 
+        $stmt->store_result();
+ 
+        if ($stmt->num_rows > 0) {
+            // user existed 
+            $stmt->close();
+            return true;
+        } else {
+            // user not existed
+            $stmt->close();
+            return false;
+        }
+    }
+	
+	     /**
+     * Check portata is existed or not
+     */
+    public function isPortataExisted($nome) {
+        $stmt = $this->conn->prepare("SELECT nome from portata WHERE nome = ?");
+ 
+        $stmt->bind_param("s", $nome);
+ 
+        $stmt->execute();
+ 
+        $stmt->store_result();
+ 
+        if ($stmt->num_rows > 0) {
+            // user existed 
+            $stmt->close();
+            return true;
+        } else {
+            // user not existed
+            $stmt->close();
+            return false;
+        }
+    }
+	
     /**
      * Encrypting password
      * @param password

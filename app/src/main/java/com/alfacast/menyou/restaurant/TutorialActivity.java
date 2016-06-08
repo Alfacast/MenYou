@@ -20,7 +20,7 @@ public class TutorialActivity extends AppCompatActivity {
         myWebView.setWebViewClient( new WebViewClient() {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {return false;}
         });
-        myWebView.loadUrl("http://www.google.it");
+        myWebView.loadUrl("http://alfacast.altervista.org/wp-content/themes/alfacast/html/add_menu.html");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
