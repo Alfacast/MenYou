@@ -7,10 +7,13 @@
     android:padding="10dp"
     android:orientation="vertical">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:orientation="vertical"
         android:paddingLeft="20dp"
         android:paddingRight="20dp" >
@@ -101,6 +104,19 @@
             android:textColor="@color/input_register"
             android:textColorHint="@color/input_register_hint" />
 
+        <Button
+            android:id="@+id/btnSelectPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Inserisci foto" />
+
+        <ImageView
+            android:id="@+id/viewImage"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@drawable/rounded_spinner"
+            android:src="@drawable/ic_camera" />
+
         <!-- Login Button -->
 
         <Button
@@ -125,5 +141,5 @@
             android:textColor="@color/white"
             android:textSize="15dp" />
     </LinearLayout>
-
+    </ScrollView>
 </LinearLayout>
