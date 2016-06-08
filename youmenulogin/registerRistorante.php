@@ -4,13 +4,15 @@ $db = new DB_Functions();
 
 $response = array("error" => FALSE);
 
-if (isset($_POST['name']) && isset($_POST['address']) && isset($_POST['partitaIva']) && isset($_POST['email']) && isset($_POST['telefono']) && isset($_POST['password'])){
-    $name =$_POST['name'];
+if (isset($_POST['nome']) && isset($_POST['address']) && isset($_POST['partitaIva']) && isset($_POST['email']) && isset($_POST['telefono']) && isset($_POST['password']) && isset($_POST['foto'])){
+    $nome =$_POST['nome'];
     $address = $_POST['address'];
     $partitaIva = $_POST['partitaIva'];
     $email = $_POST['email'];
     $telefono = $_POST['telefono'];
     $password = $_POST['password'];
+	$foto = $_POST['foto'];
+
     
     if ($db->isRistoranteExisted($partitaIva)){
         
@@ -19,18 +21,20 @@ if (isset($_POST['name']) && isset($_POST['address']) && isset($_POST['partitaIv
         echo json_encode($response);
     } else{
         
-        $user = $db->storeRistorante($name, $address, $partitaIva, $email, $telefono, $password);
+        $user = $db->storeRistorante($nome, $address, $partitaIva, $email, $telefono, $password, $foto);
         if ($user){
             
             $response["error"] = FALSE;
             $response["uid"] = $user["unique_id"];
-            $response["user"]["name"] = $user["name"];
+            $response["user"]["nome"] = $user["nome"];
             $response["user"]["address"] = $user["address"];
             $response["user"]["partitaIva"] = $user["partitaIva"];
             $response["user"]["email"] = $user["email"];
             $response["user"]["telefono"] = $user["telefono"];
+			$response["user"]["foto"] = $user["foto"];
             $response["user"]["created_at"] = $user["created_at"];
             $response["user"]["updated_at"] = $user["updated_at"];
+            
             echo json_encode($response);
         } else{
             
