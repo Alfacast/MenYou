@@ -275,7 +275,7 @@ public class RegisterRestaurateurActivity extends Activity {
                                 .getString("created_at");
 
                         // Inserting row in users table
-                        //db.addUser(id_database,name, address, partitaIva, email, tel, uid, created_at);
+                        db.addUser(id_database, nome, address, partitaIva, email, tel, foto, uid, created_at);
 
                         Toast.makeText(getApplicationContext(), "User successfully registered. Try login now!", Toast.LENGTH_LONG).show();
 

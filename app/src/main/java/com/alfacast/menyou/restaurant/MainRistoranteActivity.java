@@ -58,14 +58,14 @@ public class MainRistoranteActivity extends AppCompatActivity
 
         // Recuperare dati utente da SQLite
         HashMap<String, String> ristorante = dbr.getUserDetails();
-        String name = ristorante.get("name");
+        String nome = ristorante.get("nome");
         String partitaIva = ristorante.get("partitaIva");
 
         Log.d(TAG, "db ristorante");
 
 
         // Displaying the user details on the screen
-        txtName.setText(name);
+        txtName.setText(nome);
         txtPartitaIva.setText(partitaIva);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

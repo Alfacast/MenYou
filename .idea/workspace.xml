@@ -43,10 +43,9 @@
   <component name="ChangeListManager">
     <list default="true" id="1b3a6282-8826-460a-b22c-3aaa1328db12" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/login/activity/LoginActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/login/activity/LoginActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/login/activity/RegisterRestaurateurActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/login/activity/RegisterRestaurateurActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/login/helper/SQLiteHandlerRestaurant.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/login/helper/SQLiteHandlerRestaurant.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/register_ristorante_activity.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/register_ristorante_activity.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/restaurant/MainRistoranteActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/restaurant/MainRistoranteActivity.java" />
     </list>
     <ignored path="MenYou.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -116,15 +115,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RegisterRestaurateurActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RegisterRestaurateurActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/login/activity/RegisterRestaurateurActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.73741007">
-              <caret line="49" column="86" selection-start-line="49" selection-start-column="82" selection-end-line="49" selection-end-column="86" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="277" column="110" selection-start-line="277" selection-start-column="110" selection-end-line="277" selection-end-column="110" />
               <folding>
-                <element signature="imports" expanded="true" />
                 <element signature="e#3337#3484#0" expanded="true" />
                 <element signature="e#3483#3484#0" expanded="true" />
+                <element signature="e#3913#5359#0" expanded="true" />
+                <element signature="e#5358#5359#0" expanded="true" />
                 <element signature="e#6024#7009#0" expanded="true" />
                 <element signature="e#7008#7009#0" expanded="true" />
               </folding>
@@ -136,8 +136,20 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/login/helper/SQLiteHandlerRestaurant.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="67" column="35" selection-start-line="67" selection-start-column="35" selection-end-line="67" selection-end-column="35" />
+              <caret line="63" column="132" selection-start-line="63" selection-start-column="132" selection-end-line="63" selection-end-column="132" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainRistoranteActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/restaurant/MainRistoranteActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.097122304">
+              <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
+              <folding>
+                <element signature="e#2314#2345#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -146,7 +158,17 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/login/activity/LoginActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="219" column="0" selection-start-line="219" selection-start-column="0" selection-end-line="219" selection-end-column="0" />
+              <caret line="187" column="0" selection-start-line="187" selection-start-column="0" selection-end-line="187" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AppConfig.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/login/app/AppConfig.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="20" column="109" selection-start-line="20" selection-start-column="109" selection-end-line="20" selection-end-column="109" />
               <folding />
             </state>
           </provider>
@@ -1786,7 +1808,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/alfacast/macpro/loginyoumenu/activity/LoginActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/loginyoumenu/activity/LoginActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/insert_menu_activity.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/restaurant/MainRistoranteActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/restaurant/TutorialActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/tutorial_content.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/insert_menu_content.xml" />
@@ -1828,6 +1849,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/login/activity/LoginActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/login/helper/SQLiteHandlerRestaurant.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/login/activity/RegisterRestaurateurActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/restaurant/MainRistoranteActivity.java" />
       </list>
     </option>
   </component>
@@ -2047,6 +2069,10 @@
               <option name="myItemId" value="login" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -2099,7 +2125,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="device.picker.selection" value="192.168.204.101:5555" />
+    <property name="device.picker.selection" value="644e98ff" />
     <property name="settings.editor.selected.configurable" value="android.sdk-updates" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
@@ -2414,7 +2440,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2423,7 +2449,7 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3566553" sideWeight="0.55975795" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4778157" sideWeight="0.44024205" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4778157" sideWeight="0.44024205" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32753405" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -2491,13 +2517,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.15789473">
           <caret line="3" column="57" selection-start-line="3" selection-start-column="57" selection-end-line="3" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/login/app/AppConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.84813756">
-          <caret line="20" column="109" selection-start-line="20" selection-start-column="109" selection-end-line="20" selection-end-column="109" />
         </state>
       </provider>
     </entry>
@@ -2787,14 +2806,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/login/app/AppController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="46" column="5" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/util/LruBitmapCache.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2845,14 +2856,6 @@
             <element signature="e#1983#2788#0" expanded="false" />
             <element signature="e#2787#2788#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/restaurant/MainRistoranteActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.2230216">
-          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2925,32 +2928,59 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/login/activity/LoginActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/login/app/AppController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="219" column="0" selection-start-line="219" selection-start-column="0" selection-end-line="219" selection-end-column="0" />
+        <state vertical-scroll-proportion="1.1618705">
+          <caret line="46" column="5" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/login/helper/SQLiteHandlerRestaurant.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/login/activity/LoginActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="67" column="35" selection-start-line="67" selection-start-column="35" selection-end-line="67" selection-end-column="35" />
+          <caret line="187" column="0" selection-start-line="187" selection-start-column="0" selection-end-line="187" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/login/app/AppConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="109" selection-start-line="20" selection-start-column="109" selection-end-line="20" selection-end-column="109" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/login/activity/RegisterRestaurateurActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.73741007">
-          <caret line="49" column="86" selection-start-line="49" selection-start-column="82" selection-end-line="49" selection-end-column="86" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="277" column="110" selection-start-line="277" selection-start-column="110" selection-end-line="277" selection-end-column="110" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="e#3337#3484#0" expanded="true" />
             <element signature="e#3483#3484#0" expanded="true" />
+            <element signature="e#3913#5359#0" expanded="true" />
+            <element signature="e#5358#5359#0" expanded="true" />
             <element signature="e#6024#7009#0" expanded="true" />
             <element signature="e#7008#7009#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/login/helper/SQLiteHandlerRestaurant.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="63" column="132" selection-start-line="63" selection-start-column="132" selection-end-line="63" selection-end-column="132" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/restaurant/MainRistoranteActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.097122304">
+          <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
+          <folding>
+            <element signature="e#2314#2345#0" expanded="true" />
           </folding>
         </state>
       </provider>

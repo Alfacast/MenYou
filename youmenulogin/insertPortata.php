@@ -4,23 +4,24 @@ $db = new DB_Functions();
 
 $response = array("error" => FALSE);
 
-if (isset($_POST['name']) && isset($_POST['categoria']) && isset($_POST['descrizione']) && isset($_POST['prezzo']) && isset($_POST['opzioni']) && isset($_POST['disponibile']) && isset($_POST['foto'])){
-    $name =$_POST['name'];
+if (isset($_POST['nome']) && isset($_POST['categoria']) && isset($_POST['descrizione']) && isset($_POST['prezzo']) && isset($_POST['opzioni']) && isset($_POST['disponibile']) && isset($_POST['foto']) && isset($_POST['id_ristorante'])){
+    $nome =$_POST['nome'];
 	$categoria =$_POST['categoria'];
 	$descrizione =$_POST['descrizione'];
 	$prezzo =$_POST['prezzo'];
 	$opzioni =$_POST['opzioni'];
 	$disponibile =$_POST['disponibile'];
 	$foto =$_POST['foto'];
+    $id_ristorante =$_POST['id_ristorante'];
     
-    if ($db->isPortataExisted($nome)){
+    if ($db->isPortataExisted($nome, $id_ristorante)){
         
         $response["error"] = TRUE;
         $response["error_msg"] = "Portata already existed with " . $nome;
         echo json_encode($response);
     } else{
         
-        $portata = $db->storePortata($name, $categoria, $descrizione, $prezzo, $opzioni, $disponibile, $foto);
+        $portata = $db->storePortata($nome, $categoria, $descrizione, $prezzo, $opzioni, $disponibile, $foto, $id_ristorante);
         if ($portata){
             
             $response["error"] = FALSE;
@@ -33,6 +34,7 @@ if (isset($_POST['name']) && isset($_POST['categoria']) && isset($_POST['descriz
 			$response["portata"]["disponibile"] = $portata["disponibile"];
 			$response["portata"]["foto"] = $portata["foto"];
             $response["portata"]["created_at"] = $portata["created_at"];
+            $response["portata"]["id_ristorante"] = $portata["id_ristorante"];
             echo json_encode($response);
         } else{
             

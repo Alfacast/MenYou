@@ -54,14 +54,14 @@ class DB_Functions {
      * Storing new ristorante
      * returns ristorante details
      */    
-      public function storeristorante($name, $address, $partitIva, $email, $telefono, $password) {
+      public function storeristorante($nome, $address, $partitIva, $email, $telefono, $password, $foto) {
         $uuid = uniqid('', true);
         $hash = $this->hashSSHA($password);
         $encrypted_password = $hash["encrypted"];
         $salt = $hash["salt"];
         
-        $stmt = $this->conn->prepare("INSERT INTO ristorante( unique_id, name, address, partitaIva, email, telefono, encrypted_password, salt, created_at) VALUES(?, ?, ?, ?, ?, ?, ?, ?, NOW())");
-        $stmt->bind_param("ssssssss", $uuid, $name, $address, $partitIva, $email, $telefono, $encrypted_password, $salt);
+        $stmt = $this->conn->prepare("INSERT INTO ristorante( unique_id, name, address, partitaIva, email, telefono, encrypted_password, salt, foto, created_at) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())");
+        $stmt->bind_param("sssssssss", $uuid, $nome, $address, $partitIva, $email, $telefono, $encrypted_password, $salt, $foto);
         $result = $stmt->execute();
         $stmt->close();
         
@@ -81,17 +81,17 @@ class DB_Functions {
      * Storing new menu
      * returns ristorante details
      */    
-      public function storeMenu($name) {
+      public function storeMenu($nome, $id_ristorante) {
         $uuid = uniqid('', true);
         
-        $stmt = $this->conn->prepare("INSERT INTO menu( unique_id, nome, created_at) VALUES(?, ?, NOW())");
-        $stmt->bind_param("ss", $uuid, $name);
+        $stmt = $this->conn->prepare("INSERT INTO menu( unique_id, nome, id_ristorante, created_at) VALUES(?, ?, ?, NOW())");
+        $stmt->bind_param("ssi", $uuid, $nome, $id_ristorante);
         $result = $stmt->execute();
         $stmt->close();
         
         if ($result) {
             $stmt = $this->conn->prepare("SELECT * FROM menu WHERE nome = ?");
-            $stmt->bind_param("s", $name);
+            $stmt->bind_param("s", $nome);
             $stmt->execute();
             $menu = $stmt->get_result()->fetch_assoc();
             $stmt->close();
@@ -106,17 +106,17 @@ class DB_Functions {
      * Storing new portata
      * returns ristorante details
      */    
-      public function storePortata($name, $categoria, $descrizione, $prezzo, $opzioni, $disponibile, $foto) {
+      public function storePortata($nome, $categoria, $descrizione, $prezzo, $opzioni, $disponibile, $foto, $id_ristorante) {
         $uuid = uniqid('', true);
         
-        $stmt = $this->conn->prepare("INSERT INTO portata( unique_id, nome, categoria, descrizione, prezzo, opzioni, disponibile, foto, created_at) VALUES(?, ?, ?, ?, ?, ?, ?, ?, NOW())");
-        $stmt->bind_param("ssssssss", $uuid, $name, $categoria, $descrizione, $prezzo, $opzioni, $disponibile, $foto);
+        $stmt = $this->conn->prepare("INSERT INTO portata( unique_id, nome, categoria, descrizione, prezzo, opzioni, disponibile, foto, id_ristorante, created_at) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())");
+        $stmt->bind_param("ssssssssi", $uuid, $nome, $categoria, $descrizione, $prezzo, $opzioni, $disponibile, $foto, $id_ristorante);
         $result = $stmt->execute();
         $stmt->close();
         
         if ($result) {
             $stmt = $this->conn->prepare("SELECT * FROM portata WHERE nome = ?");
-            $stmt->bind_param("s", $name);
+            $stmt->bind_param("s", $nome);
             $stmt->execute();
             $portata = $stmt->get_result()->fetch_assoc();
             $stmt->close();
@@ -133,10 +133,7 @@ class DB_Functions {
     public function getUserByEmailAndPassword($email, $password) {
 
         $stmt = $this->conn->prepare("SELECT * FROM users WHERE email = ?");
-		//$stmt = $this->conn->prepare("SELECT * FROM ristorante");
-        //$stmt = $this->conn->prepare("SELECT * FROM ristorante INNER JOIN users ON ristorante.email = users.email WHERE users.email = ?");
-        //$stmt = $this->conn->prepare("SELECT email, encrypted_password, salt FROM ristorante, users WHERE email = ?");
-
+		
         $stmt->bind_param("s", $email);
 
         if ($stmt->execute()) {
@@ -160,10 +157,7 @@ class DB_Functions {
 	    public function getristoranteByEmailAndPassword($email, $password) {
 
         $stmt = $this->conn->prepare("SELECT * FROM ristorante WHERE email = ?");
-		//$stmt = $this->conn->prepare("SELECT * FROM ristorante");
-        //$stmt = $this->conn->prepare("SELECT * FROM ristorante INNER JOIN users ON ristorante.email = users.email WHERE users.email = ?");
-        //$stmt = $this->conn->prepare("SELECT email, encrypted_password, salt FROM ristorante, users WHERE email = ?");
-
+		
         $stmt->bind_param("s", $email);
 
         if ($stmt->execute()) {
@@ -232,7 +226,7 @@ class DB_Functions {
      /**
      * Check menu is existed or not
      */
-    public function isMenuExisted($nome) {
+    public function isMenuExisted($nome, $id_ristorante) {
         $stmt = $this->conn->prepare("SELECT nome from menu WHERE nome = ?");
  
         $stmt->bind_param("s", $nome);
@@ -255,7 +249,7 @@ class DB_Functions {
 	     /**
      * Check portata is existed or not
      */
-    public function isPortataExisted($nome) {
+    public function isPortataExisted($nome, $id_ristorante) {
         $stmt = $this->conn->prepare("SELECT nome from portata WHERE nome = ?");
  
         $stmt->bind_param("s", $nome);
