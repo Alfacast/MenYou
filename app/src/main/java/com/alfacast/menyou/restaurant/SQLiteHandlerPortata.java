@@ -23,7 +23,8 @@ public class SQLiteHandlerPortata extends SQLiteOpenHelper {
     private static  final String TABLE_PORTATA = "portata";
 
     private static final String KEY_ID = "id";
-    private static final String KEY_NAME = "name";
+    private static final String KEY_ID_RISTORANTE = "id_ristorante";
+    private static final String KEY_NOME = "nome";
     private static final String KEY_CATEGORY = "categoria";
     private static final String KEY_DESC = "descrizione";
     private static final String KEY_PRICE = "prezzo";
@@ -42,7 +43,7 @@ public class SQLiteHandlerPortata extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase dbr){
         String CREATE_PORTATA_TABLE = "CREATE TABLE " + TABLE_PORTATA + "("
-                + KEY_ID + "INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
+                + KEY_ID + "INTEGER PRIMARY KEY," + KEY_ID_RISTORANTE + " TEXT," + KEY_NOME + " TEXT,"
                 + KEY_CATEGORY + " TEXT," + KEY_DESC + " TEXT,"
                 + KEY_PRICE + " TEXT," + KEY_OPTIONS + " TEXT,"
                 + KEY_DISP + " TEXT," + KEY_PHOTO + " TEXT,"
@@ -61,11 +62,12 @@ public class SQLiteHandlerPortata extends SQLiteOpenHelper {
         onCreate(dbr);
     }
 
-    public void addPortata(String nome, String categoria, String descrizione, String prezzo, String opzioni, String disponibile, String foto, String uid, String created_at){
+    public void addPortata(String id_ristorante, String nome, String categoria, String descrizione, String prezzo, String opzioni, String disponibile, String foto, String uid, String created_at){
         SQLiteDatabase dbr = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_NAME, nome);
+        values.put(KEY_ID_RISTORANTE, id_ristorante);
+        values.put(KEY_NOME, nome);
         values.put(KEY_CATEGORY, categoria);
         values.put(KEY_DESC, descrizione);
         values.put(KEY_PRICE, prezzo);
@@ -92,15 +94,16 @@ public class SQLiteHandlerPortata extends SQLiteOpenHelper {
 
         cursor.moveToFirst();
         if(cursor.getCount() >0){
-            portata.put("nome", cursor.getString(1));
-            portata.put("categoria", cursor.getString(2));
-            portata.put("descrizione", cursor.getString(3));
-            portata.put("prezzo", cursor.getString(4));
-            portata.put("opzioni", cursor.getString(5));
-            portata.put("disponibile", cursor.getString(6));
-            portata.put("foto", cursor.getString(7));
-            portata.put("uid", cursor.getString(8));
-            portata.put("created_at", cursor.getString(9));
+            portata.put("id_ristorante", cursor.getString(1));
+            portata.put("nome", cursor.getString(2));
+            portata.put("categoria", cursor.getString(3));
+            portata.put("descrizione", cursor.getString(4));
+            portata.put("prezzo", cursor.getString(5));
+            portata.put("opzioni", cursor.getString(6));
+            portata.put("disponibile", cursor.getString(7));
+            portata.put("foto", cursor.getString(8));
+            portata.put("uid", cursor.getString(9));
+            portata.put("created_at", cursor.getString(10));
         }
         cursor.close();
         dbr.close();

@@ -23,10 +23,10 @@ public class SQLiteHandlerMenu extends SQLiteOpenHelper {
     private static  final String TABLE_MENU = "menu";
 
     private static final String KEY_ID = "id";
-    private static final String KEY_NAME = "name";
+    private static final String KEY_NOME = "nome";
     private static final String KEY_UID = "uid";
     private static final String KEY_CREATED_AT = "created_at";
-
+    private static final String KEY_ID_RISTORANTE = "id_ristorante";
 
     public SQLiteHandlerMenu(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -36,8 +36,8 @@ public class SQLiteHandlerMenu extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase dbr){
         String CREATE_MENU_TABLE = "CREATE TABLE " + TABLE_MENU + "("
-                + KEY_ID + "INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
-                + KEY_UID + " TEXT," + KEY_CREATED_AT + " TEXT" + ")";
+                + KEY_ID + "INTEGER PRIMARY KEY," + KEY_NOME + " TEXT,"
+                + KEY_UID + " TEXT," + KEY_CREATED_AT + " TEXT," + KEY_ID_RISTORANTE + " TEXT" + ")";
         dbr.execSQL(CREATE_MENU_TABLE);
 
         Log.d(TAG, "Database menu tables created");
@@ -52,13 +52,14 @@ public class SQLiteHandlerMenu extends SQLiteOpenHelper {
         onCreate(dbr);
     }
 
-    public void addMenu(String nome, String uid, String created_at){
+    public void addMenu(String nome, String uid, String created_at, String id_ristorante){
         SQLiteDatabase dbr = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_NAME, nome);
+        values.put(KEY_NOME, nome);
         values.put(KEY_UID, uid);
         values.put(KEY_CREATED_AT, created_at);
+        values.put(KEY_ID_RISTORANTE, id_ristorante);
 
         long id = dbr.insert(TABLE_MENU, null, values);
         dbr.close();
@@ -80,6 +81,7 @@ public class SQLiteHandlerMenu extends SQLiteOpenHelper {
             menu.put("nome", cursor.getString(1));
             menu.put("uid", cursor.getString(2));
             menu.put("created_at", cursor.getString(3));
+            menu.put("id_ristorante", cursor.getString(4));
         }
         cursor.close();
         dbr.close();

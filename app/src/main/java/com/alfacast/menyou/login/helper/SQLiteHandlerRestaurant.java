@@ -23,6 +23,7 @@ public class SQLiteHandlerRestaurant extends SQLiteOpenHelper {
     private static  final String TABLE_USER = "ristorante";
 
     private static final String KEY_ID = "id";
+    private static final String KEY_ID_RISTORANTE = "id_ristorante";
     private static final String KEY_NAME = "name";
     private static final String KEY_ADDRESS = "indirizzo";
     private static final String KEY_PARTITAIVA = "partitaIva";
@@ -40,7 +41,7 @@ public class SQLiteHandlerRestaurant extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase dbr){
         String CREATE_LOGIN_TABLE = "CREATE TABLE " + TABLE_USER + "("
-                + KEY_ID + "INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
+                + KEY_ID + "INTEGER PRIMARY KEY,"+ KEY_ID_RISTORANTE + " TEXT," + KEY_NAME + " TEXT,"
                 + KEY_ADDRESS + " TEXT," + KEY_PARTITAIVA + " TEXT UNIQUE,"
                 + KEY_EMAIL + " TEXT UNIQUE," + KEY_TEL + " TEXT UNIQUE,"
                 + KEY_UID + " TEXT," + KEY_CREATED_AT + " TEXT" + ")";
@@ -58,10 +59,11 @@ public class SQLiteHandlerRestaurant extends SQLiteOpenHelper {
         onCreate(dbr);
     }
 
-    public void addUser(String name, String address, String partitaIva, String email, String tel, String uid, String created_at){
+    public void addUser(String id_ristorante, String name, String address, String partitaIva, String email, String tel, String uid, String created_at){
         SQLiteDatabase dbr = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
+        values.put(KEY_ID_RISTORANTE, id_ristorante);
         values.put(KEY_NAME, name);
         values.put(KEY_ADDRESS, address);
         values.put(KEY_PARTITAIVA,partitaIva);
@@ -87,13 +89,14 @@ public class SQLiteHandlerRestaurant extends SQLiteOpenHelper {
 
         cursor.moveToFirst();
         if(cursor.getCount() >0){
-            user.put("name", cursor.getString(1));
-            user.put("address", cursor.getString(2));
-            user.put("partitaIva", cursor.getString(3));
-            user.put("email", cursor.getString(4));
-            user.put("tel", cursor.getString(5));
-            user.put("uid", cursor.getString(6));
-            user.put("created_at", cursor.getString(7));
+            user.put("id_ristorante", cursor.getString(1));
+            user.put("name", cursor.getString(2));
+            user.put("address", cursor.getString(3));
+            user.put("partitaIva", cursor.getString(4));
+            user.put("email", cursor.getString(5));
+            user.put("tel", cursor.getString(6));
+            user.put("uid", cursor.getString(7));
+            user.put("created_at", cursor.getString(8));
         }
         cursor.close();
         dbr.close();

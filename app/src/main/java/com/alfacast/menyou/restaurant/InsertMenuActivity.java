@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.alfacast.menyou.login.R;
 import com.alfacast.menyou.login.app.AppConfig;
 import com.alfacast.menyou.login.app.AppController;
+import com.alfacast.menyou.login.helper.SQLiteHandlerRestaurant;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -35,6 +36,7 @@ public class InsertMenuActivity extends AppCompatActivity {
     private EditText inputNameMenu;
     private ProgressDialog pDialog;
     private SQLiteHandlerMenu db;
+    private SQLiteHandlerRestaurant dbr;
 
 
 
@@ -61,10 +63,17 @@ public class InsertMenuActivity extends AppCompatActivity {
         // Insert Button Click event
         btnInsertMenu.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                String name = inputNameMenu.getText().toString().trim();
+                String nome = inputNameMenu.getText().toString().trim();
 
-                if (!name.isEmpty()) {
-                    insertMenu(name);
+                // recupero id dalla tabella ristorante
+                dbr = new SQLiteHandlerRestaurant(getApplicationContext());
+                HashMap<String, String> a = dbr.getUserDetails();
+                final String id_ristorante = a.get("id_ristorante");
+
+                Log.d(TAG, "id data è: " + id_ristorante);
+
+                if (!nome.isEmpty()) {
+                    insertMenu(nome, id_ristorante);
                 } else {
                     Toast.makeText(getApplicationContext(),
                             "Please enter menu name!", Toast.LENGTH_LONG)
@@ -79,7 +88,7 @@ public class InsertMenuActivity extends AppCompatActivity {
      * Function to store user in MySQL database will post params(tag, name,
      * email, password) to register url
      * */
-    private void insertMenu(final String name) {
+    private void insertMenu(final String nome, final String id_ristorante) {
         // Tag used to cancel the request
         String tag_string_req = "req_insert";
 
@@ -103,13 +112,14 @@ public class InsertMenuActivity extends AppCompatActivity {
                         String uid = jObj.getString("uid");
 
                         JSONObject menu = jObj.getJSONObject("menu");
-                        String name = menu.getString("nome");
+                        String nome = menu.getString("nome");
+                        String id_ristorante = menu.getString("id_ristorante");
 
                         String created_at = menu
                                 .getString("created_at");
 
                         // Inserting row in users table
-                        db.addMenu(name, uid, created_at);
+                        db.addMenu(nome, uid, created_at, id_ristorante);
 
                         Toast.makeText(getApplicationContext(), "Menu successfully created.", Toast.LENGTH_LONG).show();
 
@@ -147,7 +157,8 @@ public class InsertMenuActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 // Posting params to register url
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("name", name);
+                params.put("nome", nome);
+                params.put("id_ristorante", id_ristorante);
 
                 return params;
             }

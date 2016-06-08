@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.alfacast.menyou.login.R;
 import com.alfacast.menyou.login.app.AppConfig;
 import com.alfacast.menyou.login.app.AppController;
+import com.alfacast.menyou.login.helper.SQLiteHandlerRestaurant;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -66,8 +67,7 @@ public class InsertPortataActivity extends AppCompatActivity {
     private String switchOff = "No";
     private ProgressDialog pDialog;
     private SQLiteHandlerPortata db;
-
-
+    private SQLiteHandlerRestaurant dbr;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -126,7 +126,7 @@ public class InsertPortataActivity extends AppCompatActivity {
         // Insert Button Click event
         btnInsertPortata.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                String name = inputNamePortata.getText().toString().trim();
+                String nome = inputNamePortata.getText().toString().trim();
                 String categoria = inputCategoriaPortata.getSelectedItem().toString();
                 String descrizione = inputDescrizionePortata.getText().toString().trim();
                 String prezzo = inputPrezzoPortata.getText().toString().trim();
@@ -141,8 +141,13 @@ public class InsertPortataActivity extends AppCompatActivity {
 
                 String foto = Base64.encodeToString(image, Base64.NO_WRAP);
 
-                if (!name.isEmpty()) {
-                    insertPortata(name, categoria, descrizione, prezzo, opzioni, disponibile, foto);
+                // recupero id dalla tabella ristorante
+                dbr = new SQLiteHandlerRestaurant(getApplicationContext());
+                HashMap<String, String> a = dbr.getUserDetails();
+                final String id_ristorante = a.get("id_ristorante");
+
+                if (!nome.isEmpty()) {
+                    insertPortata(nome, categoria, descrizione, prezzo, opzioni, disponibile, foto, id_ristorante);
                 } else {
                     Toast.makeText(getApplicationContext(),
                             "Please enter portata name!", Toast.LENGTH_LONG)
@@ -152,7 +157,6 @@ public class InsertPortataActivity extends AppCompatActivity {
         });
 
     }
-
 
     private void selectImage() {
 
@@ -247,7 +251,7 @@ public class InsertPortataActivity extends AppCompatActivity {
      * Function to store user in MySQL database will post params(tag, name,
      * email, password) to register url
      * */
-    private void insertPortata(final String name, final String categoria, final String descrizione, final String prezzo, final String opzioni, final String disponibile, final String foto) {
+    private void insertPortata(final String nome, final String categoria, final String descrizione, final String prezzo, final String opzioni, final String disponibile, final String foto, final String id_ristorante) {
         // Tag used to cancel the request
         String tag_string_req = "req_insert";
 
@@ -271,7 +275,8 @@ public class InsertPortataActivity extends AppCompatActivity {
                         String uid = jObj.getString("uid");
 
                         JSONObject portata = jObj.getJSONObject("portata");
-                        String name = portata.getString("nome");
+                        String id_ristorante = portata.getString("id_ristorante");
+                        String nome = portata.getString("nome");
                         String categoria = portata.getString("categoria");
                         String descrizione = portata.getString("descrizione");
                         String prezzo = portata.getString("prezzo");
@@ -282,8 +287,8 @@ public class InsertPortataActivity extends AppCompatActivity {
                         String created_at = portata
                                 .getString("created_at");
 
-                        // Inserting row in users table
-                        db.addPortata(name, uid, categoria, descrizione, prezzo, opzioni, disponibile, foto, created_at);
+                        // Inserting row in users table (commentata per id_ristorante)
+                        db.addPortata(id_ristorante, nome, uid, categoria, descrizione, prezzo, opzioni, disponibile, foto, created_at);
 
                         Toast.makeText(getApplicationContext(), "Portata successfully created.", Toast.LENGTH_LONG).show();
 
@@ -321,13 +326,14 @@ public class InsertPortataActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 // Posting params to register url
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("name", name);
+                params.put("nome", nome);
                 params.put("categoria", categoria);
                 params.put("descrizione", descrizione);
                 params.put("prezzo", prezzo);
                 params.put("opzioni", opzioni);
                 params.put("disponibile", disponibile);
                 params.put("foto", foto);
+                params.put("id_ristorante", id_ristorante);
 
                 return params;
             }

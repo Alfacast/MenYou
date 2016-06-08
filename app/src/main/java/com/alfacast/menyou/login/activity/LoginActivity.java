@@ -209,6 +209,7 @@ public class LoginActivity extends Activity {
 
                         JSONObject user = jObj.getJSONObject("user");
 
+                        String id_ristorante = user.getString("id");
                         String name = user.getString("name");
                         String address = user.getString("address");
                         String partitaIva = user.getString("partitaIva");
@@ -229,7 +230,7 @@ public class LoginActivity extends Activity {
 
                         }else{
                             Log.d(TAG,"partitaIva non è null ");
-                            dbr.addUser(name, address, partitaIva, email, tel, uid, created_at);
+                            dbr.addUser(id_ristorante, name, address, partitaIva, email, tel, uid, created_at);
                             // Launch main activity
                             Intent intent = new Intent(LoginActivity.this,
                                     MainRistoranteActivity.class);
