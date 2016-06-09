@@ -16,7 +16,7 @@ public class ListaMenu {
     public ListaMenu() {
     }
 
-    public ListaMenu(String nomeMenu, String nomeRistorante) {
+    public ListaMenu(String nomeMenu, String thumbnail, String nomeRistorante) {
         this.nomeMenu = nomeMenu;
         this.thumbnail = thumbnail;
         this.nomeRistorante = nomeRistorante;

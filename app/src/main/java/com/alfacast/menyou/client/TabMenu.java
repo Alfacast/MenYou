@@ -5,18 +5,23 @@ package com.alfacast.menyou.client;
  */
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.alfacast.menyou.adapter.CustomListAdapter;
 import com.alfacast.menyou.login.R;
+import com.alfacast.menyou.login.activity.LoginActivity;
 import com.alfacast.menyou.login.app.AppController;
 import com.alfacast.menyou.model.ListaMenu;
+import com.alfacast.menyou.restaurant.TutorialActivity;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
@@ -97,6 +102,22 @@ public class TabMenu extends Fragment {
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(menuReq);
+
+        listView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View view, int arg2,
+                                    long arg3) {
+
+                Intent i = new Intent(getActivity(), TutorialActivity.class);
+
+                /* send menu id to portata list activity to get list of portate under that menu
+                String menu_id = ((TextView) view.findViewById(R.id.menu_id)).getText().toString();
+                i.putExtra("menu_id", menu_id);*/
+
+                startActivity(i);
+            }
+        });
+
         return view;
     }
     @Override
