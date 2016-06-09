@@ -5,8 +5,6 @@ package com.alfacast.menyou.client;
  */
 
 import android.app.ProgressDialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -18,7 +16,7 @@ import android.widget.ListView;
 import com.alfacast.menyou.adapter.CustomListAdapter;
 import com.alfacast.menyou.login.R;
 import com.alfacast.menyou.login.app.AppController;
-import com.alfacast.menyou.model.Movie;
+import com.alfacast.menyou.model.ListaMenu;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
@@ -37,9 +35,9 @@ public class TabMenu extends Fragment {
     private static final String TAG = TabMenu.class.getSimpleName();
 
     // Menu json url
-    private static final String url = "http://api.androidhive.info/json/movies.json";
+    private static final String url = "http://www.cinesofia.it/alfacast/youmenulogin/get_menu.php";
     private ProgressDialog pDialog;
-    private List<Movie> movieList = new ArrayList<Movie>();
+    private List<ListaMenu> menuList = new ArrayList<ListaMenu>();
     private ListView listView;
     private CustomListAdapter adapter;
 
@@ -49,7 +47,7 @@ public class TabMenu extends Fragment {
         View view = inflater.inflate(R.layout.tab_menu, container, false);
 
         listView = (ListView) view.findViewById(R.id.list);
-        adapter = new CustomListAdapter(getActivity(), movieList);
+        adapter = new CustomListAdapter(getActivity(), menuList);
         listView.setAdapter(adapter);
 
         pDialog = new ProgressDialog(getActivity());
@@ -58,7 +56,7 @@ public class TabMenu extends Fragment {
         pDialog.show();
 
         // Creating volley request obj
-        JsonArrayRequest movieReq = new JsonArrayRequest(url,
+        JsonArrayRequest menuReq = new JsonArrayRequest(url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -70,23 +68,13 @@ public class TabMenu extends Fragment {
                             try {
 
                                 JSONObject obj = response.getJSONObject(i);
-                                Movie movie = new Movie();
-                                movie.setTitle(obj.getString("title"));
-                                movie.setThumbnailUrl(obj.getString("image"));
-                                movie.setRating(((Number) obj.get("rating"))
-                                        .doubleValue());
-                                movie.setYear(obj.getInt("releaseYear"));
+                                ListaMenu menu = new ListaMenu();
+                                menu.setNomeMenu(obj.getString("nomemenu"));
+                                menu.setThumbnail(obj.getString("foto"));
+                                menu.setNomeRistorante(obj.getString("nomeristorante"));
 
-                                // Genre is json array
-                                JSONArray genreArry = obj.getJSONArray("genre");
-                                ArrayList<String> genre = new ArrayList<String>();
-                                for (int j = 0; j < genreArry.length(); j++) {
-                                    genre.add((String) genreArry.get(j));
-                                }
-                                movie.setGenre(genre);
-
-                                // adding movie to movies array
-                                movieList.add(movie);
+                                // adding menu to menu array
+                                menuList.add(menu);
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -108,7 +96,7 @@ public class TabMenu extends Fragment {
         });
 
         // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(movieReq);
+        AppController.getInstance().addToRequestQueue(menuReq);
         return view;
     }
     @Override
