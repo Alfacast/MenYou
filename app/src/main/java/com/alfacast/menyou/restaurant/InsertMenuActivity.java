@@ -112,6 +112,7 @@ public class InsertMenuActivity extends AppCompatActivity {
                         String uid = jObj.getString("uid");
 
                         JSONObject menu = jObj.getJSONObject("menu");
+                        String id = menu.getString("id");
                         String nome = menu.getString("nome");
                         String id_ristorante = menu.getString("id_ristorante");
 
@@ -124,9 +125,12 @@ public class InsertMenuActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Menu successfully created.", Toast.LENGTH_LONG).show();
 
                         // Launch login activity
+                        Bundle b= new Bundle();
+                        b.putString("idmenu", id);
                         Intent intent = new Intent(
                                 InsertMenuActivity.this,
                                 InsertPortataActivity.class);
+                        intent.putExtras(b);
                         startActivity(intent);
                         finish();
                     } else {

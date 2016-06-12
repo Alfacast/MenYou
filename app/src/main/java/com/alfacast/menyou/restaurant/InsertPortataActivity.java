@@ -146,8 +146,13 @@ public class InsertPortataActivity extends AppCompatActivity {
                 HashMap<String, String> a = dbr.getUserDetails();
                 final String id_ristorante = a.get("id_ristorante");
 
+                Intent intent=getIntent();
+                Bundle b=intent.getExtras();
+
+                final String idmenu=b.getString("idmenu");
+
                 if (!nome.isEmpty()) {
-                    insertPortata(nome, categoria, descrizione, prezzo, opzioni, disponibile, foto, id_ristorante);
+                    insertPortata(nome, categoria, descrizione, prezzo, opzioni, disponibile, foto, id_ristorante, idmenu);
                 } else {
                     Toast.makeText(getApplicationContext(),
                             "Please enter portata name!", Toast.LENGTH_LONG)
@@ -241,7 +246,7 @@ public class InsertPortataActivity extends AppCompatActivity {
                 String picturePath = c.getString(columnIndex);
                 c.close();
                 Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
-                Log.w("path of image from gallery......******************.........", picturePath+"");
+                Log.w("path of image...", picturePath+"");
                 viewImage.setImageBitmap(thumbnail);
             }
         }
@@ -251,7 +256,7 @@ public class InsertPortataActivity extends AppCompatActivity {
      * Function to store user in MySQL database will post params(tag, name,
      * email, password) to register url
      * */
-    private void insertPortata(final String nome, final String categoria, final String descrizione, final String prezzo, final String opzioni, final String disponibile, final String foto, final String id_ristorante) {
+    private void insertPortata(final String nome, final String categoria, final String descrizione, final String prezzo, final String opzioni, final String disponibile, final String foto, final String id_ristorante, final String idmenu) {
         // Tag used to cancel the request
         String tag_string_req = "req_insert";
 
@@ -334,6 +339,7 @@ public class InsertPortataActivity extends AppCompatActivity {
                 params.put("disponibile", disponibile);
                 params.put("foto", foto);
                 params.put("id_ristorante", id_ristorante);
+                params.put("idmenu", idmenu);
 
                 return params;
             }
