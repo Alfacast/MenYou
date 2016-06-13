@@ -19,6 +19,7 @@ public class AppConfig {
 
         public static String URL_INSERTMENU = "http://www.cinesofia.it/alfacast/youmenulogin/insertMenu.php";
         public static String URL_INSERTPORTATA = "http://www.cinesofia.it/alfacast/youmenulogin/insertPortata.php";
+        public static String URL_GETPORTATA = "http://www.cinesofia.it/alfacast/youmenulogin/get_portata.php";
 
 
     }

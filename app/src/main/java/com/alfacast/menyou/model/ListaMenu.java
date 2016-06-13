@@ -12,14 +12,16 @@ public class ListaMenu {
     private String nomeMenu;
     private String thumbnail;
     private String nomeRistorante;
+    private String idMenu;
 
     public ListaMenu() {
     }
 
-    public ListaMenu(String nomeMenu, String thumbnail, String nomeRistorante) {
+    public ListaMenu(String nomeMenu, String thumbnail, String nomeRistorante, String idMenu) {
         this.nomeMenu = nomeMenu;
         this.thumbnail = thumbnail;
         this.nomeRistorante = nomeRistorante;
+        this.idMenu = idMenu;
     }
 
     public String getNomeMenu() {
@@ -44,6 +46,14 @@ public class ListaMenu {
 
     public void setNomeRistorante(String nomeRistorante) {
         this.nomeRistorante = nomeRistorante;
+    }
+
+    public String getIdMenu() {
+        return idMenu;
+    }
+
+    public void setIdMenu(String idMenu) {
+        this.idMenu = idMenu;
     }
 
 }

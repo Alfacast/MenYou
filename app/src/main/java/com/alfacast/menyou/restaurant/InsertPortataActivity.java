@@ -146,6 +146,7 @@ public class InsertPortataActivity extends AppCompatActivity {
                 HashMap<String, String> a = dbr.getUserDetails();
                 final String id_ristorante = a.get("id_ristorante");
 
+                // recupero id menu dalla activity precedente
                 Intent intent=getIntent();
                 Bundle b=intent.getExtras();
 

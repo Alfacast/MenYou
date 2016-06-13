@@ -77,6 +77,7 @@ public class TabMenu extends Fragment {
                                 menu.setNomeMenu(obj.getString("nomemenu"));
                                 menu.setThumbnail(obj.getString("foto"));
                                 menu.setNomeRistorante(obj.getString("nomeristorante"));
+                                menu.setIdMenu(obj.getString("id"));
 
                                 // adding menu to menu array
                                 menuList.add(menu);
@@ -108,13 +109,17 @@ public class TabMenu extends Fragment {
             public void onItemClick(AdapterView<?> arg0, View view, int arg2,
                                     long arg3) {
 
-                Intent i = new Intent(getActivity(), TutorialActivity.class);
+                String id = ((TextView) view.findViewById(R.id.idmenu)).getText().toString();
 
-                /* send menu id to portata list activity to get list of portate under that menu
-                String menu_id = ((TextView) view.findViewById(R.id.menu_id)).getText().toString();
-                i.putExtra("menu_id", menu_id);*/
+                // send menu id to portata list activity to get list of portate under that menu
 
-                startActivity(i);
+                Bundle b= new Bundle();
+                b.putString("idmenu", id);
+                Intent intent = new Intent(
+                        getActivity(),
+                        PortataActivity.class);
+                intent.putExtras(b);
+                startActivity(intent);
             }
         });
 

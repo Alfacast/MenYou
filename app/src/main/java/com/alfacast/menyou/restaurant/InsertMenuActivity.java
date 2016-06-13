@@ -119,12 +119,12 @@ public class InsertMenuActivity extends AppCompatActivity {
                         String created_at = menu
                                 .getString("created_at");
 
-                        // Inserting row in users table
+                        // Inserting row in menu table
                         db.addMenu(nome, uid, created_at, id_ristorante);
 
                         Toast.makeText(getApplicationContext(), "Menu successfully created.", Toast.LENGTH_LONG).show();
 
-                        // Launch login activity
+                        // Launch portata activity
                         Bundle b= new Bundle();
                         b.putString("idmenu", id);
                         Intent intent = new Intent(
@@ -155,7 +155,7 @@ public class InsertMenuActivity extends AppCompatActivity {
                         error.getMessage(), Toast.LENGTH_LONG).show();
                 hideDialog();
             }
-        }) {
+        }){
 
             @Override
             protected Map<String, String> getParams() {

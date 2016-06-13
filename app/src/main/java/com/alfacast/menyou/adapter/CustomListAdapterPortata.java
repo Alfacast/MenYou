@@ -1,12 +1,9 @@
 package com.alfacast.menyou.adapter;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,31 +15,33 @@ import android.widget.TextView;
 import com.alfacast.menyou.login.R;
 import com.alfacast.menyou.login.app.AppController;
 import com.alfacast.menyou.model.ListaMenu;
+import com.alfacast.menyou.model.ListaPortata;
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.NetworkImageView;
+
+import java.util.List;
 
 /**
  * Created by Gabriele Bellissima on 08/06/2016.
  */
-public class CustomListAdapter extends BaseAdapter {
+public class CustomListAdapterPortata extends BaseAdapter {
     private Activity activity;
     private LayoutInflater inflater;
-    private List<ListaMenu> menuItems;
+    private List<ListaPortata> portataItems;
     ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
-    public CustomListAdapter(Activity activity, List<ListaMenu> menuItems) {
+    public CustomListAdapterPortata(Activity activity, List<ListaPortata> portataItems) {
         this.activity = activity;
-        this.menuItems = menuItems;
+        this.portataItems = portataItems;
     }
 
     @Override
     public int getCount() {
-        return menuItems.size();
+        return portataItems.size();
     }
 
     @Override
     public Object getItem(int location) {
-        return menuItems.get(location);
+        return portataItems.get(location);
     }
 
     @Override
@@ -57,33 +56,41 @@ public class CustomListAdapter extends BaseAdapter {
             inflater = (LayoutInflater) activity
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (convertView == null)
-            convertView = inflater.inflate(R.layout.list_row, null);
+            convertView = inflater.inflate(R.layout.list_row_portata, null);
 
         if (imageLoader == null)
             imageLoader = AppController.getInstance().getImageLoader();
-        ImageView thumbNail = (ImageView) convertView.findViewById(R.id.thumbnail);
-        TextView nomeMenu = (TextView) convertView.findViewById(R.id.nomemenu);
-        TextView nomeRistorante = (TextView) convertView.findViewById(R.id.nomeristorante);
-        TextView idMenu = (TextView) convertView.findViewById(R.id.idmenu);
+        ImageView thumbNailPortata = (ImageView) convertView.findViewById(R.id.thumbnailportata);
+        TextView nomePortata = (TextView) convertView.findViewById(R.id.nomeportata);
+        TextView descrizionePortata = (TextView) convertView.findViewById(R.id.descrizioneportata);
+        TextView categoria = (TextView) convertView.findViewById(R.id.categoria);
+        TextView prezzo = (TextView) convertView.findViewById(R.id.prezzo);
+        TextView idPortata = (TextView) convertView.findViewById(R.id.idportata);
 
         // getting menu data for the row
-        ListaMenu m = menuItems.get(position);
+        ListaPortata p = portataItems.get(position);
 
-        byte[] decodedString = Base64.decode(String.valueOf(m.getThumbnail()), Base64.DEFAULT);
+        byte[] decodedString = Base64.decode(String.valueOf(p.getThumbnailPortata()), Base64.DEFAULT);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
-        thumbNail.setImageBitmap(decodedByte);
+        thumbNailPortata.setImageBitmap(decodedByte);
 
         // thumbnail image
         //thumbNail.setImageUrl(m.getThumbnailUrl(), imageLoader);
 
-        // nome menu
-        nomeMenu.setText(m.getNomeMenu());
+        // nome portata
+        nomePortata.setText(p.getNomePortata());
 
-        // nome ristorante
-        nomeRistorante.setText("Ristorante: " + String.valueOf(m.getNomeRistorante()));
+        // descrizione portata
+        descrizionePortata.setText("Descrizione: " + String.valueOf(p.getDescrizionePortata()));
 
-        idMenu.setText(m.getIdMenu());
+        // categoria
+        categoria.setText(p.getCategoria());
+
+        // prezzo portata
+        prezzo.setText(p.getPrezzo());
+
+        idPortata.setText(p.getIdPortata());
 
         return convertView;
     }
