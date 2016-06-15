@@ -4,10 +4,12 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -25,12 +27,16 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONStringer;
 
+import java.lang.reflect.Method;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,7 +48,7 @@ public class PortataActivity extends AppCompatActivity {
     private static final String TAG = PortataActivity.class.getSimpleName();
 
     // Portata json url
-    private static final String url = "http://www.cinesofia.it/alfacast/youmenulogin/get_portata.php";
+    private static final String url = "http://www.cinesofia.it/alfacast/youmenulogin/get_portata.php?idmenu=";
     private ProgressDialog pDialog;
     private List<ListaPortata> portataList = new ArrayList<ListaPortata>();
     private ListView listView;
@@ -75,7 +81,7 @@ public class PortataActivity extends AppCompatActivity {
         pDialog.show();
 
         // Creating volley request obj
-        JsonArrayRequest portataReq = new JsonArrayRequest(url,
+        JsonArrayRequest portataReq = new JsonArrayRequest(url+idmenu,
 
                 new Response.Listener<JSONArray>() {
 
@@ -89,6 +95,7 @@ public class PortataActivity extends AppCompatActivity {
                             try {
 
                                 JSONObject obj = response.getJSONObject(i);
+
                                 ListaPortata portata = new ListaPortata();
                                 portata.setNomePortata(obj.getString("nome"));
                                 portata.setThumbnailPortata(obj.getString("foto"));
@@ -118,23 +125,11 @@ public class PortataActivity extends AppCompatActivity {
 
             }
 
-        }){
-
-            @Override
-            protected Map<String, String> getParams() {
-                // Posting parameters to login url
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("idmenu", idmenu);
-
-                return params;
-
-            }
-
-        };
-
+        });
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(portataReq);
+
     }
 
     @Override

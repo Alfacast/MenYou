@@ -19,8 +19,8 @@
             android:background="@color/btn_login_bg"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-    </android.support.design.widget.AppBarLayout>
+        <include layout="@layout/portata_content" />
 
-    <include layout="@layout/portata_content" />
+    </android.support.design.widget.AppBarLayout>
 
 </android.support.design.widget.CoordinatorLayout>

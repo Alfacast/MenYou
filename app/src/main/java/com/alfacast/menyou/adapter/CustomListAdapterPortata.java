@@ -82,13 +82,13 @@ public class CustomListAdapterPortata extends BaseAdapter {
         nomePortata.setText(p.getNomePortata());
 
         // descrizione portata
-        descrizionePortata.setText("Descrizione: " + String.valueOf(p.getDescrizionePortata()));
+        descrizionePortata.setText(p.getDescrizionePortata());
 
         // categoria
-        categoria.setText(p.getCategoria());
+        categoria.setText("Categoria: " + String.valueOf(p.getCategoria()));
 
         // prezzo portata
-        prezzo.setText(p.getPrezzo());
+        prezzo.setText("Prezzo: € " + String.valueOf(p.getPrezzo()));
 
         idPortata.setText(p.getIdPortata());
 
