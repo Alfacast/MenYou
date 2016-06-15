@@ -1,5 +1,6 @@
 package com.alfacast.menyou.restaurant;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -10,26 +11,45 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.alfacast.menyou.adapter.CustomListAdapter;
+import com.alfacast.menyou.adapter.CustomListAdapterPortata;
 import com.alfacast.menyou.login.R;
 
 import android.content.Intent;
 import android.util.Log;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.alfacast.menyou.login.activity.LoginActivity;
+import com.alfacast.menyou.login.app.AppController;
 import com.alfacast.menyou.login.helper.SQLiteHandlerRestaurant;
 import com.alfacast.menyou.login.helper.SessionManager;
+import com.alfacast.menyou.model.ListaMenu;
+import com.alfacast.menyou.model.ListaPortata;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonArrayRequest;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class MainRistoranteActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = MainRistoranteActivity.class.getSimpleName();
 
-    private TextView txtName;
-    private TextView txtPartitaIva;
-
+    // Portata json url
+    private static final String url = "http://www.cinesofia.it/alfacast/youmenulogin/get_menu_ristorante.php?idristorante=";
+    private ProgressDialog pDialog;
+    private List<ListaMenu> menuList = new ArrayList<ListaMenu>();
+    private ListView listView;
+    private CustomListAdapter adapter;
 
     private SessionManager session;
     private SQLiteHandlerRestaurant dbr;
@@ -39,37 +59,80 @@ public class MainRistoranteActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ristorante_main_activity);
 
-        txtName = (TextView) findViewById(R.id.name);
-        txtPartitaIva = (TextView) findViewById(R.id.partitaIva);
-
-
         dbr = new SQLiteHandlerRestaurant(getApplicationContext());
-
 
         // session manager
         session = new SessionManager(getApplicationContext());
-
-
 
         if (!session.isLoggedIn()) {
             logoutUser();
         }
 
-
         // Recuperare dati utente da SQLite
         HashMap<String, String> ristorante = dbr.getUserDetails();
-        String nome = ristorante.get("nome");
-        String partitaIva = ristorante.get("partitaIva");
+        String idristorante = ristorante.get("id_ristorante");
 
-        Log.d(TAG, "db ristorante");
-
-
-        // Displaying the user details on the screen
-        txtName.setText(nome);
-        txtPartitaIva.setText(partitaIva);
+        Log.d(TAG, "id ristorante: "+idristorante);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        listView = (ListView) findViewById(R.id.list);
+        adapter = new CustomListAdapter(this, menuList);
+        listView.setAdapter(adapter);
+
+        pDialog = new ProgressDialog(this);
+        // Showing progress dialog before making http request
+        pDialog.setMessage("Loading...");
+        pDialog.show();
+
+        // Creating volley request obj
+        JsonArrayRequest menuReq = new JsonArrayRequest(url+idristorante,
+
+                new Response.Listener<JSONArray>() {
+
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.d(TAG, response.toString());
+                        hidePDialog();
+
+                        // Parsing json
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+
+                                JSONObject obj = response.getJSONObject(i);
+
+                                ListaMenu menu = new ListaMenu();
+                                menu.setIdMenu(obj.getString("id"));
+                                menu.setNomeMenu(obj.getString("nomemenu"));
+                                menu.setNomeRistorante(obj.getString("nomeristorante"));
+                                menu.setThumbnail(obj.getString("foto"));
+
+                                // adding portata to portata array
+                                menuList.add(menu);
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+
+                        // notifying list adapter about data changes
+                        // so that it renders the list view with updated data
+                        adapter.notifyDataSetChanged();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                hidePDialog();
+
+            }
+
+        });
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(menuReq);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -120,7 +183,7 @@ public class MainRistoranteActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_account) {
-            
+
         } else if (id == R.id.nav_menu) {
 
         } else if (id == R.id.nav_menu_add) {
@@ -132,12 +195,13 @@ public class MainRistoranteActivity extends AppCompatActivity
                     TutorialActivity.class);
             startActivity(i);
         } else if (id == R.id.btnLogout) {
-                logoutUser();
+            logoutUser();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+
     }
 
     /**
@@ -154,6 +218,19 @@ public class MainRistoranteActivity extends AppCompatActivity
         Intent intent = new Intent(MainRistoranteActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        hidePDialog();
+    }
+
+    private void hidePDialog() {
+        if (pDialog != null) {
+            pDialog.dismiss();
+            pDialog = null;
+        }
     }
 
 }
