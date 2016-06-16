@@ -58,5 +58,6 @@
         <item>Altro</item>
     </string-array>
     <string name="title_activity_portata">Portate Menu</string>
+    <string name="title_activity_portata_activity_ristorante">Portate Menu</string>
 
 </resources>

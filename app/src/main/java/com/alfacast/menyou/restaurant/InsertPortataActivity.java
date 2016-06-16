@@ -147,13 +147,21 @@ public class InsertPortataActivity extends AppCompatActivity {
                 final String id_ristorante = a.get("id_ristorante");
 
                 // recupero id menu dalla activity precedente
-                Intent intent=getIntent();
-                Bundle b=intent.getExtras();
+                Intent i=getIntent();
+                Bundle b=i.getExtras();
 
                 final String idmenu=b.getString("idmenu");
 
                 if (!nome.isEmpty()) {
                     insertPortata(nome, categoria, descrizione, prezzo, opzioni, disponibile, foto, id_ristorante, idmenu);
+
+                    //Lancio PortataActivityRistorante
+                    Intent intent = new Intent(
+                            InsertPortataActivity.this,
+                            PortataActivityRistorante.class);
+                    intent.putExtras(b);
+                    startActivity(intent);
+
                 } else {
                     Toast.makeText(getApplicationContext(),
                             "Please enter portata name!", Toast.LENGTH_LONG)
@@ -298,12 +306,6 @@ public class InsertPortataActivity extends AppCompatActivity {
 
                         Toast.makeText(getApplicationContext(), "Portata successfully created.", Toast.LENGTH_LONG).show();
 
-                        // Launch login activity
-                        Intent intent = new Intent(
-                                InsertPortataActivity.this,
-                                MainRistoranteActivity.class);
-                        startActivity(intent);
-                        finish();
                     } else {
 
                         // Error occurred in registration. Get the error
