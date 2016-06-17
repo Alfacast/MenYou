@@ -114,7 +114,6 @@
             android:id="@+id/viewImage"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:background="@drawable/rounded_spinner"
             android:src="@drawable/ic_camera" />
 
         <!-- Login Button -->
