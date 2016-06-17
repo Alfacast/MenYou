@@ -143,6 +143,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.alfacast.menyou.restaurant.MainRistoranteActivity" />
         </activity>
+        <activity
+            android:name="com.alfacast.menyou.client.PortataDettaglioActivity"
+            android:label="@string/title_activity_portata_dettaglio"
+            android:parentActivityName="com.alfacast.menyou.client.PortataActivity"
+            android:theme="@style/AppTheme">
+        </activity>
     </application>
 
 </manifest>

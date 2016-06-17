@@ -19,9 +19,9 @@
             android:background="@color/btn_login_bg"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-        <include layout="@layout/ristorante_portata_activity_content_" />
-
     </android.support.design.widget.AppBarLayout>
+
+    <include layout="@layout/ristorante_portata_activity_content_" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
