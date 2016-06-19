@@ -147,6 +147,11 @@
             android:name="com.alfacast.menyou.client.PortataDettaglioActivity"
             android:label="@string/title_activity_portata_dettaglio"
             android:parentActivityName="com.alfacast.menyou.client.PortataActivity"
+            android:theme="@style/AppTheme"></activity>
+        <activity
+            android:name="com.alfacast.menyou.restaurant.PortataDettaglioRistoranteActivity"
+            android:label="@string/title_activity_portata_dettaglio_ristorante"
+            android:parentActivityName="com.alfacast.menyou.restaurant.PortataActivityRistorante"
             android:theme="@style/AppTheme">
         </activity>
     </application>

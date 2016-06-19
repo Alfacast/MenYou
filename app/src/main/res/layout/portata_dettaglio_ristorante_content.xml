@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.alfacast.menyou.client.PortataDettaglioActivity"
-    tools:showIn="@layout/portata_dettaglio_activity">
+    tools:context="com.alfacast.menyou.restaurant.PortataDettaglioRistoranteActivity"
+    tools:showIn="@layout/portata_dettaglio_ristorante_activity">
 
     <TextView
         android:id="@+id/idportata"

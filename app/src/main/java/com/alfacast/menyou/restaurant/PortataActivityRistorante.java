@@ -9,9 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.alfacast.menyou.adapter.CustomListAdapterPortata;
+import com.alfacast.menyou.client.PortataDettaglioActivity;
 import com.alfacast.menyou.login.R;
 import com.alfacast.menyou.login.app.AppController;
 import com.alfacast.menyou.model.ListaPortata;
@@ -131,6 +134,25 @@ public class PortataActivityRistorante extends AppCompatActivity {
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(portataReq);
+
+        listView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View view, int arg2,
+                                    long arg3) {
+
+                String id = ((TextView) view.findViewById(R.id.idportata)).getText().toString();
+
+                // send menu id to portata list activity to get list of portate under that menu
+
+                Bundle b= new Bundle();
+                b.putString("idportata", id);
+                Intent intent = new Intent(
+                        getApplicationContext(),
+                        PortataDettaglioRistoranteActivity.class);
+                intent.putExtras(b);
+                startActivity(intent);
+            }
+        });
 
     }
 

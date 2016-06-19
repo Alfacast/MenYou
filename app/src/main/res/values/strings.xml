@@ -60,5 +60,6 @@
     <string name="title_activity_portata">Portate Menu</string>
     <string name="title_activity_portata_activity_ristorante">Portate Menu</string>
     <string name="title_activity_portata_dettaglio">Dettaglio Portata</string>
+    <string name="title_activity_portata_dettaglio_ristorante">Dettaglio Portata</string>
 
 </resources>

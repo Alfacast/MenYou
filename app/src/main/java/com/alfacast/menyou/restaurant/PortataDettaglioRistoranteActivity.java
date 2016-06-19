@@ -1,17 +1,17 @@
-package com.alfacast.menyou.client;
+package com.alfacast.menyou.restaurant;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
-import android.text.method.LinkMovementMethod;
-import android.text.util.Linkify;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,10 +26,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class PortataDettaglioActivity extends AppCompatActivity {
+public class PortataDettaglioRistoranteActivity extends AppCompatActivity {
 
     // Log tag
-    private static final String TAG = PortataDettaglioActivity.class.getSimpleName();
+    private static final String TAG = PortataDettaglioRistoranteActivity.class.getSimpleName();
 
     // Portata json url
     private static final String url = "http://www.cinesofia.it/alfacast/youmenulogin/get_portata_dettaglio.php?idportata=";
@@ -38,7 +38,7 @@ public class PortataDettaglioActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.portata_dettaglio_activity);
+        setContentView(R.layout.portata_dettaglio_ristorante_activity);
 
         // recupero id portata dalla activity precedente
         Intent intent=getIntent();
@@ -50,6 +50,14 @@ public class PortataDettaglioActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabedit);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         final ImageView foto = (ImageView) findViewById(R.id.foto);
@@ -79,34 +87,34 @@ public class PortataDettaglioActivity extends AppCompatActivity {
                         hidePDialog();
 
                         // Parsing json
-                            try {
+                        try {
 
-                                JSONObject obj = response.getJSONObject(0);
+                            JSONObject obj = response.getJSONObject(0);
 
-                                nomePortata.setText(obj.getString("nome"));
-                                descrizionePortata.setText(obj.getString("descrizione"));
-                                categoria.setText("Categoria: "+obj.getString("categoria"));
-                                prezzo.setText("Prezzo: € "+obj.getString("prezzo"));
-                                nomeRistorante.setText("Ristorante: "+obj.getString("nomeristorante"));
-                                indirizzo.setText(obj.getString("indirizzo"));
-                                //indirizzo.setMovementMethod(LinkMovementMethod.getInstance());
-                                //Linkify.addLinks(indirizzo, Linkify.ALL);
-                                telefono.setText(obj.getString("telefono"));
-                                idPortata.setText(obj.getString("id"));
+                            nomePortata.setText(obj.getString("nome"));
+                            descrizionePortata.setText(obj.getString("descrizione"));
+                            categoria.setText("Categoria: "+obj.getString("categoria"));
+                            prezzo.setText("Prezzo: € "+obj.getString("prezzo"));
+                            nomeRistorante.setText("Ristorante: "+obj.getString("nomeristorante"));
+                            indirizzo.setText(obj.getString("indirizzo"));
+                            //indirizzo.setMovementMethod(LinkMovementMethod.getInstance());
+                            //Linkify.addLinks(indirizzo, Linkify.ALL);
+                            telefono.setText(obj.getString("telefono"));
+                            idPortata.setText(obj.getString("id"));
 
-                                byte[] decodedString = Base64.decode(String.valueOf(obj.getString("foto")), Base64.DEFAULT);
-                                Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                            byte[] decodedString = Base64.decode(String.valueOf(obj.getString("foto")), Base64.DEFAULT);
+                            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
-                                thumbNailPortata.setImageBitmap(decodedByte);
+                            thumbNailPortata.setImageBitmap(decodedByte);
 
-                                byte[] decodedStringFoto = Base64.decode(String.valueOf(obj.getString("fotoportata")), Base64.DEFAULT);
-                                Bitmap decodedByteFoto = BitmapFactory.decodeByteArray(decodedStringFoto, 0, decodedStringFoto.length);
+                            byte[] decodedStringFoto = Base64.decode(String.valueOf(obj.getString("fotoportata")), Base64.DEFAULT);
+                            Bitmap decodedByteFoto = BitmapFactory.decodeByteArray(decodedStringFoto, 0, decodedStringFoto.length);
 
-                                foto.setImageBitmap(decodedByteFoto);
+                            foto.setImageBitmap(decodedByteFoto);
 
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }, new Response.ErrorListener() {
             @Override
