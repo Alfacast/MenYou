@@ -44,7 +44,15 @@ public class ListaPortata {
     }
 
     public void setDescrizionePortata(String descrizionePortata) {
-        this.descrizionePortata = descrizionePortata;
+        String str1 = descrizionePortata.toString();
+
+        int count;
+        count = str1.length();
+
+        if (count>50) {
+            this.descrizionePortata = str1.substring(0,50);
+        }
+        else this.descrizionePortata = descrizionePortata;
     }
 
     public String getCategoria() {
