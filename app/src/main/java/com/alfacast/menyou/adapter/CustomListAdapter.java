@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +18,6 @@ import com.alfacast.menyou.login.R;
 import com.alfacast.menyou.login.app.AppController;
 import com.alfacast.menyou.model.ListaMenu;
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.NetworkImageView;
 
 /**
  * Created by Gabriele Bellissima on 08/06/2016.
@@ -69,12 +67,13 @@ public class CustomListAdapter extends BaseAdapter {
         // getting menu data for the row
         ListaMenu m = menuItems.get(position);
 
+        //Decodifica immmagine da db
         byte[] decodedString = Base64.decode(String.valueOf(m.getThumbnail()), Base64.DEFAULT);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
         thumbNail.setImageBitmap(decodedByte);
 
-        // thumbnail image
+        // Set immagine senza decodifica
         //thumbNail.setImageUrl(m.getThumbnailUrl(), imageLoader);
 
         // nome menu

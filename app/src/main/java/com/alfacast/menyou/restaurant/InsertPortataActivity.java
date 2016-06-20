@@ -7,7 +7,6 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,7 +17,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -36,7 +34,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.facebook.internal.Utility;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -93,6 +90,7 @@ public class InsertPortataActivity extends AppCompatActivity {
         viewImage=(ImageView)findViewById(R.id.viewImage);
         switchButton = (Switch) findViewById(R.id.switchButton);
 
+        //Imposta portata disponibile si/no
         switchButton.setChecked(true);
         switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -142,6 +140,7 @@ public class InsertPortataActivity extends AppCompatActivity {
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 85, stream);
                 final byte[] image=stream.toByteArray();
 
+                //Codifica foto su db
                 String foto = Base64.encodeToString(image, Base64.NO_WRAP);
 
                 // recupero id dalla tabella ristorante
@@ -218,6 +217,7 @@ public class InsertPortataActivity extends AppCompatActivity {
                     }
                 }
                 try {
+                    //Imposta orientamento automatico foto da dati exif
                     ExifInterface exif = new ExifInterface(f.getPath());
                     int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
 

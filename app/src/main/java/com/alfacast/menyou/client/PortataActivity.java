@@ -3,46 +3,29 @@ package com.alfacast.menyou.client;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.alfacast.menyou.adapter.CustomListAdapter;
 import com.alfacast.menyou.adapter.CustomListAdapterPortata;
 import com.alfacast.menyou.login.R;
-import com.alfacast.menyou.login.app.AppConfig;
 import com.alfacast.menyou.login.app.AppController;
 import com.alfacast.menyou.model.ListaPortata;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.JsonRequest;
-import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONStringer;
 
-import java.lang.reflect.Method;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class PortataActivity extends AppCompatActivity {
 
@@ -139,7 +122,7 @@ public class PortataActivity extends AppCompatActivity {
 
                 String id = ((TextView) view.findViewById(R.id.idportata)).getText().toString();
 
-                // send menu id to portata list activity to get list of portate under that menu
+                // send portata id to portata list activity to get list of portate under that menu
 
                 Bundle b= new Bundle();
                 b.putString("idportata", id);

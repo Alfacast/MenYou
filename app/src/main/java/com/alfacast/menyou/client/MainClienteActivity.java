@@ -13,14 +13,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.alfacast.menyou.login.R;
 import com.alfacast.menyou.login.activity.LoginActivity;
-import com.alfacast.menyou.login.helper.SQLiteHandlerUser;
 import com.alfacast.menyou.login.helper.SessionManager;
-
-import java.util.HashMap;
 
 public class MainClienteActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -40,11 +36,8 @@ public class MainClienteActivity extends AppCompatActivity
             logoutUser();
         }
 
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -132,7 +125,7 @@ public class MainClienteActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_account) {
-            // Handle the camera action
+
         } else if (id == R.id.nav_preferiti) {
 
         } else if (id == R.id.nav_cerca) {

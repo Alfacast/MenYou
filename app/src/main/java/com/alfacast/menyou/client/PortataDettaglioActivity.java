@@ -7,9 +7,6 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
-import android.text.method.LinkMovementMethod;
-import android.text.util.Linkify;
 import android.util.Base64;
 import android.util.Log;
 import android.widget.ImageView;
@@ -89,11 +86,10 @@ public class PortataDettaglioActivity extends AppCompatActivity {
                                 prezzo.setText("Prezzo: € "+obj.getString("prezzo"));
                                 nomeRistorante.setText("Ristorante: "+obj.getString("nomeristorante"));
                                 indirizzo.setText(obj.getString("indirizzo"));
-                                //indirizzo.setMovementMethod(LinkMovementMethod.getInstance());
-                                //Linkify.addLinks(indirizzo, Linkify.ALL);
                                 telefono.setText(obj.getString("telefono"));
                                 idPortata.setText(obj.getString("id"));
 
+                                //decodifica immagine da db
                                 byte[] decodedString = Base64.decode(String.valueOf(obj.getString("foto")), Base64.DEFAULT);
                                 Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 

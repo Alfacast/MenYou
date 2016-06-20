@@ -192,6 +192,7 @@ public class RegisterRestaurateurActivity extends Activity {
                     Bitmap bitmap;
                     BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
 
+                    //codifica immagine in db
                     bitmap = BitmapFactory.decodeFile(f.getAbsolutePath(),
                             bitmapOptions);
 

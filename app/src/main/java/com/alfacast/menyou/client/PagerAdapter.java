@@ -2,6 +2,7 @@ package com.alfacast.menyou.client;
 
 /**
  * Created by Gabriele Bellissima on 07/06/2016.
+ * Gestione dei Fragment (tab menu e ristoranti)
  */
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

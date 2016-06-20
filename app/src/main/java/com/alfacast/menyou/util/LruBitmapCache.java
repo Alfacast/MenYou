@@ -7,6 +7,7 @@ import com.android.volley.toolbox.ImageLoader;
 
 /**
  * Created by Gabriele Bellissima on 08/06/2016.
+ * gestione immagine per menu e portata
  */
 public class LruBitmapCache extends LruCache<String, Bitmap> implements
         ImageLoader.ImageCache {

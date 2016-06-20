@@ -2,6 +2,7 @@ package com.alfacast.menyou.client;
 
 /**
  * Created by Gabriele Bellissima on 07/06/2016.
+ * Gestione del tab menu su MainClienteActivity
  */
 
 import android.app.ProgressDialog;
@@ -18,10 +19,8 @@ import android.widget.TextView;
 
 import com.alfacast.menyou.adapter.CustomListAdapter;
 import com.alfacast.menyou.login.R;
-import com.alfacast.menyou.login.activity.LoginActivity;
 import com.alfacast.menyou.login.app.AppController;
 import com.alfacast.menyou.model.ListaMenu;
-import com.alfacast.menyou.restaurant.TutorialActivity;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;

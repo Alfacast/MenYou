@@ -97,11 +97,10 @@ public class PortataDettaglioRistoranteActivity extends AppCompatActivity {
                             prezzo.setText("Prezzo: € "+obj.getString("prezzo"));
                             nomeRistorante.setText("Ristorante: "+obj.getString("nomeristorante"));
                             indirizzo.setText(obj.getString("indirizzo"));
-                            //indirizzo.setMovementMethod(LinkMovementMethod.getInstance());
-                            //Linkify.addLinks(indirizzo, Linkify.ALL);
                             telefono.setText(obj.getString("telefono"));
                             idPortata.setText(obj.getString("id"));
 
+                            //Decodifica immagine da db
                             byte[] decodedString = Base64.decode(String.valueOf(obj.getString("foto")), Base64.DEFAULT);
                             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 

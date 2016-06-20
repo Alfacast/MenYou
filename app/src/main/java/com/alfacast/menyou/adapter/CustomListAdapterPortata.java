@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.alfacast.menyou.login.R;
 import com.alfacast.menyou.login.app.AppController;
-import com.alfacast.menyou.model.ListaMenu;
 import com.alfacast.menyou.model.ListaPortata;
 import com.android.volley.toolbox.ImageLoader;
 
@@ -67,9 +66,10 @@ public class CustomListAdapterPortata extends BaseAdapter {
         TextView prezzo = (TextView) convertView.findViewById(R.id.prezzo);
         TextView idPortata = (TextView) convertView.findViewById(R.id.idportata);
 
-        // getting menu data for the row
+        // getting portata data for the row
         ListaPortata p = portataItems.get(position);
 
+        // decodifica immagine da db
         byte[] decodedString = Base64.decode(String.valueOf(p.getThumbnailPortata()), Base64.DEFAULT);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 

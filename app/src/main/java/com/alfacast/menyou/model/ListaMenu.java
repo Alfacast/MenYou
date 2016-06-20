@@ -1,10 +1,5 @@
 package com.alfacast.menyou.model;
 
-import android.media.Image;
-import android.widget.ImageView;
-
-import java.util.ArrayList;
-
 /**
  * Created by Gabriele Bellissima on 08/06/2016.
  */

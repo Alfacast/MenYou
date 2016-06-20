@@ -68,6 +68,7 @@ public class LoginActivity extends Activity {
         btnLinkToRegister = (Button) findViewById(R.id.btnLinkToRegisterScreen);
         btnRegisterRestaurateur = (Button) findViewById(R.id.btnLinkToRegisterRestaurateur);
 
+        //Button login con Facebook
         loginButton = (LoginButton)findViewById(R.id.login_button);
 
             // Callback registration
@@ -113,11 +114,12 @@ public class LoginActivity extends Activity {
         Log.d(TAG,"database cliente"+db.getUserDetails().toString());
         if (session.isLoggedIn()) {
             if(dbr.getUserDetails().toString().contains("partitaIva")) {
-                // User is already logged in. Take him to main activity
+                // Ristorante is already logged in. Take him to main activity
                 Intent intent = new Intent(LoginActivity.this, MainRistoranteActivity.class);
                 startActivity(intent);
                 finish();
             }else{
+                // User is already logged in. Take him to main activity
                 Intent intent = new Intent(LoginActivity.this, MainClienteActivity.class);
                 startActivity(intent);
                 finish();
@@ -232,7 +234,7 @@ public class LoginActivity extends Activity {
                         }else{
                             Log.d(TAG,"partitaIva non è null ");
                             dbr.addUser(id_ristorante, name, address, partitaIva, email, tel, foto, uid, created_at);
-                            // Launch main activity
+                            // Launch main activity ristorante
                             Intent intent = new Intent(LoginActivity.this,
                                     MainRistoranteActivity.class);
                             startActivity(intent);

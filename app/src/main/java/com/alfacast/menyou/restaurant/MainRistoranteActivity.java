@@ -12,8 +12,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.alfacast.menyou.adapter.CustomListAdapter;
-import com.alfacast.menyou.adapter.CustomListAdapterPortata;
-import com.alfacast.menyou.client.PortataActivity;
 import com.alfacast.menyou.login.R;
 
 import android.content.Intent;
@@ -28,7 +26,6 @@ import com.alfacast.menyou.login.app.AppController;
 import com.alfacast.menyou.login.helper.SQLiteHandlerRestaurant;
 import com.alfacast.menyou.login.helper.SessionManager;
 import com.alfacast.menyou.model.ListaMenu;
-import com.alfacast.menyou.model.ListaPortata;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;

@@ -1,6 +1,5 @@
 package com.alfacast.menyou.restaurant;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -124,7 +123,7 @@ public class InsertMenuActivity extends AppCompatActivity {
 
                         Toast.makeText(getApplicationContext(), "Menu successfully created.", Toast.LENGTH_LONG).show();
 
-                        // Launch portata activity
+                        // Launch Insert portata activity
                         Bundle b= new Bundle();
                         b.putString("idmenu", id);
                         Intent intent = new Intent(

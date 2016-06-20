@@ -2,6 +2,7 @@ package com.alfacast.menyou.client;
 
 /**
  * Created by Pietro Fantuzzi on 07/06/2016.
+ * Gestione tab ristoranti su MainClienteActivity
  */
 
 import android.os.Bundle;
