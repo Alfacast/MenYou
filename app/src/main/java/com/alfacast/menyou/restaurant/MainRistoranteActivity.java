@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.alfacast.menyou.adapter.CustomListAdapter;
+import com.alfacast.menyou.adapter.CustomListMenuRistorante;
 import com.alfacast.menyou.login.R;
 
 import android.content.Intent;
@@ -49,7 +50,7 @@ public class MainRistoranteActivity extends AppCompatActivity
     private ProgressDialog pDialog;
     private List<ListaMenu> menuList = new ArrayList<ListaMenu>();
     private ListView listView;
-    private CustomListAdapter adapter;
+    private CustomListMenuRistorante adapter;
 
     private SessionManager session;
     private SQLiteHandlerRestaurant dbr;
@@ -78,7 +79,7 @@ public class MainRistoranteActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         listView = (ListView) findViewById(R.id.list);
-        adapter = new CustomListAdapter(this, menuList);
+        adapter = new CustomListMenuRistorante(this, menuList);
         listView.setAdapter(adapter);
 
         pDialog = new ProgressDialog(this);
@@ -133,25 +134,6 @@ public class MainRistoranteActivity extends AppCompatActivity
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(menuReq);
-
-        listView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View view, int arg2,
-                                    long arg3) {
-
-                String id = ((TextView) view.findViewById(R.id.idmenu)).getText().toString();
-
-                // send menu id to portata list activity to get list of portate under that menu
-
-                Bundle b= new Bundle();
-                b.putString("idmenu", id);
-                Intent intent = new Intent(
-                        getApplicationContext(),
-                        PortataActivityRistorante.class);
-                intent.putExtras(b);
-                startActivity(intent);
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
