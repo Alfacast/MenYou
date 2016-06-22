@@ -1,12 +1,15 @@
 package com.alfacast.menyou.adapter;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +22,20 @@ import android.widget.Toast;
 import com.alfacast.menyou.login.R;
 import com.alfacast.menyou.login.app.AppController;
 import com.alfacast.menyou.model.ListaMenu;
+import com.alfacast.menyou.restaurant.MainRistoranteActivity;
 import com.alfacast.menyou.restaurant.PortataActivityRistorante;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -28,6 +43,13 @@ import java.util.List;
  * Created by Gabriele Bellissima on 08/06/2016.
  */
 public class CustomListMenuRistorante extends BaseAdapter {
+
+    // Log tag
+    private static final String TAG = CustomListMenuRistorante.class.getSimpleName();
+
+    // Portata json url
+    private static final String url = "http://www.cinesofia.it/alfacast/youmenulogin/delete_menu.php?idmenu=";
+
     private Activity activity;
     private LayoutInflater inflater;
     private List<ListaMenu> menuItems;
@@ -54,7 +76,7 @@ public class CustomListMenuRistorante extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, final ViewGroup parent) {
 
         if (inflater == null)
             inflater = (LayoutInflater) activity
@@ -92,14 +114,81 @@ public class CustomListMenuRistorante extends BaseAdapter {
 
         idMenu.setText(m.getIdMenu());
 
+        //On click del bottone delete
         btnDeleteMenu.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Toast.makeText(v.getContext(),"Delete button Clicked",
-                        Toast.LENGTH_LONG).show();
+            public void onClick(final View v) {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                        v.getContext());
+
+                // set title
+                alertDialogBuilder.setTitle("Elimina Menu");
+
+                // set dialog message
+                alertDialogBuilder
+                        .setMessage("Sei sicuro di voler eliminare il menu?")
+                        .setCancelable(false)
+                        .setPositiveButton("Si",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                // se cliccato elimino il menu e lancio la mainactivity
+                                final String idDelMenu = idMenu.getText().toString();
+                                Log.d(TAG,"id menu: "+ idDelMenu);
+                                JsonArrayRequest menuReq = new JsonArrayRequest(url+idDelMenu,
+                                        new Response.Listener<JSONArray>() {
+
+                                            @Override
+                                            public void onResponse(JSONArray response) {
+                                                Log.d(TAG, response.toString());
+
+                                                // Parsing json
+                                                try {
+
+                                                    JSONObject obj = response.getJSONObject(0);
+
+                                                    String message = obj.getString("message");
+                                                    Log.d(TAG,"messaggio json: "+ message);
+
+                                                } catch (JSONException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                        }, new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        VolleyLog.d(TAG, "Error: " + error.getMessage());
+
+                                    }
+
+                                });
+                                // Adding request to request queue
+                                AppController.getInstance().addToRequestQueue(menuReq);
+
+                                //lancio la mainactivity
+                                Intent i = new Intent(v.getContext(),
+                                        MainRistoranteActivity.class);
+                                v.getContext().startActivity(i);
+                                ((Activity)v.getContext()).finish();
+                            }
+                        })
+                        .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                // if this button is clicked, just close
+                                // the dialog box and do nothing
+                                dialog.cancel();
+                            }
+                        });
+
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                // show it
+                alertDialog.show();
+
             }
         });
 
+        //On click del bottone edit
         btnEditMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,6 +197,7 @@ public class CustomListMenuRistorante extends BaseAdapter {
             }
         });
 
+        //On click del bottone itemize
         btnItemizeMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
