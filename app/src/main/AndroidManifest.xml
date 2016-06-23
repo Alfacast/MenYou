@@ -154,6 +154,15 @@
             android:parentActivityName="com.alfacast.menyou.restaurant.PortataActivityRistorante"
             android:theme="@style/AppTheme">
         </activity>
+        <activity
+            android:name="com.alfacast.menyou.restaurant.EditMenuActivity"
+            android:label="@string/title_activity_edit_menu"
+            android:parentActivityName="com.alfacast.menyou.restaurant.MainRistoranteActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.alfacast.menyou.restaurant.MainRistoranteActivity" />
+        </activity>
     </application>
 
 </manifest>

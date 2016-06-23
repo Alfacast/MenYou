@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.alfacast.menyou.login.R;
 import com.alfacast.menyou.login.app.AppController;
 import com.alfacast.menyou.model.ListaMenu;
+import com.alfacast.menyou.restaurant.EditMenuActivity;
 import com.alfacast.menyou.restaurant.MainRistoranteActivity;
 import com.alfacast.menyou.restaurant.PortataActivityRistorante;
 import com.android.volley.NetworkResponse;
@@ -87,7 +88,7 @@ public class CustomListMenuRistorante extends BaseAdapter {
         if (imageLoader == null)
             imageLoader = AppController.getInstance().getImageLoader();
         ImageView thumbNail = (ImageView) convertView.findViewById(R.id.thumbnail);
-        TextView nomeMenu = (TextView) convertView.findViewById(R.id.nomemenu);
+        final TextView nomeMenu = (TextView) convertView.findViewById(R.id.nomemenu);
         TextView nomeRistorante = (TextView) convertView.findViewById(R.id.nomeristorante);
         final TextView idMenu = (TextView) convertView.findViewById(R.id.idmenu);
         ImageButton btnDeleteMenu = (ImageButton) convertView.findViewById(R.id.btnDeleteMenu);
@@ -192,8 +193,20 @@ public class CustomListMenuRistorante extends BaseAdapter {
         btnEditMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(),"Edit button Clicked",
-                        Toast.LENGTH_LONG).show();
+                Bundle b= new Bundle();
+                b.putString("nomemenu", nomeMenu.getText().toString());
+
+                Bundle c= new Bundle();
+                c.putString("idmenu", idMenu.getText().toString());
+
+
+                Intent intent = new Intent(
+                        v.getContext(),
+                        EditMenuActivity.class);
+                intent.putExtras(b);
+                intent.putExtras(c);
+
+                v.getContext().startActivity(intent);
             }
         });
 

@@ -8,6 +8,7 @@
     <string name="btn_login">LOGIN</string>
     <string name="btn_register">REGISTER</string>
     <string name="btn_insert">INSERISCI</string>
+    <string name="btn_edit">MODIFICA</string>
     <string name="btn_link_to_register_client">Non sei registrato? Iscriviti ora.</string>
     <string name="btn_link_to_register_restaurateur">Vuoi inserire un Menu? Iscriviti ora.</string>
     <string name="btn_link_to_facebook">Login con Facebook</string>
@@ -39,8 +40,10 @@
     <string name="registra_cliente">Registra nuovo cliente</string>
     <string name="tutorial_name">Tutorial</string>
     <string name="Insert_menu_name">Inserisci Menu</string>
-    <string name="insert_menu">Inserisci nuovo menu</string>
-    <string name="insert_portata">Inserisci nuova portata</string>
+    <string name="insert_menu">Inserisci nuovo Menu</string>
+    <string name="edit_menu">Modifica Menu</string>
+
+    <string name="insert_portata">Inserisci nuova Portata</string>
     <string name="Insert_portata_name">Inserisci Portata</string>
 
     <string name="facebook_app_id">1046817178707165</string>
@@ -61,5 +64,6 @@
     <string name="title_activity_portata_activity_ristorante">Portate Menu</string>
     <string name="title_activity_portata_dettaglio">Dettaglio Portata</string>
     <string name="title_activity_portata_dettaglio_ristorante">Dettaglio Portata</string>
+    <string name="title_activity_edit_menu">Modifica Menu</string>
 
 </resources>
