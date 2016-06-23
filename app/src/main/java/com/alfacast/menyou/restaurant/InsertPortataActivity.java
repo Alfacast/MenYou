@@ -77,7 +77,7 @@ public class InsertPortataActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         inputNamePortata = (EditText) findViewById(R.id.namePortata);
         btnInsertPortata = (Button) findViewById(R.id.btnInsertPortata);

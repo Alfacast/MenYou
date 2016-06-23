@@ -106,4 +106,13 @@
         android:textColor="@color/categoria"
         android:textSize="@dimen/categoria" />
 
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnDeletePortata"
+        android:src="@drawable/ic_delete"
+        android:layout_above="@+id/descrizioneportata"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>

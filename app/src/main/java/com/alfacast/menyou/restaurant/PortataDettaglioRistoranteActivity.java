@@ -1,5 +1,6 @@
 package com.alfacast.menyou.restaurant;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,6 +35,7 @@ public class PortataDettaglioRistoranteActivity extends AppCompatActivity {
 
     // Portata json url
     private static final String url = "http://www.cinesofia.it/alfacast/youmenulogin/get_portata_dettaglio.php?idportata=";
+    private static final String urldel = "http://www.cinesofia.it/alfacast/youmenulogin/delete_portata.php?idportata=";
     private ProgressDialog pDialog;
 
     @Override
@@ -43,9 +46,13 @@ public class PortataDettaglioRistoranteActivity extends AppCompatActivity {
         // recupero id portata dalla activity precedente
         Intent intent=getIntent();
         Bundle b=intent.getExtras();
+        Bundle c=intent.getExtras();
 
         final String idportata=b.getString("idportata");
         Log.d(TAG,"id portata: "+ idportata);
+
+        final String idmenu=c.getString("idmenu");
+        Log.d(TAG,"id menu: "+ idmenu);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -70,6 +77,7 @@ public class PortataDettaglioRistoranteActivity extends AppCompatActivity {
         final TextView categoria = (TextView) findViewById(R.id.categoria);
         final TextView prezzo = (TextView) findViewById(R.id.prezzo);
         final TextView idPortata = (TextView) findViewById(R.id.idportata);
+        final ImageButton btnDeletePortata = (ImageButton) findViewById(R.id.btnDeletePortata);
 
         pDialog = new ProgressDialog(this);
         // Showing progress dialog before making http request
@@ -127,6 +135,63 @@ public class PortataDettaglioRistoranteActivity extends AppCompatActivity {
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(portataReq);
+
+        btnDeletePortata.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+
+                // Showing progress dialog before making http request
+                //pDialog.setMessage("Loading...");
+                //showDialog();
+
+                // Creating volley request obj
+                final JsonArrayRequest portataReq = new JsonArrayRequest(urldel+idportata,
+
+                new Response.Listener<JSONArray>() {
+
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.d(TAG, response.toString());
+
+                        // Parsing json
+                        try {
+
+                            JSONObject obj = response.getJSONObject(0);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        VolleyLog.d(TAG, "Error: " + error.getMessage());
+
+                    }
+
+                });
+
+                // Adding request to request queue
+                AppController.getInstance().addToRequestQueue(portataReq);
+
+                Bundle b= new Bundle();
+                b.putString("idmenu", idmenu);
+
+                //lancio la portata activity ristorante
+                Intent i = new Intent(view.getContext(),
+                        PortataActivityRistorante.class);
+                i.putExtras(b);
+                view.getContext().startActivity(i);
+                ((Activity)view.getContext()).finish();
+
+            }
+
+        });
+
+    }
+
+    private void showDialog() {
+        if (pDialog.isShowing())
+            pDialog.show();
     }
 
     @Override

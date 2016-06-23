@@ -144,10 +144,13 @@ public class PortataActivityRistorante extends AppCompatActivity {
 
                 Bundle b= new Bundle();
                 b.putString("idportata", id);
+                Bundle c= new Bundle();
+                c.putString("idmenu", idmenu);
                 Intent intent = new Intent(
                         getApplicationContext(),
                         PortataDettaglioRistoranteActivity.class);
                 intent.putExtras(b);
+                intent.putExtras(c);
                 startActivity(intent);
             }
         });
