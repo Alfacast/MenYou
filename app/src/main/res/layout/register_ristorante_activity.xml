@@ -113,8 +113,9 @@
         <ImageView
             android:id="@+id/viewImage"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:src="@drawable/ic_camera" />
+            android:layout_height="200dp"
+            android:src="@drawable/ic_camera"
+            android:scaleType="centerCrop"/>
 
         <!-- Login Button -->
 
