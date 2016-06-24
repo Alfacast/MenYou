@@ -37,6 +37,7 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_main_cliente">MainClienteActivity</string>
     <string name="registra_attivita">Registra nuova attività</string>
+    <string name="modifica_account">Modifica Account</string>
     <string name="registra_cliente">Registra nuovo cliente</string>
     <string name="tutorial_name">Tutorial</string>
     <string name="Insert_menu_name">Inserisci Menu</string>
@@ -53,8 +54,10 @@
     <string-array name="categoria">
         <item>Seleziona Categoria</item>
         <item>Antipasti</item>
+        <item>Piatto Unico</item>
         <item>Primi</item>
         <item>Secondi</item>
+        <item>Pizza</item>
         <item>Contorni</item>
         <item>Dessert</item>
         <item>Bevande</item>
@@ -66,5 +69,6 @@
     <string name="title_activity_portata_dettaglio_ristorante">Dettaglio Portata</string>
     <string name="title_activity_edit_menu">Modifica Menu</string>
     <string name="title_activity_ristorante_dettaglio">Dettaglio Ristorante</string>
+    <string name="title_activity_edit_account">Modifica Account</string>
 
 </resources>

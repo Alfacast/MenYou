@@ -142,13 +142,12 @@
             android:name="com.alfacast.menyou.client.PortataDettaglioActivity"
             android:label="@string/title_activity_portata_dettaglio"
             android:parentActivityName="com.alfacast.menyou.client.PortataActivity"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name="com.alfacast.menyou.restaurant.PortataDettaglioRistoranteActivity"
             android:label="@string/title_activity_portata_dettaglio_ristorante"
             android:parentActivityName="com.alfacast.menyou.restaurant.PortataActivityRistorante"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name="com.alfacast.menyou.restaurant.EditMenuActivity"
             android:label="@string/title_activity_edit_menu"
@@ -166,6 +165,15 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.alfacast.menyou.client.MainClienteActivity" />
+        </activity>
+        <activity
+            android:name="com.alfacast.menyou.restaurant.EditAccountRistoranteActivity"
+            android:label="@string/title_activity_edit_account"
+            android:parentActivityName="com.alfacast.menyou.restaurant.EditAccountRistoranteActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.alfacast.menyou.restaurant.MainRistoranteActivity" />
         </activity>
     </application>
 

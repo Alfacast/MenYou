@@ -184,7 +184,9 @@ public class MainRistoranteActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_account) {
-
+            Intent i = new Intent(getApplicationContext(),
+                    EditAccountRistoranteActivity.class);
+            startActivity(i);
         } else if (id == R.id.nav_menu) {
 
         } else if (id == R.id.nav_menu_add) {
