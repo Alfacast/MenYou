@@ -52,13 +52,13 @@ public class EditAccountRistoranteActivity extends AppCompatActivity {
 
     private static final String TAG = EditAccountRistoranteActivity.class.getSimpleName();
     private ProgressDialog pDialog;
-    private Button btnRegister;
+    private Button btnEdit;
     private EditText nameRestaurant;
-    private EditText RestaurantAddress;
-    private EditText PartitaIva;
-    private EditText RestaurantEmail;
-    private EditText RestaurantTel;
-    private EditText RestaurantPassword;
+    private EditText restaurantAddress;
+    private EditText restaurantPartitaIva;
+    private EditText restaurantEmail;
+    private EditText restaurantTel;
+    private EditText restaurantPassword;
     private Button btnInsertFoto;
     private ImageView viewImage;
 
@@ -76,13 +76,13 @@ public class EditAccountRistoranteActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         nameRestaurant = (EditText) findViewById(R.id.nameRestaurant);
-        RestaurantAddress = (EditText) findViewById(R.id.RestaurantAddress);
-        PartitaIva = (EditText) findViewById(R.id.PartitaIva);
-        RestaurantEmail = (EditText) findViewById(R.id.RestaurantEmail);
-        RestaurantTel = (EditText) findViewById(R.id.RestaurantTel);
-        RestaurantPassword = (EditText) findViewById(R.id.RestaurantPassword);
+        restaurantAddress = (EditText) findViewById(R.id.RestaurantAddress);
+        restaurantPartitaIva = (EditText) findViewById(R.id.PartitaIva);
+        restaurantEmail = (EditText) findViewById(R.id.RestaurantEmail);
+        restaurantTel = (EditText) findViewById(R.id.RestaurantTel);
+        restaurantPassword = (EditText) findViewById(R.id.RestaurantPassword);
         btnInsertFoto=(Button)findViewById(R.id.btnSelectPhoto);
-        btnRegister = (Button) findViewById(R.id.btnRegister);
+        btnEdit = (Button) findViewById(R.id.btnEditAccount);
         viewImage=(ImageView)findViewById(R.id.viewImage);
 
         // SqLite database handler
@@ -102,10 +102,10 @@ public class EditAccountRistoranteActivity extends AppCompatActivity {
 
         // Displaying the user details on the screen
         nameRestaurant.setText(nome);
-        RestaurantAddress.setText(indirizzo);
-        PartitaIva.setText(partitaIva);
-        RestaurantEmail.setText(email);
-        RestaurantTel.setText(telefono);
+        restaurantAddress.setText(indirizzo);
+        restaurantPartitaIva.setText(partitaIva);
+        restaurantEmail.setText(email);
+        restaurantTel.setText(telefono);
 
         btnInsertFoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,14 +115,14 @@ public class EditAccountRistoranteActivity extends AppCompatActivity {
         });
 
         // Register Button Click event
-        btnRegister.setOnClickListener(new View.OnClickListener() {
+        btnEdit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 String nome = nameRestaurant.getText().toString().trim();
-                String address = RestaurantAddress.getText().toString().trim();
-                String partitaIva = PartitaIva.getText().toString().trim();
-                String email = RestaurantEmail.getText().toString().trim();
-                String tel = RestaurantTel.getText().toString().trim();
-                String password = RestaurantPassword.getText().toString().trim();
+                String address = restaurantAddress.getText().toString().trim();
+                String partitaIva = restaurantPartitaIva.getText().toString().trim();
+                String email = restaurantEmail.getText().toString().trim();
+                String tel = restaurantTel.getText().toString().trim();
+                String password = restaurantPassword.getText().toString().trim();
 
                 viewImage.buildDrawingCache();
                 Bitmap bitmap = viewImage.getDrawingCache();
