@@ -99,6 +99,7 @@ public class EditAccountRistoranteActivity extends AppCompatActivity {
         String partitaIva = user.get("partitaIva");
         String email = user.get("email");
         String telefono = user.get("tel");
+        String foto = user.get("foto");
 
         // Displaying the user details on the screen
         nameRestaurant.setText(nome);
@@ -106,6 +107,12 @@ public class EditAccountRistoranteActivity extends AppCompatActivity {
         restaurantPartitaIva.setText(partitaIva);
         restaurantEmail.setText(email);
         restaurantTel.setText(telefono);
+
+        //decodifica immagine da db
+        byte[] decodedString = Base64.decode(String.valueOf(foto), Base64.DEFAULT);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+        viewImage.setImageBitmap(decodedByte);
 
         btnInsertFoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -253,8 +260,8 @@ public class EditAccountRistoranteActivity extends AppCompatActivity {
         // Tag used to cancel the request
         String tag_string_req = "req_update";
 
-        pDialog.setMessage("Updating ...");
-        showDialog();
+        //pDialog.setMessage("Updating ...");
+        //showDialog();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 AppConfig.URL_RESTAURANTUPDATE, new Response.Listener<String>() {
@@ -262,7 +269,7 @@ public class EditAccountRistoranteActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "Update Response: " + response.toString());
-                hideDialog();
+                //hideDialog();
 
                 try {
                     JSONObject jObj = new JSONObject(response);
@@ -340,10 +347,10 @@ public class EditAccountRistoranteActivity extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
-    private void showDialog() {
+    /*private void showDialog() {
         if (!pDialog.isShowing())
             pDialog.show();
-    }
+    }*/
 
     private void hideDialog() {
         if (pDialog.isShowing())
