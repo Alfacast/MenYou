@@ -105,24 +105,24 @@ public class TabRistoranti extends Fragment {
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(menuReq);
 
-        /*listView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View view, int arg2,
                                     long arg3) {
 
-                String id = ((TextView) view.findViewById(R.id.idmenu)).getText().toString();
+                String id = ((TextView) view.findViewById(R.id.idristorante)).getText().toString();
 
                 // send menu id to portata list activity to get list of portate under that menu
 
                 Bundle b= new Bundle();
-                b.putString("idRistorante", id);
+                b.putString("idristorante", id);
                 Intent intent = new Intent(
                         getActivity(),
-                        PortataActivity.class);
+                        RistoranteDettaglioActivity.class);
                 intent.putExtras(b);
                 startActivity(intent);
             }
-        });*/
+        });
 
         return view;
     }
