@@ -42,7 +42,7 @@ public class SQLiteHandlerRestaurant extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase dbr){
         String CREATE_LOGIN_TABLE = "CREATE TABLE " + TABLE_USER + "("
-                + KEY_ID + "INTEGER PRIMARY KEY,"+ KEY_ID_RISTORANTE + " TEXT," + KEY_NAME + " TEXT,"
+                + KEY_ID + "INTEGER PRIMARY KEY,"+ KEY_ID_RISTORANTE + " TEXT," + KEY_NAME + " TEXT UNIQUE,"
                 + KEY_ADDRESS + " TEXT," + KEY_PARTITAIVA + " TEXT UNIQUE,"
                 + KEY_EMAIL + " TEXT UNIQUE," + KEY_TEL + " TEXT UNIQUE,"
                 + KEY_PHOTO + " BLOB,"
@@ -82,6 +82,26 @@ public class SQLiteHandlerRestaurant extends SQLiteOpenHelper {
 
     }
 
+    public void updateUser(String id_ristorante, String nome, String address, String partitaIva, String email, String tel, String foto, String uid, String created_at){
+        SQLiteDatabase dbr = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_ID_RISTORANTE, id_ristorante);
+        values.put(KEY_NAME, nome);
+        values.put(KEY_ADDRESS, address);
+        values.put(KEY_PARTITAIVA,partitaIva);
+        values.put(KEY_EMAIL, email);
+        values.put(KEY_TEL, tel);
+        values.put(KEY_PHOTO, foto);
+        values.put(KEY_UID, uid);
+        values.put(KEY_CREATED_AT, created_at);
+
+        long pIva = dbr.update(TABLE_USER, values, "partitaIva ='" + partitaIva + "'",null);
+        dbr.close();
+
+        Log.d(TAG, "New user update into sqlite: " + pIva);
+
+    }
 
     public HashMap<String, String> getUserDetails(){
         HashMap<String, String> user = new HashMap<String, String>();

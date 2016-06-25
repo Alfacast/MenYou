@@ -121,7 +121,7 @@ public class EditAccountRistoranteActivity extends AppCompatActivity {
             }
         });
 
-        // Register Button Click event
+        // Update Button Click event
         btnEdit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 String nome = nameRestaurant.getText().toString().trim();
@@ -260,9 +260,6 @@ public class EditAccountRistoranteActivity extends AppCompatActivity {
         // Tag used to cancel the request
         String tag_string_req = "req_update";
 
-        //pDialog.setMessage("Updating ...");
-        //showDialog();
-
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 AppConfig.URL_RESTAURANTUPDATE, new Response.Listener<String>() {
 
@@ -292,7 +289,7 @@ public class EditAccountRistoranteActivity extends AppCompatActivity {
                                 .getString("created_at");
 
                         // Inserting row in users table
-                        db.addUser(id_database, nome, address, partitaIva, email, tel, foto, uid, created_at);
+                        db.updateUser(id_database, nome, address, partitaIva, email, tel, foto, uid, created_at);
 
                         Toast.makeText(getApplicationContext(), "User successfully update!", Toast.LENGTH_LONG).show();
 
@@ -346,11 +343,6 @@ public class EditAccountRistoranteActivity extends AppCompatActivity {
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
-
-    /*private void showDialog() {
-        if (!pDialog.isShowing())
-            pDialog.show();
-    }*/
 
     private void hideDialog() {
         if (pDialog.isShowing())
