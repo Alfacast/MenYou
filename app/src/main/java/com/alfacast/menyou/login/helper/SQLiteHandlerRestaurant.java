@@ -43,7 +43,7 @@ public class SQLiteHandlerRestaurant extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase dbr){
         String CREATE_LOGIN_TABLE = "CREATE TABLE " + TABLE_USER + "("
                 + KEY_ID + "INTEGER PRIMARY KEY,"+ KEY_ID_RISTORANTE + " TEXT," + KEY_NAME + " TEXT UNIQUE,"
-                + KEY_ADDRESS + " TEXT," + KEY_PARTITAIVA + " TEXT UNIQUE,"
+                + KEY_ADDRESS + " TEXT," + KEY_PARTITAIVA + " TEXT,"
                 + KEY_EMAIL + " TEXT UNIQUE," + KEY_TEL + " TEXT UNIQUE,"
                 + KEY_PHOTO + " BLOB,"
                 + KEY_UID + " TEXT," + KEY_CREATED_AT + " TEXT" + ")";
