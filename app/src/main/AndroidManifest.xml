@@ -175,6 +175,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.alfacast.menyou.restaurant.MainRistoranteActivity" />
         </activity>
+        <activity
+            android:name="com.alfacast.menyou.client.EditAccountClienteActivity"
+            android:label="@string/title_activity_edit_account"
+            android:parentActivityName="com.alfacast.menyou.client.EditAccountClienteActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.alfacast.menyou.client.MainClienteActivity" />
+        </activity>
     </application>
 
 </manifest>

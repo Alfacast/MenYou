@@ -16,13 +16,18 @@ import android.view.MenuItem;
 
 import com.alfacast.menyou.login.R;
 import com.alfacast.menyou.login.activity.LoginActivity;
+import com.alfacast.menyou.login.helper.SQLiteHandlerRestaurant;
+import com.alfacast.menyou.login.helper.SQLiteHandlerUser;
 import com.alfacast.menyou.login.helper.SessionManager;
+
+import java.util.HashMap;
 
 public class MainClienteActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = MainClienteActivity.class.getSimpleName();
 
     private SessionManager session;
+    private SQLiteHandlerUser db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +36,7 @@ public class MainClienteActivity extends AppCompatActivity
 
         // session manager
         session = new SessionManager(getApplicationContext());
+        db = new SQLiteHandlerUser(getApplicationContext());
 
         if (!session.isLoggedIn()) {
             logoutUser();
@@ -80,6 +86,9 @@ public class MainClienteActivity extends AppCompatActivity
     private void logoutUser() {
         session.setLogin(false);
 
+        //dbr.deleteUsers();
+        db.deleteUsers();
+
         // Launching the login activity
         Intent intent = new Intent(MainClienteActivity.this, LoginActivity.class);
         startActivity(intent);
@@ -125,7 +134,9 @@ public class MainClienteActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_account) {
-
+            Intent i = new Intent(getApplicationContext(),
+                    EditAccountClienteActivity.class);
+            startActivity(i);
         } else if (id == R.id.nav_preferiti) {
 
         } else if (id == R.id.nav_cerca) {
