@@ -28,6 +28,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+
 public class PortataDettaglioRistoranteActivity extends AppCompatActivity {
 
     // Log tag
@@ -57,14 +59,6 @@ public class PortataDettaglioRistoranteActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabedit);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         final ImageView foto = (ImageView) findViewById(R.id.foto);
@@ -78,6 +72,7 @@ public class PortataDettaglioRistoranteActivity extends AppCompatActivity {
         final TextView prezzo = (TextView) findViewById(R.id.prezzo);
         final TextView idPortata = (TextView) findViewById(R.id.idportata);
         final ImageButton btnDeletePortata = (ImageButton) findViewById(R.id.btnDeletePortata);
+        final TextView opzioniPortata = (TextView)findViewById(R.id.opzioniPortata);
 
         pDialog = new ProgressDialog(this);
         // Showing progress dialog before making http request
@@ -107,6 +102,7 @@ public class PortataDettaglioRistoranteActivity extends AppCompatActivity {
                             indirizzo.setText(obj.getString("indirizzo"));
                             telefono.setText(obj.getString("telefono"));
                             idPortata.setText(obj.getString("id"));
+                            opzioniPortata.setText(obj.getString("opzioni"));
 
                             //Decodifica immagine da db
                             byte[] decodedString = Base64.decode(String.valueOf(obj.getString("foto")), Base64.DEFAULT);
@@ -146,22 +142,22 @@ public class PortataDettaglioRistoranteActivity extends AppCompatActivity {
                 // Creating volley request obj
                 final JsonArrayRequest portataReq = new JsonArrayRequest(urldel+idportata,
 
-                new Response.Listener<JSONArray>() {
+                        new Response.Listener<JSONArray>() {
 
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.d(TAG, response.toString());
+                            @Override
+                            public void onResponse(JSONArray response) {
+                                Log.d(TAG, response.toString());
 
-                        // Parsing json
-                        try {
+                                // Parsing json
+                                try {
 
-                            JSONObject obj = response.getJSONObject(0);
+                                    JSONObject obj = response.getJSONObject(0);
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         VolleyLog.d(TAG, "Error: " + error.getMessage());
@@ -187,6 +183,53 @@ public class PortataDettaglioRistoranteActivity extends AppCompatActivity {
 
         });
 
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabedit);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //lancio edit portata
+
+                Bundle c= new Bundle();
+                c.putString("nomeportata", nomePortata.getText().toString());
+
+                Bundle d= new Bundle();
+                d.putString("descrizioneportata", descrizionePortata.getText().toString());
+
+                Bundle e= new Bundle();
+                e.putString("prezzoportata", prezzo.getText().toString());
+
+                Bundle f= new Bundle();
+                f.putString("opzioni", opzioniPortata.getText().toString());
+
+                thumbNailPortata.buildDrawingCache();
+                Bitmap bitmap = thumbNailPortata.getDrawingCache();
+                ByteArrayOutputStream stream=new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 85, stream);
+                final byte[] image=stream.toByteArray();
+                String foto = Base64.encodeToString(image, Base64.NO_WRAP);
+
+                Bundle g= new Bundle();
+                g.putString("decodedStringFoto", foto);
+
+                Bundle h= new Bundle();
+                f.putString("idportata", idPortata.getText().toString());
+
+                Intent i = new Intent(view.getContext(),
+                        EditPortataActivity.class);
+
+                i.putExtras(c);
+                i.putExtras(d);
+                i.putExtras(e);
+                i.putExtras(f);
+                i.putExtras(g);
+                i.putExtras(h);
+
+                view.getContext().startActivity(i);
+                ((Activity)view.getContext()).finish();
+
+            }
+        });
     }
 
     private void showDialog() {

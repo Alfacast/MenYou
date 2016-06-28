@@ -136,7 +136,6 @@ public class EditAccountRistoranteActivity extends AppCompatActivity {
                 ByteArrayOutputStream stream=new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 85, stream);
                 final byte[] image=stream.toByteArray();
-
                 String foto = Base64.encodeToString(image, Base64.NO_WRAP);
 
                 if (!nome.isEmpty() && !address.isEmpty() && !partitaIva.isEmpty() && !email.isEmpty() && !tel.isEmpty() && !password.isEmpty() && !foto.isEmpty()) {

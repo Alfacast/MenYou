@@ -9,6 +9,7 @@
     <string name="btn_register">REGISTER</string>
     <string name="btn_insert">INSERISCI</string>
     <string name="btn_edit">MODIFICA</string>
+    <string name="btn_edit_portata">Modifica Portata</string>
     <string name="btn_link_to_register_client">Non sei registrato? Iscriviti ora.</string>
     <string name="btn_link_to_register_restaurateur">Vuoi inserire un Menu? Iscriviti ora.</string>
     <string name="btn_link_to_facebook">Login con Facebook</string>
@@ -61,6 +62,7 @@
         <item>Contorni</item>
         <item>Dessert</item>
         <item>Bevande</item>
+        <item>Street Food</item>
         <item>Altro</item>
     </string-array>
     <string name="title_activity_portata">Portate Menu</string>
@@ -70,5 +72,6 @@
     <string name="title_activity_edit_menu">Modifica Menu</string>
     <string name="title_activity_ristorante_dettaglio">Dettaglio Ristorante</string>
     <string name="title_activity_edit_account">Modifica Account</string>
+    <string name="title_activity_edit_portata">Modifica Portata</string>
 
 </resources>
