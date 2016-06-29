@@ -101,11 +101,11 @@ public class EditPortataActivity extends AppCompatActivity {
         final String repPrezzoPortata = e.getString("prezzoportata");
         final String repOpzioni = f.getString("opzioni");
         final String repFoto = g.getString("decodedStringFoto");
-        final String repIdPortata = g.getString("idportata");
+        final String repIdPortata = h.getString("idportata");
 
         namePortata.setText(repNomePortata);
         descrizionePortata.setText(repDescrizionePortata);
-        prezzoPortata.setText(repPrezzoPortata);
+        prezzoPortata.setText(repPrezzoPortata.replaceFirst("Prezzo: € ",""));
         opzioniPortata.setText(repOpzioni);
 
         //decodifica immagine da db
@@ -157,6 +157,7 @@ public class EditPortataActivity extends AppCompatActivity {
                 String prezzo = prezzoPortata.getText().toString().trim();
                 String opzioni = opzioniPortata.getText().toString().trim();
                 String disponibile = disponibilePortata.getText().toString().trim();
+                String idPortata = repIdPortata;
 
                 viewImage.buildDrawingCache();
                 Bitmap bitmap = viewImage.getDrawingCache();
@@ -179,13 +180,16 @@ public class EditPortataActivity extends AppCompatActivity {
                 final String idMenu = b.getString("idmenu");
 
                 if (!nome.isEmpty()) {
-                    editPortata(nome, categoria, descrizione, prezzo, opzioni, disponibile, foto, id_ristorante, idMenu);
+                    editPortata(nome, categoria, descrizione, prezzo, opzioni, disponibile, foto, idPortata);
+
+                    Bundle c= new Bundle();
+                    c.putString("idportata", idPortata);
 
                     //Lancio PortataActivityRistorante
                     Intent intent = new Intent(
                             EditPortataActivity.this,
-                            PortataActivityRistorante.class);
-                    intent.putExtras(b);
+                            PortataDettaglioRistoranteActivity.class);
+                    intent.putExtras(c);
                     startActivity(intent);
 
                 } else {
@@ -307,15 +311,15 @@ public class EditPortataActivity extends AppCompatActivity {
      * Function to store user in MySQL database will post params(tag, name,
      * email, password) to register url
      * */
-    private void editPortata(final String nome, final String categoria, final String descrizione, final String prezzo, final String opzioni, final String disponibile, final String foto, final String id_ristorante, final String idmenu) {
+    private void editPortata(final String nome, final String categoria, final String descrizione, final String prezzo, final String opzioni, final String disponibile, final String foto, final String idPortata) {
         // Tag used to cancel the request
         String tag_string_req = "req_insert";
 
-        pDialog.setMessage("Insert ...");
+        pDialog.setMessage("Modifica ...");
         showDialog();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_EDITMENU, new Response.Listener<String>() {
+                AppConfig.URL_EDITPORTATA, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -326,6 +330,7 @@ public class EditPortataActivity extends AppCompatActivity {
                     JSONObject jObj = new JSONObject(response);
                     boolean error = jObj.getBoolean("error");
                     if (!error) {
+
                         // User successfully stored in MySQL
                         // Now store the user in sqlite
                         String uid = jObj.getString("uid");
@@ -346,7 +351,7 @@ public class EditPortataActivity extends AppCompatActivity {
                         // Inserting row in users table (commentata per id_ristorante)
                         db.addPortata(id_ristorante, nome, uid, categoria, descrizione, prezzo, opzioni, disponibile, foto, created_at);
 
-                        Toast.makeText(getApplicationContext(), "Portata successfully created.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Portata successfully update.", Toast.LENGTH_LONG).show();
 
                     } else {
 
@@ -383,8 +388,7 @@ public class EditPortataActivity extends AppCompatActivity {
                 params.put("opzioni", opzioni);
                 params.put("disponibile", disponibile);
                 params.put("foto", foto);
-                params.put("id_ristorante", id_ristorante);
-                params.put("idmenu", idmenu);
+                params.put("idportata", idPortata);
 
                 return params;
             }
@@ -405,275 +409,3 @@ public class EditPortataActivity extends AppCompatActivity {
             pDialog.dismiss();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
-    private Switch switchButton;
-    private String switchOn = "Si";
-    private String switchOff = "No";
-    private Spinner editCategoriaPortata;
-    private EditText editDisponibilePortata;
-    private ImageView viewImage;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.edit_portata_activity);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        editDisponibilePortata = (EditText) findViewById(R.id.disponibilePortata);
-        //Imposta portata disponibile si/no
-        switchButton.setChecked(true);
-        switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean bChecked) {
-                if (bChecked) {
-                    editDisponibilePortata.setText(switchOn);
-                } else {
-                    editDisponibilePortata.setText(switchOff);
-                }
-            }
-        });
-
-        if (switchButton.isChecked()) {
-            editDisponibilePortata.setText(switchOn);
-        } else {
-            editDisponibilePortata.setText(switchOff);
-        }
-
-
-        final ImageView efoto = (ImageView) findViewById(R.id.viewImage);
-        final TextView enomePortata = (TextView) findViewById(R.id.nomeportata);
-        final TextView edescrizionePortata = (TextView) findViewById(R.id.descrizioneportata);
-        //       final TextView categoria = (TextView) findViewById(R.id.categoria);
-        final TextView eprezzoportata = (TextView) findViewById(R.id.prezzo);
-        final TextView eidPortata = (TextView) findViewById(R.id.idportata);
-        final Button btnEditPortata = (Button) findViewById(R.id.btnEditPortata);
-        final TextView eopzioniPortata = (TextView) findViewById(R.id.opzioniPortata);
-
-        switchButton = (Switch) findViewById(R.id.switchButton);
-        editCategoriaPortata = (Spinner) findViewById(R.id.categoriaPortata);
-        viewImage=(ImageView)findViewById(R.id.viewImage);
-        switchButton = (Switch) findViewById(R.id.switchButton);
-
-
-        Intent intent = getIntent();
-
-        Bundle b = intent.getExtras();
-        Bundle c = intent.getExtras();
-        Bundle d = intent.getExtras();
-        Bundle e = intent.getExtras();
-        Bundle f = intent.getExtras();
-        Bundle g = intent.getExtras();
-
-
-        final String idPortata = b.getString("idportata");
-        final String nomePortata = c.getString("nomeportata");
-        final String descrizionePortata = d.getString("descrizioneportata");
-        final String prezzoPortata = e.getString("prezzoportata");
-        final String opzioniPortata = f.getString("opzioni");
-
-
-        final String foto = g.getString("decodedStringFoto");
-
-        byte[] decodedStringFoto = Base64.decode(String.valueOf(foto), Base64.DEFAULT);
-        Bitmap decodedByteFoto = BitmapFactory.decodeByteArray(decodedStringFoto, 0, decodedStringFoto.length);
-
-
-        //Log.d(TAG,"id portata: "+ idportata);
-
-        enomePortata.setText(nomePortata);
-        edescrizionePortata.setText(descrizionePortata);
-        eprezzoportata.setText(prezzoPortata);
-        eopzioniPortata.setText(opzioniPortata);
-        efoto.setImageBitmap(decodedByteFoto);
-
-        // Insert Button Click event
-        btnEditPortata.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-
-                String disponibile = editDisponibilePortata.getText().toString().trim();
-                String categoria = editCategoriaPortata.getSelectedItem().toString();
-
-                final String newPortata = enomePortata.getText().toString().replace(" ", "%20");
-                final String newDescrizione = edescrizionePortata.getText().toString().replace(" ", "%20");
-                final String newPrezzoPortata = eprezzoportata.getText().toString().replace(" ", "%20");
-                final String newOpzioniPortata = eopzioniPortata.getText().toString().replace(" ", "%20");
-
-                //Decodifica immagine da db
-
-                byte[] decodedStringFoto = Base64.decode(String.valueOf(foto), Base64.DEFAULT);
-                Bitmap decodedByteFoto = BitmapFactory.decodeByteArray(decodedStringFoto, 0, decodedStringFoto.length);
-
-                efoto.setImageBitmap(decodedByteFoto);
-
-                //lancio la mainactivity
-                Intent i = new Intent(view.getContext(),
-                        PortataDettaglioRistoranteActivity.class);
-                view.getContext().startActivity(i);
-                ((Activity) view.getContext()).finish();
-
-
-                final JsonArrayRequest menuReq = new JsonArrayRequest(AppConfig.URL_EDITMENU + idPortata + "&nomeportata=" + newPortata +
-                        "descrizioneportata=" + newDescrizione + "prezzoportata=" + newPrezzoPortata + "opzioni=" + newOpzioniPortata + "foto=" + efoto,
-
-                        new Response.Listener<JSONArray>() {
-
-                            @Override
-                            public void onResponse(JSONArray response) {
-                                //                          Log.d(TAG, response.toString());
-
-                                // Parsing json
-                                try {
-
-                                    JSONObject obj = response.getJSONObject(0);
-
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }, new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //                       VolleyLog.d(TAG, "Error: " + error.getMessage());
-
-                    }
-
-                    private void selectImage() {
-
-                        final CharSequence[] options = {"Scatta una foto", "Seleziona dalla galleria", "Annulla"};
-
-                        AlertDialog.Builder builder = new AlertDialog.Builder(EditPortataActivity.this);
-                        builder.setTitle("Aggiungi foto");
-                        builder.setItems(options, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int item) {
-                                if (options[item].equals("Scatta una foto")) {
-                                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                                    File f = new File(android.os.Environment.getExternalStorageDirectory(), "temp.jpg");
-                                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
-                                    startActivityForResult(intent, 1);
-                                } else if (options[item].equals("Seleziona dalla galleria")) {
-                                    Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                                    startActivityForResult(intent, 2);
-
-                                } else if (options[item].equals("Annulla")) {
-                                    dialog.dismiss();
-                                }
-                            }
-                        });
-                        builder.show();
-                    }
-
-                });
-            }
-        });
-    }
-
-
-            protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-                super.onActivityResult(requestCode, resultCode, data);
-                if (resultCode == RESULT_OK) {
-                    if (requestCode == 1) {
-                        File f = new File(Environment.getExternalStorageDirectory().toString());
-                        for (File temp : f.listFiles()) {
-                            if (temp.getName().equals("temp.jpg")) {
-                                f = temp;
-                                break;
-                            }
-                        }
-                        try {
-                            //Imposta orientamento automatico foto da dati exif
-                            ExifInterface exif = new ExifInterface(f.getPath());
-                            int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-
-                            int angle = 0;
-
-                            if (orientation == ExifInterface.ORIENTATION_ROTATE_90) {
-                                angle = 90;
-                            } else if (orientation == ExifInterface.ORIENTATION_ROTATE_180) {
-                                angle = 180;
-                            } else if (orientation == ExifInterface.ORIENTATION_ROTATE_270) {
-                                angle = 270;
-                            }
-
-                            Matrix mat = new Matrix();
-                            mat.postRotate(angle);
-
-                            Bitmap bmp = BitmapFactory.decodeStream(new FileInputStream(f), null, null);
-                            Bitmap bitmap = Bitmap.createBitmap(bmp, 0, 0, bmp.getWidth(), bmp.getHeight(), mat, true);
-
-                            viewImage.setImageBitmap(bitmap);
-
-                            String path = android.os.Environment
-                                    .getExternalStorageDirectory()
-                                    + File.separator
-                                    + "Phoenix" + File.separator + "default";
-                            f.delete();
-                            OutputStream outFile = null;
-                            File file = new File(path, String.valueOf(System.currentTimeMillis()) + ".jpg");
-                            try {
-                                outFile = new FileOutputStream(file);
-                                bitmap.compress(Bitmap.CompressFormat.JPEG, 85, outFile);
-                                outFile.flush();
-                                outFile.close();
-                            } catch (FileNotFoundException e) {
-                                e.printStackTrace();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    } else if (requestCode == 2) {
-
-                        Uri selectedImage = data.getData();
-                        String[] filePath = {MediaStore.Images.Media.DATA};
-                        Cursor c = getContentResolver().query(selectedImage, filePath, null, null, null);
-                        c.moveToFirst();
-                        int columnIndex = c.getColumnIndex(filePath[0]);
-                        String picturePath = c.getString(columnIndex);
-                        c.close();
-                        Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
-                        Log.w("path of image...", picturePath + "");
-                        viewImage.setImageBitmap(thumbnail);
-                    }
-                }
-            }
-        }
-**/

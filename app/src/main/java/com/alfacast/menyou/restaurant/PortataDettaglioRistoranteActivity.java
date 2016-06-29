@@ -202,18 +202,18 @@ public class PortataDettaglioRistoranteActivity extends AppCompatActivity {
                 Bundle f= new Bundle();
                 f.putString("opzioni", opzioniPortata.getText().toString());
 
-                thumbNailPortata.buildDrawingCache();
-                Bitmap bitmap = thumbNailPortata.getDrawingCache();
+                foto.buildDrawingCache();
+                Bitmap bitmap = foto.getDrawingCache();
                 ByteArrayOutputStream stream=new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 85, stream);
                 final byte[] image=stream.toByteArray();
-                String foto = Base64.encodeToString(image, Base64.NO_WRAP);
+                String fotoPortata = Base64.encodeToString(image, Base64.NO_WRAP);
 
                 Bundle g= new Bundle();
-                g.putString("decodedStringFoto", foto);
+                g.putString("decodedStringFoto", fotoPortata);
 
                 Bundle h= new Bundle();
-                f.putString("idportata", idPortata.getText().toString());
+                h.putString("idportata", idPortata.getText().toString());
 
                 Intent i = new Intent(view.getContext(),
                         EditPortataActivity.class);

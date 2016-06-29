@@ -30,6 +30,14 @@
                 android:padding="10dp"
                 android:entries="@array/categoria"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nome Portata"
+                android:id="@+id/textView6"
+                android:textSize="18dp"
+                android:layout_marginBottom="5dp" />
+
             <EditText
                 android:id="@+id/namePortata"
                 android:layout_width="match_parent"
@@ -42,6 +50,14 @@
                 android:inputType="textCapWords"
                 android:textColor="@color/input_register"
                 android:textColorHint="@color/input_register_hint" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Descrizione"
+                android:id="@+id/textView7"
+                android:layout_marginBottom="5dp"
+                android:textSize="18dp" />
 
             <EditText
                 android:id="@+id/descrizionePortata"
@@ -57,6 +73,14 @@
                 android:textColor="@color/input_register"
                 android:textColorHint="@color/input_register_hint" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Prezzo"
+                android:id="@+id/textView8"
+                android:textSize="18dp"
+                android:layout_marginBottom="5dp" />
+
             <EditText
                 android:id="@+id/prezzoPortata"
                 android:layout_width="match_parent"
@@ -69,6 +93,14 @@
                 android:inputType="numberDecimal|number"
                 android:textColor="@color/input_register"
                 android:textColorHint="@color/input_register_hint" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Opzioni"
+                android:id="@+id/textView9"
+                android:layout_marginBottom="5dp"
+                android:textSize="18dp" />
 
             <EditText
                 android:id="@+id/opzioniPortata"
