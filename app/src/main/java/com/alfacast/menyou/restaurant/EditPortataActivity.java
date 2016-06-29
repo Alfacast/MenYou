@@ -323,7 +323,7 @@ public class EditPortataActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "Insert Response: " + response.toString());
+                Log.d(TAG, "Update Response: " + response.toString());
                 hideDialog();
 
                 try {
@@ -345,11 +345,10 @@ public class EditPortataActivity extends AppCompatActivity {
                         String disponibile = portata.getString("disponibile");
                         String foto = portata.getString("foto");
 
-                        String created_at = portata
-                                .getString("created_at");
+                        String created_at = portata.getString("created_at");
 
                         // Inserting row in users table (commentata per id_ristorante)
-                        db.addPortata(id_ristorante, nome, uid, categoria, descrizione, prezzo, opzioni, disponibile, foto, created_at);
+                        db.updatePortata(id_ristorante, nome, uid, categoria, descrizione, prezzo, opzioni, disponibile, foto, created_at);
 
                         Toast.makeText(getApplicationContext(), "Portata successfully update.", Toast.LENGTH_LONG).show();
 

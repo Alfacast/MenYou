@@ -1,7 +1,9 @@
 package com.alfacast.menyou.restaurant;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -102,7 +104,7 @@ public class PortataDettaglioRistoranteActivity extends AppCompatActivity {
                             indirizzo.setText(obj.getString("indirizzo"));
                             telefono.setText(obj.getString("telefono"));
                             idPortata.setText(obj.getString("id"));
-                            opzioniPortata.setText(obj.getString("opzioni"));
+                            opzioniPortata.setText("Opzioni: "+obj.getString("opzioni"));
 
                             //Decodifica immagine da db
                             byte[] decodedString = Base64.decode(String.valueOf(obj.getString("foto")), Base64.DEFAULT);
@@ -133,54 +135,77 @@ public class PortataDettaglioRistoranteActivity extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(portataReq);
 
         btnDeletePortata.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
+            @Override
+            public void onClick(final View view) {
 
-                // Showing progress dialog before making http request
-                //pDialog.setMessage("Loading...");
-                //showDialog();
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                        view.getContext());
 
-                // Creating volley request obj
-                final JsonArrayRequest portataReq = new JsonArrayRequest(urldel+idportata,
+                // set title
+                alertDialogBuilder.setTitle("Elimina Portata");
 
-                        new Response.Listener<JSONArray>() {
+                // set dialog message
+                alertDialogBuilder
+                        .setMessage("Sei sicuro di voler eliminare la portata?")
+                        .setCancelable(false)
+                        .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
 
-                            @Override
-                            public void onResponse(JSONArray response) {
-                                Log.d(TAG, response.toString());
+                                // Creating volley request obj
+                                final JsonArrayRequest portataReq = new JsonArrayRequest(urldel + idportata,
 
-                                // Parsing json
-                                try {
+                                        new Response.Listener<JSONArray>() {
 
-                                    JSONObject obj = response.getJSONObject(0);
+                                            @Override
+                                            public void onResponse(JSONArray response) {
+                                                Log.d(TAG, response.toString());
 
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
+                                                // Parsing json
+                                                try {
+
+                                                    JSONObject obj = response.getJSONObject(0);
+
+                                                } catch (JSONException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                        }, new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        VolleyLog.d(TAG, "Error: " + error.getMessage());
+
+                                    }
+
+                                });
+
+                                // Adding request to request queue
+                                AppController.getInstance().addToRequestQueue(portataReq);
+
+                                Bundle b = new Bundle();
+                                b.putString("idmenu", idmenu);
+
+                                //lancio la portata activity ristorante
+                                Intent i = new Intent(view.getContext(),
+                                        PortataActivityRistorante.class);
+                                i.putExtras(b);
+                                view.getContext().startActivity(i);
+                                ((Activity) view.getContext()).finish();
+
                             }
-                        }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        VolleyLog.d(TAG, "Error: " + error.getMessage());
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // if this button is clicked, just close
+                                // the dialog box and do nothing
+                                dialog.cancel();
+                            }
+                        });
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
 
-                    }
-
-                });
-
-                // Adding request to request queue
-                AppController.getInstance().addToRequestQueue(portataReq);
-
-                Bundle b= new Bundle();
-                b.putString("idmenu", idmenu);
-
-                //lancio la portata activity ristorante
-                Intent i = new Intent(view.getContext(),
-                        PortataActivityRistorante.class);
-                i.putExtras(b);
-                view.getContext().startActivity(i);
-                ((Activity)view.getContext()).finish();
-
+                // show it
+                alertDialog.show();
             }
-
         });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabedit);

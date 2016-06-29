@@ -84,6 +84,27 @@ public class SQLiteHandlerPortata extends SQLiteOpenHelper {
 
     }
 
+    public void updatePortata(String id_ristorante, String nome, String categoria, String descrizione, String prezzo, String opzioni, String disponibile, String foto, String uid, String created_at){
+        SQLiteDatabase dbr = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_ID_RISTORANTE, id_ristorante);
+        values.put(KEY_NOME, nome);
+        values.put(KEY_CATEGORY, categoria);
+        values.put(KEY_DESC, descrizione);
+        values.put(KEY_PRICE, prezzo);
+        values.put(KEY_OPTIONS, opzioni);
+        values.put(KEY_DISP, disponibile);
+        values.put(KEY_PHOTO, foto);
+        values.put(KEY_UID, uid);
+        values.put(KEY_CREATED_AT, created_at);
+
+        long id = dbr.update(TABLE_PORTATA, values, "uid ='" + uid + "'",null);
+        dbr.close();
+
+        Log.d(TAG, "New portata update into sqlite: " + id);
+
+    }
 
     public HashMap<String, String> getPortataDetails(){
         HashMap<String, String> portata = new HashMap<String, String>();

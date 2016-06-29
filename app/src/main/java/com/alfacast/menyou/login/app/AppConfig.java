@@ -23,7 +23,7 @@ public class AppConfig {
         public static String URL_EDITMENU = "http://www.cinesofia.it/alfacast/youmenulogin/editMenu.php?idmenu=";
         public static String URL_RESTAURANTUPDATE = "http://www.cinesofia.it/alfacast/youmenulogin/updateRistorante.php";
         public static String URL_USERUPDATE = "http://www.cinesofia.it/alfacast/youmenulogin/updateUser.php";
-        public static String URL_EDITPORTATA = "http://www.cinesofia.it/alfacast/youmenulogin/editPortata.php";
+        public static String URL_EDITPORTATA = "http://www.cinesofia.it/alfacast/youmenulogin/updatePortata.php";
 
     }
 
