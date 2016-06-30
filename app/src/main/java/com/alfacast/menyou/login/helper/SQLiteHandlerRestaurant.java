@@ -27,6 +27,7 @@ public class SQLiteHandlerRestaurant extends SQLiteOpenHelper {
     private static final String KEY_NAME = "nome";
     private static final String KEY_ADDRESS = "indirizzo";
     private static final String KEY_PARTITAIVA = "partitaIva";
+    private static final String KEY_SITOWEB = "sitoWeb";
     private static final String KEY_EMAIL = "email";
     private static final String KEY_TEL = "telefono";
     private static final String KEY_PHOTO ="foto";
@@ -43,7 +44,7 @@ public class SQLiteHandlerRestaurant extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase dbr){
         String CREATE_LOGIN_TABLE = "CREATE TABLE " + TABLE_USER + "("
                 + KEY_ID + "INTEGER PRIMARY KEY,"+ KEY_ID_RISTORANTE + " TEXT," + KEY_NAME + " TEXT UNIQUE,"
-                + KEY_ADDRESS + " TEXT," + KEY_PARTITAIVA + " TEXT,"
+                + KEY_ADDRESS + " TEXT," + KEY_PARTITAIVA + " TEXT," + KEY_SITOWEB + " TEXT,"
                 + KEY_EMAIL + " TEXT UNIQUE," + KEY_TEL + " TEXT UNIQUE,"
                 + KEY_PHOTO + " BLOB,"
                 + KEY_UID + " TEXT," + KEY_CREATED_AT + " TEXT" + ")";
@@ -61,7 +62,7 @@ public class SQLiteHandlerRestaurant extends SQLiteOpenHelper {
         onCreate(dbr);
     }
 
-    public void addUser(String id_ristorante, String nome, String address, String partitaIva, String email, String tel, String foto, String uid, String created_at){
+    public void addUser(String id_ristorante, String nome, String address, String partitaIva, String sitoWeb, String email, String tel, String foto, String uid, String created_at){
         SQLiteDatabase dbr = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -69,6 +70,7 @@ public class SQLiteHandlerRestaurant extends SQLiteOpenHelper {
         values.put(KEY_NAME, nome);
         values.put(KEY_ADDRESS, address);
         values.put(KEY_PARTITAIVA,partitaIva);
+        values.put(KEY_SITOWEB,sitoWeb);
         values.put(KEY_EMAIL, email);
         values.put(KEY_TEL, tel);
         values.put(KEY_PHOTO, foto);
@@ -82,7 +84,7 @@ public class SQLiteHandlerRestaurant extends SQLiteOpenHelper {
 
     }
 
-    public void updateUser(String id_ristorante, String nome, String address, String partitaIva, String email, String tel, String foto, String uid, String created_at){
+    public void updateUser(String id_ristorante, String nome, String address, String partitaIva, String sitoWeb, String email, String tel, String foto, String uid, String created_at){
         SQLiteDatabase dbr = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -90,6 +92,7 @@ public class SQLiteHandlerRestaurant extends SQLiteOpenHelper {
         values.put(KEY_NAME, nome);
         values.put(KEY_ADDRESS, address);
         values.put(KEY_PARTITAIVA,partitaIva);
+        values.put(KEY_SITOWEB,sitoWeb);
         values.put(KEY_EMAIL, email);
         values.put(KEY_TEL, tel);
         values.put(KEY_PHOTO, foto);
@@ -116,11 +119,12 @@ public class SQLiteHandlerRestaurant extends SQLiteOpenHelper {
             user.put("nome", cursor.getString(2));
             user.put("address", cursor.getString(3));
             user.put("partitaIva", cursor.getString(4));
-            user.put("email", cursor.getString(5));
-            user.put("tel", cursor.getString(6));
-            user.put("foto", cursor.getString(7));
-            user.put("uid", cursor.getString(8));
-            user.put("created_at", cursor.getString(9));
+            user.put("sitoWeb", cursor.getString(5));
+            user.put("email", cursor.getString(6));
+            user.put("tel", cursor.getString(7));
+            user.put("foto", cursor.getString(8));
+            user.put("uid", cursor.getString(9));
+            //user.put("created_at", cursor.getString(9));
         }
         cursor.close();
         dbr.close();

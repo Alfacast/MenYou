@@ -56,6 +56,7 @@ public class EditAccountRistoranteActivity extends AppCompatActivity {
     private EditText nameRestaurant;
     private EditText restaurantAddress;
     private EditText restaurantPartitaIva;
+    private EditText restaurantSitoWeb;
     private EditText restaurantEmail;
     private EditText restaurantTel;
     private EditText restaurantPassword;
@@ -78,6 +79,7 @@ public class EditAccountRistoranteActivity extends AppCompatActivity {
         nameRestaurant = (EditText) findViewById(R.id.nameRestaurant);
         restaurantAddress = (EditText) findViewById(R.id.RestaurantAddress);
         restaurantPartitaIva = (EditText) findViewById(R.id.PartitaIva);
+        restaurantSitoWeb = (EditText) findViewById(R.id.SitoWeb);
         restaurantEmail = (EditText) findViewById(R.id.RestaurantEmail);
         restaurantTel = (EditText) findViewById(R.id.RestaurantTel);
         restaurantPassword = (EditText) findViewById(R.id.RestaurantPassword);
@@ -97,6 +99,7 @@ public class EditAccountRistoranteActivity extends AppCompatActivity {
         String nome = user.get("nome");
         String indirizzo = user.get("address");
         String partitaIva = user.get("partitaIva");
+        String sitoWeb = user.get("sitoWeb");
         String email = user.get("email");
         String telefono = user.get("tel");
         String foto = user.get("foto");
@@ -105,6 +108,7 @@ public class EditAccountRistoranteActivity extends AppCompatActivity {
         nameRestaurant.setText(nome);
         restaurantAddress.setText(indirizzo);
         restaurantPartitaIva.setText(partitaIva);
+        restaurantSitoWeb.setText(sitoWeb);
         restaurantEmail.setText(email);
         restaurantTel.setText(telefono);
 
@@ -127,6 +131,7 @@ public class EditAccountRistoranteActivity extends AppCompatActivity {
                 String nome = nameRestaurant.getText().toString().trim();
                 String address = restaurantAddress.getText().toString().trim();
                 String partitaIva = restaurantPartitaIva.getText().toString().trim();
+                String sitoWeb = restaurantSitoWeb.getText().toString().trim();
                 String email = restaurantEmail.getText().toString().trim();
                 String tel = restaurantTel.getText().toString().trim();
                 String password = restaurantPassword.getText().toString().trim();
@@ -139,7 +144,7 @@ public class EditAccountRistoranteActivity extends AppCompatActivity {
                 String foto = Base64.encodeToString(image, Base64.NO_WRAP);
 
                 if (!nome.isEmpty() && !address.isEmpty() && !partitaIva.isEmpty() && !email.isEmpty() && !tel.isEmpty() && !password.isEmpty() && !foto.isEmpty()) {
-                    editRestaurant(nome, address, partitaIva, email, tel, password, foto);
+                    editRestaurant(nome, address, partitaIva, sitoWeb, email, tel, password, foto);
                 } else {
                     Toast.makeText(getApplicationContext(),
                             "Please enter your details!", Toast.LENGTH_LONG)
@@ -255,7 +260,7 @@ public class EditAccountRistoranteActivity extends AppCompatActivity {
         }
     }
 
-    private void editRestaurant(final String nome, final String address, final String partitaIva,final String email, final String tel, final String password, final String foto) {
+    private void editRestaurant(final String nome, final String address, final String partitaIva, final String sitoWeb, final String email, final String tel, final String password, final String foto) {
         // Tag used to cancel the request
         String tag_string_req = "req_update";
 
@@ -276,10 +281,11 @@ public class EditAccountRistoranteActivity extends AppCompatActivity {
                         String uid = jObj.getString("uid");
 
                         JSONObject user = jObj.getJSONObject("user");
-                        String id_database = "";
+                        String id_ristorante = user.getString("idRistorante");
                         String nome = user.getString("nome");
                         String address = user.getString("address");
                         String partitaIva = user.getString("partitaIva");
+                        String sitoWeb = user.getString("sitoWeb");
                         String email = user.getString("email");
                         String tel = user.getString("telefono");
                         String foto = user.getString("foto");
@@ -288,7 +294,7 @@ public class EditAccountRistoranteActivity extends AppCompatActivity {
                                 .getString("created_at");
 
                         // Inserting row in users table
-                        db.updateUser(id_database, nome, address, partitaIva, email, tel, foto, uid, created_at);
+                        db.updateUser(id_ristorante, nome, address, partitaIva, sitoWeb, email, tel, foto, uid, created_at);
 
                         Toast.makeText(getApplicationContext(), "User successfully update!", Toast.LENGTH_LONG).show();
 
@@ -329,6 +335,7 @@ public class EditAccountRistoranteActivity extends AppCompatActivity {
                 params.put("nome", nome);
                 params.put("address", address);
                 params.put("partitaIva", partitaIva);
+                params.put("sitoWeb", sitoWeb);
                 params.put("email", email);
                 params.put("telefono", tel);
                 params.put("password", password);

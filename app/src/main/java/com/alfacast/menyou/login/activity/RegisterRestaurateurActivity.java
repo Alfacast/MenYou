@@ -56,6 +56,7 @@ public class RegisterRestaurateurActivity extends Activity {
     private EditText inputNameRestaurant;
     private EditText inputAddress;
     private EditText inputPartitaIva;
+    private EditText inputSitoWeb;
     private EditText inputRestaurantEmail;
     private EditText inputRestaurantTel;
     private EditText inputRestaurantPassword;
@@ -75,6 +76,7 @@ public class RegisterRestaurateurActivity extends Activity {
         inputNameRestaurant = (EditText) findViewById(R.id.nameRestaurant);
         inputAddress = (EditText) findViewById(R.id.RestaurantAddress);
         inputPartitaIva = (EditText) findViewById(R.id.PartitaIva);
+        inputSitoWeb = (EditText) findViewById(R.id.SitoWeb);
         inputRestaurantEmail = (EditText) findViewById(R.id.RestaurantEmail);
         inputRestaurantTel = (EditText) findViewById(R.id.RestaurantTel);
         inputRestaurantPassword = (EditText) findViewById(R.id.RestaurantPassword);
@@ -115,6 +117,7 @@ public class RegisterRestaurateurActivity extends Activity {
                 String nome = inputNameRestaurant.getText().toString().trim();
                 String address = inputAddress.getText().toString().trim();
                 String partitaIva = inputPartitaIva.getText().toString().trim();
+                String sitoWeb = inputSitoWeb.getText().toString().trim();
                 String email = inputRestaurantEmail.getText().toString().trim();
                 String tel = inputRestaurantTel.getText().toString().trim();
                 String password = inputRestaurantPassword.getText().toString().trim();
@@ -128,7 +131,7 @@ public class RegisterRestaurateurActivity extends Activity {
                 String foto = Base64.encodeToString(image, Base64.NO_WRAP);
 
                 if (!nome.isEmpty() && !address.isEmpty() && !partitaIva.isEmpty() && !email.isEmpty() && !tel.isEmpty() && !password.isEmpty() && !foto.isEmpty()) {
-                    registerRestaurant(nome, address, partitaIva, email, tel, password, foto);
+                    registerRestaurant(nome, address, partitaIva, sitoWeb, email, tel, password, foto);
                 } else {
                     Toast.makeText(getApplicationContext(),
                             "Please enter your details!", Toast.LENGTH_LONG)
@@ -258,7 +261,7 @@ public class RegisterRestaurateurActivity extends Activity {
      * Function to store user in MySQL database will post params(tag, name,
      * email, password) to register url
      * */
-    private void registerRestaurant(final String nome, final String address, final String partitaIva,final String email, final String tel, final String password, final String foto) {
+    private void registerRestaurant(final String nome, final String address, final String partitaIva, final String sitoWeb, final String email, final String tel, final String password, final String foto) {
         // Tag used to cancel the request
         String tag_string_req = "req_register";
 
@@ -286,6 +289,7 @@ public class RegisterRestaurateurActivity extends Activity {
                         String nome = user.getString("nome");
                         String address = user.getString("address");
                         String partitaIva = user.getString("partitaIva");
+                        String sitoWeb = user.getString("sitoWeb");
                         String email = user.getString("email");
                         String tel = user.getString("telefono");
                         String foto = user.getString("foto");
@@ -294,7 +298,7 @@ public class RegisterRestaurateurActivity extends Activity {
                                 .getString("created_at");
 
                         // Inserting row in users table
-                        db.addUser(id_database, nome, address, partitaIva, email, tel, foto, uid, created_at);
+                        db.addUser(id_database, nome, address, partitaIva, sitoWeb, email, tel, foto, uid, created_at);
 
                         Toast.makeText(getApplicationContext(), "User successfully registered. Try login now!", Toast.LENGTH_LONG).show();
 
@@ -335,6 +339,7 @@ public class RegisterRestaurateurActivity extends Activity {
                 params.put("nome", nome);
                 params.put("address", address);
                 params.put("partitaIva", partitaIva);
+                params.put("sitoWeb", sitoWeb);
                 params.put("email", email);
                 params.put("telefono", tel);
                 params.put("password", password);

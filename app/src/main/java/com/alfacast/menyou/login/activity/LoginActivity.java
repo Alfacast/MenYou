@@ -215,6 +215,7 @@ public class LoginActivity extends Activity {
                         String name = user.getString("name");
                         String address = user.getString("address");
                         String partitaIva = user.getString("partitaIva");
+                        String sitoWeb = user.getString("sitoWeb");
                         String email = user.getString("email");
                         String tel = user.getString("telefono");
                         String foto = user.getString("foto");
@@ -233,7 +234,7 @@ public class LoginActivity extends Activity {
 
                         }else{
                             Log.d(TAG,"partitaIva non è null ");
-                            dbr.addUser(id_ristorante, name, address, partitaIva, email, tel, foto, uid, created_at);
+                            dbr.addUser(id_ristorante, name, address, partitaIva, sitoWeb, email, tel, foto, uid, created_at);
                             // Launch main activity ristorante
                             Intent intent = new Intent(LoginActivity.this,
                                     MainRistoranteActivity.class);

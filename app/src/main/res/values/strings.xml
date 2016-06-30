@@ -28,6 +28,7 @@
     <string name="hint_fotoPortata">Foto</string>
     <string name="hint_restaurantAddress">Indirizzo</string>
     <string name="hint_partitaIva">Partita Iva</string>
+    <string name="hint_sitoWeb">Sito Web</string>
     <string name="hint_restaurantEmail">Email</string>
     <string name="hint_restaurantTel">Telefono</string>
     <string name="title_activity_main_ristorante">MainRistoranteActivity</string>
