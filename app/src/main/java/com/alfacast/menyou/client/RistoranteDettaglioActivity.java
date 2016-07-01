@@ -1,10 +1,10 @@
 package com.alfacast.menyou.client;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -19,16 +19,22 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 /**
  * Created by Pietro Fantuzzi on 22/06/2016.
  */
-public class RistoranteDettaglioActivity extends AppCompatActivity {
+public class RistoranteDettaglioActivity extends AppCompatActivity implements OnMapReadyCallback{
 
     // Log tag
     private static final String TAG = RistoranteDettaglioActivity.class.getSimpleName();
@@ -37,29 +43,36 @@ public class RistoranteDettaglioActivity extends AppCompatActivity {
     private static final String url = "http://www.cinesofia.it/alfacast/youmenulogin/get_ristorante_dettaglio.php?idristorante=";
     private ProgressDialog pDialog;
 
+    private final LatLng STARTING_POINT = new LatLng(45.464711, 9.188736);
+
+    //Our Map
+    private GoogleMap mMap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dettaglio_ristorante_activity);
 
         // recupero id ristorante dalla activity precedente
-        Intent intent=getIntent();
-        Bundle b=intent.getExtras();
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
 
-        final String idristorante=b.getString("idristorante");
-        Log.d(TAG,"id ristorante: "+ idristorante);
+        final String idristorante = b.getString("idristorante");
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final ImageView foto = (ImageView) findViewById(R.id.foto);
         final TextView nome = (TextView) findViewById(R.id.nome);
         final TextView indirizzo = (TextView) findViewById(R.id.indirizzo);
         final TextView telefono = (TextView) findViewById(R.id.telefono);
         final TextView sito_web = (TextView) findViewById(R.id.sito_web);
-        final TextView email = (TextView) findViewById(R.id.email);
 
         pDialog = new ProgressDialog(this);
         // Showing progress dialog before making http request
@@ -67,7 +80,7 @@ public class RistoranteDettaglioActivity extends AppCompatActivity {
         pDialog.show();
 
         // Creating volley request obj
-        JsonArrayRequest portataReq = new JsonArrayRequest(url+idristorante,
+        JsonArrayRequest ristoranteReq = new JsonArrayRequest(url + idristorante,
 
                 new Response.Listener<JSONArray>() {
 
@@ -83,19 +96,19 @@ public class RistoranteDettaglioActivity extends AppCompatActivity {
 
                             nome.setText(obj.getString("nome"));
                             indirizzo.setText(obj.getString("indirizzo"));
-                            telefono.setText(obj.getString("telefono"));
-                            email.setText(obj.getString("email"));
+                            telefono.setText("Telefono: " + obj.getString("telefono"));
                             sito_web.setText(obj.getString("sito_web"));
 
                             byte[] decodedString = Base64.decode(String.valueOf(obj.getString("foto")), Base64.DEFAULT);
                             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
                             foto.setImageBitmap(decodedByte);
 
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
                     }
+
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -107,8 +120,73 @@ public class RistoranteDettaglioActivity extends AppCompatActivity {
         });
 
         // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(portataReq);
+        AppController.getInstance().addToRequestQueue(ristoranteReq);
+
     }
+
+    @Override
+    public void onMapReady(final GoogleMap googleMap) {
+
+        // recupero id ristorante dalla activity precedente
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+
+        final String idristorante = b.getString("idristorante");
+
+        // Creating volley request obj
+        JsonArrayRequest ristoranteReq = new JsonArrayRequest(url + idristorante,
+
+                new Response.Listener<JSONArray>() {
+
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.d(TAG, response.toString());
+                        hidePDialog();
+
+                        // Parsing json
+                        try {
+
+                            JSONObject obj = response.getJSONObject(0);
+
+                            String nomeR = obj.getString("nome");
+
+                            //Initializing our map
+                            mMap = googleMap;
+                            mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+
+                            LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(STARTING_POINT, 5));
+                            mMap.animateCamera(CameraUpdateFactory.zoomTo(13), 3000, null);
+
+                            LatLng position = new LatLng(45.464711, 9.188736);
+
+                            mMap.addMarker(new MarkerOptions()
+                                    .position(position)
+                                    .icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.logo_marker)))
+                                    .title(nomeR));
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                hidePDialog();
+
+            }
+
+        });
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(ristoranteReq);
+
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
