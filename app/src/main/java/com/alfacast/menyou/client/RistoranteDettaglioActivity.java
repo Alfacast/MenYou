@@ -157,7 +157,7 @@ public class RistoranteDettaglioActivity extends AppCompatActivity implements On
                             LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(STARTING_POINT, 5));
-                            mMap.animateCamera(CameraUpdateFactory.zoomTo(13), 3000, null);
+                            mMap.animateCamera(CameraUpdateFactory.zoomTo(13), 500, null);
 
                             LatLng position = new LatLng(45.464711, 9.188736);
 

@@ -140,7 +140,9 @@ public class MainClienteActivity extends AppCompatActivity
         } else if (id == R.id.nav_preferiti) {
 
         } else if (id == R.id.nav_cerca) {
-
+            Intent i = new Intent(getApplicationContext(),
+                    CercaActivity.class);
+            startActivity(i);
         } else if (id == R.id.btnLogout) {
 
             logoutUser();
