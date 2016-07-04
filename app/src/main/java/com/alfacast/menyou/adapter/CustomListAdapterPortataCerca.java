@@ -1,8 +1,10 @@
 package com.alfacast.menyou.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -12,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alfacast.menyou.client.PortataDettaglioActivity;
 import com.alfacast.menyou.login.R;
 import com.alfacast.menyou.model.ListaPortataCerca;
 
@@ -90,7 +93,15 @@ public class CustomListAdapterPortataCerca extends RecyclerView.Adapter<Recycler
         @Override
         public void onClick(View v) {
 
-            Toast.makeText(context, "You clicked an item", Toast.LENGTH_SHORT).show();
+            String id = ((TextView) v.findViewById(R.id.idportata)).getText().toString();
+
+            Bundle b= new Bundle();
+            b.putString("idportata", id);
+            Intent intent = new Intent(
+                    v.getContext(),
+                    PortataDettaglioActivity.class);
+            intent.putExtras(b);
+            v.getContext().startActivity(intent);
 
         }
 
