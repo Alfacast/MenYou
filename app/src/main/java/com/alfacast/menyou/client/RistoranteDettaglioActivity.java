@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +33,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.util.List;
+
 /**
  * Created by Pietro Fantuzzi on 22/06/2016.
  */
@@ -42,8 +47,6 @@ public class RistoranteDettaglioActivity extends AppCompatActivity implements On
     // Portata json url
     private static final String url = "http://www.cinesofia.it/alfacast/youmenulogin/get_ristorante_dettaglio.php?idristorante=";
     private ProgressDialog pDialog;
-
-    private final LatLng STARTING_POINT = new LatLng(45.464711, 9.188736);
 
     //Our Map
     private GoogleMap mMap;
@@ -149,22 +152,36 @@ public class RistoranteDettaglioActivity extends AppCompatActivity implements On
                             JSONObject obj = response.getJSONObject(0);
 
                             String nomeR = obj.getString("nome");
+                            String indirizzoR = obj.getString("indirizzo");
 
-                            //Initializing our map
-                            mMap = googleMap;
-                            mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+                            Geocoder geocoder = new Geocoder(getBaseContext());
+                            List<Address> addresses;
+                            try {
+                                addresses = geocoder.getFromLocationName(indirizzoR, 1);
+                                if (addresses.size() > 0) {
+                                    double latitude = addresses.get(0).getLatitude();
+                                    double longitude = addresses.get(0).getLongitude();
 
-                            LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+                                    LatLng position = new LatLng(latitude, longitude);
 
-                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(STARTING_POINT, 5));
-                            mMap.animateCamera(CameraUpdateFactory.zoomTo(13), 500, null);
+                                    //Initializing our map
+                                    mMap = googleMap;
+                                    mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
 
-                            LatLng position = new LatLng(45.464711, 9.188736);
+                                    LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
-                            mMap.addMarker(new MarkerOptions()
-                                    .position(position)
-                                    .icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.logo_marker)))
-                                    .title(nomeR));
+                                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 5));
+                                    mMap.animateCamera(CameraUpdateFactory.zoomTo(13), 500, null);
+
+                                    mMap.addMarker(new MarkerOptions()
+                                            .position(position)
+                                            .icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.logo_marker)))
+                                            .title(nomeR));
+
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
