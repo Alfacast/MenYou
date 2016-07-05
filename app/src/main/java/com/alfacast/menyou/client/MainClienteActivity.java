@@ -139,6 +139,10 @@ public class MainClienteActivity extends AppCompatActivity
             startActivity(i);
         } else if (id == R.id.nav_preferiti) {
 
+        } else if (id == R.id.nav_map) {
+            Intent i = new Intent(getApplicationContext(),
+                    MapsActivity.class);
+            startActivity(i);
         } else if (id == R.id.nav_cerca) {
             Intent i = new Intent(getApplicationContext(),
                     CercaActivity.class);

@@ -74,5 +74,6 @@
     <string name="title_activity_ristorante_dettaglio">Dettaglio Ristorante</string>
     <string name="title_activity_edit_account">Modifica Account</string>
     <string name="title_activity_edit_portata">Modifica Portata</string>
+    <string name="title_activity_maps">Mappa Ristoranti</string>
 
 </resources>
