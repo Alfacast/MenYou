@@ -42,24 +42,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1b3a6282-8826-460a-b22c-3aaa1328db12" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_23_1_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/design_23_1_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_common_9_0_2.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_base_9_0_2.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_basement_9_0_2.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_maps_9_0_2.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_tasks_9_0_2.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/recyclerview_v7_23_1_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/support_annotations_23_1_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_23_1_1.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_23_1_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_23_1_1.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/design_23_1_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/design_23_1_1.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/recyclerview_v7_23_1_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/recyclerview_v7_23_1_1.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_23_1_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_23_1_1.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/client/MainClienteActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/client/MainClienteActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/content_map.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/content_map.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/activity_main_cliente_drawer.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/activity_main_cliente_drawer.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/adapter/CustomListMenuRistorante.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/adapter/CustomListMenuRistorante.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/client/MapsActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/client/MapsActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/client/RistoranteDettaglioActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/client/RistoranteDettaglioActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/restaurant/MainRistoranteActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/restaurant/MainRistoranteActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ic_delete.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_delete.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ic_edit.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_edit.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/list_row_menu_ristorante.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_row_menu_ristorante.xml" />
     </list>
     <ignored path="MenYou.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -79,23 +74,7 @@
     <favorites_list name="MenYou" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MapsActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/client/MapsActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6996997">
-              <caret line="103" column="87" selection-start-line="103" selection-start-column="87" selection-end-line="103" selection-end-column="87" />
-              <folding>
-                <element signature="e#2402#5007#0" expanded="true" />
-                <element signature="e#5006#5007#0" expanded="true" />
-                <element signature="e#5009#5245#0" expanded="true" />
-                <element signature="e#5244#5245#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -1764,8 +1743,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/adapter/CustomListAdapterPortata.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/model/ListaMenu.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/client/PagerAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/client/PortataDettaglioActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/client/TabMenu.java" />
@@ -1773,9 +1750,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/model/ListaPortata.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/list_row.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/list_row_ristorante.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/list_row_menu_ristorante.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/restaurant/EditMenuActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/adapter/CustomListMenuRistorante.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/restaurant/PortataActivityRistorante.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/restaurant/InsertPortataActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/client/TabRistoranti.java" />
@@ -1785,7 +1760,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/login/helper/SQLiteHandlerUser.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/client/EditAccountClienteActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/activity_main_ristorante_drawer.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/restaurant/MainRistoranteActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/edit_portata_content.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/restaurant/SQLiteHandlerPortata.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/restaurant/EditPortataActivity.java" />
@@ -1807,14 +1781,19 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_cerca.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/portata_dettaglio_content.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/adapter/CustomListAdapterPortataCerca.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/client/RistoranteDettaglioActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/content_map.xml" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_maps.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/client/MapsActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/client/MainClienteActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/activity_main_cliente_drawer.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/client/MapsActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/client/RistoranteDettaglioActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/restaurant/MainRistoranteActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/ic_edit.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/ic_delete.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/list_row_menu_ristorante.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/adapter/CustomListMenuRistorante.java" />
       </list>
     </option>
   </component>
@@ -1849,19 +1828,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="Scratches" />
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MenYou" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
+      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -1898,7 +1866,7 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="menu" />
+              <option name="myItemId" value="layout" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1986,6 +1954,36 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="restaurant" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MenYou" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="alfacast" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="menyou" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="client" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -1998,6 +1996,47 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="alfacast" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="menyou" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adapter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MenYou" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MenYou" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -2333,15 +2372,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38395905" sideWeight="0.6051437" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38395905" sideWeight="0.39485627" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38395905" sideWeight="0.6096823" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38395905" sideWeight="0.3903177" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32473445" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -2405,60 +2444,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/nav_bar_content_main_ristorante.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12230216">
-          <caret line="2" column="55" selection-start-line="2" selection-start-column="55" selection-end-line="2" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/nav_bar_main_ristorante.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.7338129">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/nav_header_main_ristorante.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/activity_main_ristorante_drawer.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2556391">
-          <caret line="8" column="38" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/ristorante_main_activity.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.04771372">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/restaurant/InsertPortataActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.8768768">
-          <caret line="218" column="21" selection-start-line="218" selection-start-column="21" selection-end-line="218" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/restaurant/SQLiteHandlerPortata.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2497,13 +2482,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.5195195">
           <caret line="211" column="59" selection-start-line="211" selection-start-column="59" selection-end-line="211" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/adapter/CustomListMenuRistorante.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.05105105">
-          <caret line="186" column="35" selection-start-line="186" selection-start-column="35" selection-end-line="186" selection-end-column="35" />
         </state>
       </provider>
     </entry>
@@ -2558,13 +2536,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/restaurant/MainRistoranteActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.8168168">
-          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/login/helper/SQLiteHandlerRestaurant.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="3.2672672">
@@ -2583,13 +2554,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.71684587">
           <caret line="82" column="64" selection-start-line="82" selection-start-column="64" selection-end-line="82" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/model/ListaMenu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.15232974">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -2674,13 +2638,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/adapter/CustomListAdapterPortata.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35735735">
-          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/client/TabMenu.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.2732732">
@@ -2731,17 +2688,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/client/RistoranteDettaglioActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="217" column="5" selection-start-line="217" selection-start-column="5" selection-end-line="217" selection-end-column="5" />
-          <folding>
-            <element signature="e#5102#7411#0" expanded="true" />
-            <element signature="e#7410#7411#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.43648207">
@@ -2754,7 +2700,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="31" column="55" selection-start-line="31" selection-start-column="55" selection-end-line="31" selection-end-column="55" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2806,17 +2751,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/client/PortataActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3783784">
-          <caret line="86" column="92" selection-start-line="86" selection-start-column="92" selection-end-line="86" selection-end-column="92" />
-          <folding>
-            <element signature="e#2361#3913#0" expanded="false" />
-            <element signature="e#3912#3913#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/client/MainClienteActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2833,15 +2767,130 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/client/RistoranteDettaglioActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.18318318">
+          <caret line="168" column="77" selection-start-line="168" selection-start-column="77" selection-end-line="168" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/client/MapsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6996997">
-          <caret line="103" column="87" selection-start-line="103" selection-start-column="87" selection-end-line="103" selection-end-column="87" />
+        <state vertical-scroll-proportion="3.2672672">
+          <caret line="98" column="83" selection-start-line="98" selection-start-column="83" selection-end-line="98" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/model/ListaMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25525525">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/adapter/CustomListAdapterPortata.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.012012">
+          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/client/PortataActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="134" column="11" selection-start-line="134" selection-start-column="11" selection-end-line="134" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/ristorante_main_activity.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_preferiti.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_logout.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_edit.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.9230769">
+          <caret line="6" column="34" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_delete.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.9230769">
+          <caret line="6" column="34" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_row_menu_ristorante.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.509091">
+          <caret line="62" column="56" selection-start-line="62" selection-start-column="56" selection-end-line="62" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/adapter/CustomListMenuRistorante.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3873874">
+          <caret line="210" column="11" selection-start-line="210" selection-start-column="11" selection-end-line="210" selection-end-column="11" />
           <folding>
-            <element signature="e#2402#5007#0" expanded="true" />
-            <element signature="e#5006#5007#0" expanded="true" />
-            <element signature="e#5009#5245#0" expanded="true" />
-            <element signature="e#5244#5245#0" expanded="true" />
+            <element signature="e#4160#7659#0" expanded="true" />
+            <element signature="e#4719#7044#0" expanded="true" />
+            <element signature="e#5218#6171#0" expanded="true" />
+            <element signature="e#6170#6171#0" expanded="true" />
+            <element signature="e#6173#6498#0" expanded="true" />
+            <element signature="e#6497#6498#0" expanded="true" />
+            <element signature="e#7043#7044#0" expanded="true" />
+            <element signature="e#7094#7457#0" expanded="true" />
+            <element signature="e#7456#7457#0" expanded="true" />
+            <element signature="e#7658#7659#0" expanded="true" />
+            <element signature="e#7738#8339#0" expanded="true" />
+            <element signature="e#8338#8339#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/alfacast/menyou/restaurant/MainRistoranteActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3063063">
+          <caret line="138" column="40" selection-start-line="138" selection-start-column="40" selection-end-line="138" selection-end-column="40" />
+          <folding>
+            <element signature="e#5032#5765#0" expanded="true" />
+            <element signature="e#5764#5765#0" expanded="true" />
+            <element signature="e#5953#5984#0" expanded="true" />
+            <element signature="e#5986#6018#0" expanded="true" />
           </folding>
         </state>
       </provider>

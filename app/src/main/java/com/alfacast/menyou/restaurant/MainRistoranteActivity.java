@@ -19,6 +19,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -134,6 +135,27 @@ public class MainRistoranteActivity extends AppCompatActivity
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(menuReq);
+
+        listView.setItemsCanFocus(true);
+
+        listView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View view, int arg2,
+                                    long arg3) {
+
+                String id = ((TextView) view.findViewById(R.id.idmenu)).getText().toString();
+
+                // send portata id to portata list activity to get list of portate under that menu
+
+                Bundle b= new Bundle();
+                b.putString("idmenu", id);
+                Intent intent = new Intent(
+                        getApplicationContext(),
+                        PortataActivityRistorante.class);
+                intent.putExtras(b);
+                startActivity(intent);
+            }
+        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

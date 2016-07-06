@@ -166,7 +166,7 @@ public class RistoranteDettaglioActivity extends AppCompatActivity implements On
 
                                     //Initializing our map
                                     mMap = googleMap;
-                                    mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+                                    mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
                                     LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 

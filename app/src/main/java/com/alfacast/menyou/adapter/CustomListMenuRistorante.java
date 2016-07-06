@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -91,9 +92,8 @@ public class CustomListMenuRistorante extends BaseAdapter {
         final TextView nomeMenu = (TextView) convertView.findViewById(R.id.nomemenu);
         TextView nomeRistorante = (TextView) convertView.findViewById(R.id.nomeristorante);
         final TextView idMenu = (TextView) convertView.findViewById(R.id.idmenu);
-        ImageButton btnDeleteMenu = (ImageButton) convertView.findViewById(R.id.btnDeleteMenu);
-        ImageButton btnItemizeMenu = (ImageButton) convertView.findViewById(R.id.btnItemizeMenu);
-        ImageButton btnEditMenu = (ImageButton) convertView.findViewById(R.id.btnEditMenu);
+        Button btnDeleteMenu = (Button) convertView.findViewById(R.id.btnDeleteMenu);
+        Button btnEditMenu = (Button) convertView.findViewById(R.id.btnEditMenu);
 
         // getting menu data for the row
         ListaMenu m = menuItems.get(position);
@@ -206,23 +206,6 @@ public class CustomListMenuRistorante extends BaseAdapter {
                 intent.putExtras(b);
                 intent.putExtras(c);
 
-                v.getContext().startActivity(intent);
-            }
-        });
-
-        //On click del bottone itemize
-        btnItemizeMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // send menu id to portata list activity to get list of portate under that menu
-
-                Bundle b= new Bundle();
-                b.putString("idmenu", idMenu.getText().toString());
-                Intent intent = new Intent(
-                        v.getContext(),
-                        PortataActivityRistorante.class);
-                intent.putExtras(b);
                 v.getContext().startActivity(intent);
             }
         });

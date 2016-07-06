@@ -96,7 +96,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                                         //Initializing our map
                                         mMap = googleMap;
-                                        mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+                                        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
                                         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
