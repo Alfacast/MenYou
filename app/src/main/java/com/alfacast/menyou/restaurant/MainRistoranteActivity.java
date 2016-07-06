@@ -136,8 +136,6 @@ public class MainRistoranteActivity extends AppCompatActivity
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(menuReq);
 
-        listView.setItemsCanFocus(true);
-
         listView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View view, int arg2,

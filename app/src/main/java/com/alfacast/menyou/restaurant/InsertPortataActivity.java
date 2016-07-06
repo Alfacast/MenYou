@@ -239,6 +239,7 @@ public class InsertPortataActivity extends AppCompatActivity {
                     Bitmap bmp = BitmapFactory.decodeStream(new FileInputStream(f), null, null);
                     Bitmap bitmap = Bitmap.createBitmap(bmp, 0, 0, bmp.getWidth(), bmp.getHeight(), mat, true);
 
+                    viewImage.setVisibility(View.VISIBLE);
                     viewImage.setImageBitmap(bitmap);
 
                     String path = android.os.Environment
@@ -274,6 +275,7 @@ public class InsertPortataActivity extends AppCompatActivity {
                 c.close();
                 Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
                 Log.w("path of image...", picturePath+"");
+                viewImage.setVisibility(View.VISIBLE);
                 viewImage.setImageBitmap(thumbnail);
             }
         }

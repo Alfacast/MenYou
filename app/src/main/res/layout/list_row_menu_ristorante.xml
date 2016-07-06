@@ -45,6 +45,7 @@
     <Button
         android:layout_width="24dp"
         android:layout_height="24dp"
+        android:layout_marginLeft="10dp"
         android:id="@+id/btnDeleteMenu"
         android:layout_below="@+id/nomeristorante"
         android:background="@drawable/ic_delete"
