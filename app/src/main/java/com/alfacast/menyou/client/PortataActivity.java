@@ -47,11 +47,14 @@ public class PortataActivity extends AppCompatActivity {
         // recupero id menu dalla activity precedente
         Intent intent=getIntent();
         Bundle b=intent.getExtras();
+        Bundle c=intent.getExtras();
 
         final String idmenu=b.getString("idmenu");
+        final String nomemenu=c.getString("nomemenu");
         Log.d(TAG,"id menu: "+ idmenu);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(nomemenu);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -121,15 +124,19 @@ public class PortataActivity extends AppCompatActivity {
                                     long arg3) {
 
                 String id = ((TextView) view.findViewById(R.id.idportata)).getText().toString();
+                String nome = ((TextView) view.findViewById(R.id.nomeportata)).getText().toString();
 
                 // send portata id to portata list activity to get list of portate under that menu
 
                 Bundle b= new Bundle();
                 b.putString("idportata", id);
+                Bundle c= new Bundle();
+                c.putString("nomeportata", nome);
                 Intent intent = new Intent(
                         getApplicationContext(),
                         PortataDettaglioActivity.class);
                 intent.putExtras(b);
+                intent.putExtras(c);
                 startActivity(intent);
             }
         });

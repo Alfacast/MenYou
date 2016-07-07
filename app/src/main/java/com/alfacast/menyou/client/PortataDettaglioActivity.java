@@ -40,11 +40,14 @@ public class PortataDettaglioActivity extends AppCompatActivity {
         // recupero id portata dalla activity precedente
         Intent intent=getIntent();
         Bundle b=intent.getExtras();
+        Bundle c=intent.getExtras();
 
         final String idportata=b.getString("idportata");
+        final String nomeportata=c.getString("nomeportata");
         Log.d(TAG,"id portata: "+ idportata);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(nomeportata);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);

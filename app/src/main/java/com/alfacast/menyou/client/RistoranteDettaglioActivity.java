@@ -59,14 +59,17 @@ public class RistoranteDettaglioActivity extends AppCompatActivity implements On
         // recupero id ristorante dalla activity precedente
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
+        Bundle c = intent.getExtras();
 
         final String idristorante = b.getString("idristorante");
+        final String nomeristorante = c.getString("nomeristorante");
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(nomeristorante);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

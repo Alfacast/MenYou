@@ -251,10 +251,33 @@ public class RegisterRestaurateurActivity extends Activity {
                 int columnIndex = c.getColumnIndex(filePath[0]);
                 String picturePath = c.getString(columnIndex);
                 c.close();
-                Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
-                Log.w("path gallery...", picturePath+"");
-                viewImage.setVisibility(View.VISIBLE);
-                viewImage.setImageBitmap(thumbnail);
+                try {
+                    //Imposta orientamento automatico foto da dati exif
+                    ExifInterface exif = new ExifInterface(picturePath);
+                    int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+
+                    int angle = 0;
+
+                    if (orientation == ExifInterface.ORIENTATION_ROTATE_90) {
+                        angle = 90;
+                    }
+                    else if (orientation == ExifInterface.ORIENTATION_ROTATE_180) {
+                        angle = 180;
+                    }
+                    else if (orientation == ExifInterface.ORIENTATION_ROTATE_270) {
+                        angle = 270;
+                    }
+
+                    Matrix mat = new Matrix();
+                    mat.postRotate(angle);
+
+                    Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
+                    Log.w("path gallery...", picturePath+"");
+                    viewImage.setVisibility(View.VISIBLE);
+                    viewImage.setImageBitmap(thumbnail);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

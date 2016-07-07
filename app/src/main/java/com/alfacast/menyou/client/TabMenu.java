@@ -109,15 +109,19 @@ public class TabMenu extends Fragment {
                                     long arg3) {
 
                 String id = ((TextView) view.findViewById(R.id.idmenu)).getText().toString();
+                String nome = ((TextView) view.findViewById(R.id.nomemenu)).getText().toString();
 
                 // send menu id to portata list activity to get list of portate under that menu
 
                 Bundle b= new Bundle();
                 b.putString("idmenu", id);
+                Bundle c= new Bundle();
+                c.putString("nomemenu", nome);
                 Intent intent = new Intent(
                         getActivity(),
                         PortataActivity.class);
                 intent.putExtras(b);
+                intent.putExtras(c);
                 startActivity(intent);
             }
         });
