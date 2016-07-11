@@ -220,6 +220,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.alfacast.menyou.client.MainClienteActivity" />
         </activity>
+        <activity
+            android:name="com.alfacast.menyou.client.MenuRistoranteActivity"
+            android:label="@string/title_activity_menuristorante"
+            android:parentActivityName="com.alfacast.menyou.client.MainClienteActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.alfacast.menyou.client.MainClienteActivity" />
+        </activity>
     </application>
 
 </manifest>

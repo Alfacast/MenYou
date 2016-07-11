@@ -55,8 +55,8 @@ public class MainClienteActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Menu"));
         tabLayout.addTab(tabLayout.newTab().setText("Ristoranti"));
+        tabLayout.addTab(tabLayout.newTab().setText("Menu"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);

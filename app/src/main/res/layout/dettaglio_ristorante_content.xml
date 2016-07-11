@@ -52,31 +52,75 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/sito_web"
-        android:autoLink="web"
-        android:textColorLink="#576586"
-        android:layout_below="@+id/indirizzo"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:paddingLeft="16dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/telefono"
+        android:text="telefono"
         android:autoLink="phone"
         android:textColorLink="#576586"
         android:layout_below="@+id/indirizzo"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:paddingRight="16dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="10dp"
+        android:paddingRight="16dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sito_web"
+        android:text="sito web"
+        android:autoLink="web"
+        android:textColorLink="#576586"
+        android:layout_below="@+id/telefono"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentRight="true"
+        android:paddingRight="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/menuristorante"
+        android:text="Menu del Ristorante"
+        android:textColor="#576586"
+        android:layout_below="@+id/sito_web"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentRight="true"
+        android:paddingRight="16dp" />
 
     <include layout="@layout/content_map" />
+
+    <ImageView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:id="@+id/imageView2"
+        android:layout_above="@+id/sito_web"
+        android:layout_toRightOf="@+id/idristorante"
+        android:layout_toEndOf="@+id/idristorante"
+        android:paddingLeft="16dp"
+        android:src="@drawable/ic_phone"
+        android:tint="#939393" />
+
+    <ImageView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:id="@+id/imageView3"
+        android:layout_above="@+id/menuristorante"
+        android:layout_toRightOf="@+id/idristorante"
+        android:layout_toEndOf="@+id/idristorante"
+        android:src="@drawable/ic_web"
+        android:paddingLeft="16dp"
+        android:tint="#939393" />
+
+    <ImageView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:id="@+id/imageView4"
+        android:layout_below="@+id/imageView3"
+        android:layout_toRightOf="@+id/idristorante"
+        android:layout_toEndOf="@+id/idristorante"
+        android:paddingLeft="16dp"
+        android:src="@drawable/ic_menu"
+        android:tint="#939393" />
 
 </RelativeLayout>
 </ScrollView>

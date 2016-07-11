@@ -10,8 +10,10 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.util.Linkify;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -79,6 +81,20 @@ public class RistoranteDettaglioActivity extends AppCompatActivity implements On
         final TextView indirizzo = (TextView) findViewById(R.id.indirizzo);
         final TextView telefono = (TextView) findViewById(R.id.telefono);
         final TextView sito_web = (TextView) findViewById(R.id.sito_web);
+        final TextView menuRistorante = (TextView) findViewById(R.id.menuristorante);
+
+        menuRistorante.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Bundle b= new Bundle();
+                Bundle c= new Bundle();
+                b.putString("idristorante", idristorante);
+                c.putString("nomeristorante", nomeristorante);
+                Intent intent = new Intent(RistoranteDettaglioActivity.this, MenuRistoranteActivity.class);
+                intent.putExtras(b);
+                intent.putExtras(c);
+                startActivity(intent);
+            }
+        });
 
         pDialog = new ProgressDialog(this);
         // Showing progress dialog before making http request

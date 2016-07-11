@@ -21,10 +21,10 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                TabMenu tab1 = new TabMenu();
+                TabRistoranti tab1 = new TabRistoranti();
                 return tab1;
             case 1:
-                TabRistoranti tab2 = new TabRistoranti();
+                TabMenu tab2 = new TabMenu();
                 return tab2;
             default:
                 return null;
