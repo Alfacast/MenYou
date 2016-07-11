@@ -15,7 +15,6 @@ import android.widget.TextView;
 import com.alfacast.menyou.login.R;
 import com.alfacast.menyou.login.app.AppController;
 
-import com.alfacast.menyou.model.ListaMenu;
 import com.alfacast.menyou.model.ListaRistoranti;
 import com.android.volley.toolbox.ImageLoader;
 

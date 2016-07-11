@@ -10,7 +10,6 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.util.Linkify;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;

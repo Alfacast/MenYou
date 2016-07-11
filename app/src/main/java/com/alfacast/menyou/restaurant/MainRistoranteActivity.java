@@ -11,7 +11,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.alfacast.menyou.adapter.CustomListAdapter;
 import com.alfacast.menyou.adapter.CustomListMenuRistorante;
 import com.alfacast.menyou.login.R;
 
@@ -19,7 +18,6 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 

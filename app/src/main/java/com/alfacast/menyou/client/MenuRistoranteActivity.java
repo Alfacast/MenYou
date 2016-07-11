@@ -3,32 +3,18 @@ package com.alfacast.menyou.client;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.alfacast.menyou.adapter.CustomListAdapter;
-import com.alfacast.menyou.adapter.CustomListMenuRistorante;
 import com.alfacast.menyou.login.R;
-import com.alfacast.menyou.login.activity.LoginActivity;
 import com.alfacast.menyou.login.app.AppController;
-import com.alfacast.menyou.login.helper.SQLiteHandlerRestaurant;
-import com.alfacast.menyou.login.helper.SessionManager;
 import com.alfacast.menyou.model.ListaMenu;
-import com.alfacast.menyou.restaurant.EditAccountRistoranteActivity;
-import com.alfacast.menyou.restaurant.InsertMenuActivity;
-import com.alfacast.menyou.restaurant.PortataActivityRistorante;
-import com.alfacast.menyou.restaurant.TutorialActivity;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
@@ -39,7 +25,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class MenuRistoranteActivity extends AppCompatActivity {

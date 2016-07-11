@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,11 +15,8 @@ import android.view.MenuItem;
 
 import com.alfacast.menyou.login.R;
 import com.alfacast.menyou.login.activity.LoginActivity;
-import com.alfacast.menyou.login.helper.SQLiteHandlerRestaurant;
 import com.alfacast.menyou.login.helper.SQLiteHandlerUser;
 import com.alfacast.menyou.login.helper.SessionManager;
-
-import java.util.HashMap;
 
 public class MainClienteActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
