@@ -87,7 +87,8 @@
         android:layout_alignParentRight="true"
         android:paddingRight="16dp" />
 
-    <include layout="@layout/content_map" />
+    <include layout="@layout/content_map"
+        android:id="@+id/include" />
 
     <ImageView
         android:layout_width="48dp"
@@ -97,8 +98,7 @@
         android:layout_toRightOf="@+id/idristorante"
         android:layout_toEndOf="@+id/idristorante"
         android:paddingLeft="16dp"
-        android:src="@drawable/ic_phone"
-        android:tint="#939393" />
+        android:src="@drawable/icotel" />
 
     <ImageView
         android:layout_width="48dp"
@@ -107,20 +107,18 @@
         android:layout_above="@+id/menuristorante"
         android:layout_toRightOf="@+id/idristorante"
         android:layout_toEndOf="@+id/idristorante"
-        android:src="@drawable/ic_web"
-        android:paddingLeft="16dp"
-        android:tint="#939393" />
+        android:src="@drawable/icoweb"
+        android:paddingLeft="16dp" />
 
     <ImageView
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:id="@+id/imageView4"
-        android:layout_below="@+id/imageView3"
-        android:layout_toRightOf="@+id/idristorante"
-        android:layout_toEndOf="@+id/idristorante"
         android:paddingLeft="16dp"
-        android:src="@drawable/ic_menu"
-        android:tint="#939393" />
+        android:src="@drawable/icomenu"
+        android:layout_above="@+id/include"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
 </ScrollView>

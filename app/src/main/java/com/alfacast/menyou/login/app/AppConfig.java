@@ -12,6 +12,7 @@ public class AppConfig {
         // Server user register url
         //public static String URL_REGISTER = "http://10.0.3.2:80/youmenulogin/register.php";
         public static String URL_REGISTER = "http://www.cinesofia.it/alfacast/youmenulogin/register.php";
+        public static String URL_REGISTER_FB = "http://www.cinesofia.it/alfacast/youmenulogin/register_fb.php";
 
         // Server restaurant register url
         //public static String URL_RESTAURANTREGISTER = "http://10.0.3.2:80/youmenulogin/registerRistorante.php";

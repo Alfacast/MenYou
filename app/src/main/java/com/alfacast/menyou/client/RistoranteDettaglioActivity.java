@@ -117,7 +117,7 @@ public class RistoranteDettaglioActivity extends AppCompatActivity implements On
 
                             nome.setText(obj.getString("nome"));
                             indirizzo.setText(obj.getString("indirizzo"));
-                            telefono.setText("Telefono: " + obj.getString("telefono"));
+                            telefono.setText("Chiama: " + obj.getString("telefono"));
                             sito_web.setText(obj.getString("sito_web"));
 
                             byte[] decodedString = Base64.decode(String.valueOf(obj.getString("foto")), Base64.DEFAULT);
