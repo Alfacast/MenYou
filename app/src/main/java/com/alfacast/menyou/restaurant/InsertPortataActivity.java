@@ -154,7 +154,7 @@ public class InsertPortataActivity extends AppCompatActivity {
 
                 final String idmenu=b.getString("idmenu");
 
-                if (!nome.isEmpty()) {
+                if (!nome.isEmpty() && !categoria.isEmpty() && !descrizione.isEmpty() && !prezzo.isEmpty() && !opzioni.isEmpty() && !disponibile.isEmpty() && !foto.isEmpty() && !id_ristorante.isEmpty() && !idmenu.isEmpty()) {
                     insertPortata(nome, categoria, descrizione, prezzo, opzioni, disponibile, foto, id_ristorante, idmenu);
 
                     //Lancio PortataActivityRistorante
