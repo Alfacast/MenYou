@@ -127,7 +127,7 @@
             android:id="@+id/viewImage"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:visibility="gone"
+            android:visibility="invisible"
             android:scaleType="centerCrop"/>
 
         <!-- Login Button -->

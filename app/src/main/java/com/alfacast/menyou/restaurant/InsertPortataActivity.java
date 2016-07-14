@@ -154,7 +154,7 @@ public class InsertPortataActivity extends AppCompatActivity {
 
                 final String idmenu=b.getString("idmenu");
 
-                if (!nome.isEmpty() && !categoria.isEmpty() && !descrizione.isEmpty() && !prezzo.isEmpty() && !opzioni.isEmpty() && !disponibile.isEmpty() && !foto.isEmpty() && !id_ristorante.isEmpty() && !idmenu.isEmpty()) {
+                if (!nome.isEmpty() && !categoria.isEmpty() && !descrizione.isEmpty() && !prezzo.isEmpty() && !disponibile.isEmpty() && !id_ristorante.isEmpty() && !idmenu.isEmpty()) {
                     insertPortata(nome, categoria, descrizione, prezzo, opzioni, disponibile, foto, id_ristorante, idmenu);
 
                     //Lancio PortataActivityRistorante
@@ -163,10 +163,11 @@ public class InsertPortataActivity extends AppCompatActivity {
                             PortataActivityRistorante.class);
                     intent.putExtras(b);
                     startActivity(intent);
+                    finish();
 
                 } else {
                     Toast.makeText(getApplicationContext(),
-                            "Please enter portata name!", Toast.LENGTH_LONG)
+                            "Please enter portata data!", Toast.LENGTH_LONG)
                             .show();
                 }
             }
