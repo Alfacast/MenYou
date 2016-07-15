@@ -70,6 +70,7 @@ public class PortataActivityRistorante extends AppCompatActivity {
                         InsertPortataActivity.class);
                 intent.putExtras(b);
                 startActivity(intent);
+                finish();
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -152,6 +153,7 @@ public class PortataActivityRistorante extends AppCompatActivity {
                 intent.putExtras(b);
                 intent.putExtras(c);
                 startActivity(intent);
+                finish();
             }
         });
 

@@ -179,7 +179,7 @@ public class EditPortataActivity extends AppCompatActivity {
 
                 final String idMenu = b.getString("idmenu");
 
-                if (!nome.isEmpty()) {
+                if (!nome.isEmpty() && !categoria.isEmpty() && !descrizione.isEmpty() && !prezzo.isEmpty() && !disponibile.isEmpty()) {
                     editPortata(nome, categoria, descrizione, prezzo, opzioni, disponibile, foto, idPortata);
 
                     Bundle c= new Bundle();
@@ -191,10 +191,11 @@ public class EditPortataActivity extends AppCompatActivity {
                             PortataDettaglioRistoranteActivity.class);
                     intent.putExtras(c);
                     startActivity(intent);
+                    finish();
 
                 } else {
                     Toast.makeText(getApplicationContext(),
-                            "Please enter portata name!", Toast.LENGTH_LONG)
+                            "Please enter portata data!", Toast.LENGTH_LONG)
                             .show();
                 }
             }
