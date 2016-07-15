@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -56,12 +57,26 @@ public class PortataDettaglioActivity extends AppCompatActivity {
         final ImageView thumbNailPortata = (ImageView) findViewById(R.id.thumbnailportata);
         final TextView nomePortata = (TextView) findViewById(R.id.nomeportata);
         final TextView nomeRistorante = (TextView) findViewById(R.id.nomeristorante);
+        final TextView idRistorante = (TextView) findViewById(R.id.idristorante);
         final TextView indirizzo = (TextView) findViewById(R.id.indirizzo);
         final TextView telefono = (TextView) findViewById(R.id.telefono);
         final TextView descrizionePortata = (TextView) findViewById(R.id.descrizioneportata);
         final TextView categoria = (TextView) findViewById(R.id.categoria);
         final TextView prezzo = (TextView) findViewById(R.id.prezzo);
         final TextView idPortata = (TextView) findViewById(R.id.idportata);
+
+        nomeRistorante.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Bundle b= new Bundle();
+                Bundle c= new Bundle();
+                b.putString("idristorante", idRistorante.getText().toString());
+                c.putString("nomeristorante", nomeRistorante.getText().toString());
+                Intent intent = new Intent(PortataDettaglioActivity.this, RistoranteDettaglioActivity.class);
+                intent.putExtras(b);
+                intent.putExtras(c);
+                startActivity(intent);
+            }
+        });
 
         pDialog = new ProgressDialog(this);
         // Showing progress dialog before making http request
@@ -88,6 +103,7 @@ public class PortataDettaglioActivity extends AppCompatActivity {
                                 categoria.setText("Categoria: "+obj.getString("categoria"));
                                 prezzo.setText("Prezzo: € "+obj.getString("prezzo"));
                                 nomeRistorante.setText("Ristorante: "+obj.getString("nomeristorante"));
+                                idRistorante.setText(obj.getString("idristorante"));
                                 indirizzo.setText(obj.getString("indirizzo"));
                                 telefono.setText(obj.getString("telefono"));
                                 idPortata.setText(obj.getString("id"));

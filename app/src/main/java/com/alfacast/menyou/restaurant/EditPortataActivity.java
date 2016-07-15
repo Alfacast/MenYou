@@ -106,7 +106,7 @@ public class EditPortataActivity extends AppCompatActivity {
         namePortata.setText(repNomePortata);
         descrizionePortata.setText(repDescrizionePortata);
         prezzoPortata.setText(repPrezzoPortata.replaceFirst("Prezzo: € ",""));
-        opzioniPortata.setText(repOpzioni);
+        opzioniPortata.setText(repOpzioni.replaceFirst("Opzioni: ",""));
 
         //decodifica immagine da db
         byte[] decodedString = Base64.decode(String.valueOf(repFoto), Base64.DEFAULT);
@@ -338,9 +338,6 @@ public class EditPortataActivity extends AppCompatActivity {
     private void editPortata(final String nome, final String categoria, final String descrizione, final String prezzo, final String opzioni, final String disponibile, final String foto, final String idPortata) {
         // Tag used to cancel the request
         String tag_string_req = "req_insert";
-
-        pDialog.setMessage("Modifica ...");
-        showDialog();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 AppConfig.URL_EDITPORTATA, new Response.Listener<String>() {
