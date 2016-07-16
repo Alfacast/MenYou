@@ -1,6 +1,8 @@
 package com.alfacast.menyou.restaurant;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -214,7 +216,34 @@ public class MainRistoranteActivity extends AppCompatActivity
                     TutorialActivity.class);
             startActivity(i);
         } else if (id == R.id.btnLogout) {
-            logoutUser();
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+            // set title
+            alertDialogBuilder.setTitle("Logout");
+
+            // set dialog message
+            alertDialogBuilder
+                    .setMessage("Sei sicuro di voler effettuare il logout?")
+                    .setCancelable(false)
+                    .setPositiveButton("Si",new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+
+                            logoutUser();
+                        }
+                    })
+                    .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int id) {
+                            // if this button is clicked, just close
+                            // the dialog box and do nothing
+                            dialog.cancel();
+                        }
+                    });
+
+            // create alert dialog
+            AlertDialog alertDialog = alertDialogBuilder.create();
+
+            // show it
+            alertDialog.show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

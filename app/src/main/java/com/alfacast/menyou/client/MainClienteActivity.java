@@ -1,5 +1,7 @@
 package com.alfacast.menyou.client;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -12,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.alfacast.menyou.login.R;
 import com.alfacast.menyou.login.activity.LoginActivity;
@@ -145,7 +148,34 @@ public class MainClienteActivity extends AppCompatActivity
             startActivity(i);
         } else if (id == R.id.btnLogout) {
 
-            logoutUser();
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+                    // set title
+                    alertDialogBuilder.setTitle("Logout");
+
+                    // set dialog message
+                    alertDialogBuilder
+                            .setMessage("Sei sicuro di voler effettuare il logout?")
+                            .setCancelable(false)
+                            .setPositiveButton("Si",new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+
+                                    logoutUser();
+                                }
+                            })
+                            .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog,int id) {
+                                    // if this button is clicked, just close
+                                    // the dialog box and do nothing
+                                    dialog.cancel();
+                                }
+                            });
+
+                    // create alert dialog
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+
+                    // show it
+                    alertDialog.show();
 
         }
 
