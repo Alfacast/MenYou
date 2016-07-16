@@ -1,10 +1,12 @@
 package com.alfacast.menyou.client;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -22,6 +24,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
@@ -29,6 +32,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -62,8 +66,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(final GoogleMap googleMap) {
 
+        final HashMap<Marker, Uri> markerData = new HashMap<>();
+        final HashMap<Marker, Uri> markerData2 = new HashMap<>();
         // Creating volley request obj
-        JsonArrayRequest ristoranteReq = new JsonArrayRequest(url,
+        final JsonArrayRequest ristoranteReq = new JsonArrayRequest(url,
 
                 new Response.Listener<JSONArray>() {
 
@@ -78,8 +84,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                                 JSONObject obj = response.getJSONObject(i);
 
-                                String nomeR = obj.getString("nome");
-                                String indirizzoR = obj.getString("indirizzo");
+                                final String nomeR = obj.getString("nome");
+                                final String indirizzoR = obj.getString("indirizzo");
+                                final String idR = obj.getString("id");
 
                                 Geocoder geocoder = new Geocoder(getBaseContext());
                                 List<Address> addresses;
@@ -101,10 +108,29 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(start, 5));
                                         mMap.animateCamera(CameraUpdateFactory.zoomTo(5), 500, null);
 
-                                        mMap.addMarker(new MarkerOptions()
+                                        final Marker marker = mMap.addMarker(new MarkerOptions()
                                                 .position(position)
                                                 .icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.logo_marker)))
                                                 .title(nomeR));
+
+                                        markerData.put(marker, Uri.parse(idR));
+                                        markerData2.put(marker, Uri.parse(nomeR));
+
+                                        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener()
+                                        {
+                                            @Override
+                                            public void onInfoWindowClick(Marker marker) {
+                                                Bundle b= new Bundle();
+                                                Bundle c= new Bundle();
+                                                b.putString("idristorante", markerData.get(marker).toString());
+                                                c.putString("nomeristorante", markerData2.get(marker).toString());
+                                                Intent i = new Intent(MapsActivity.this, RistoranteDettaglioActivity.class);
+                                                i.putExtras(b);
+                                                i.putExtras(c);
+                                                startActivity(i);
+                                            }
+
+                                        });
 
                                     }
                                 } catch (IOException e) {
