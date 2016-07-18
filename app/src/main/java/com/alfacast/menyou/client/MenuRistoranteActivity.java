@@ -52,7 +52,7 @@ public class MenuRistoranteActivity extends AppCompatActivity {
         final String nomeristorante = c.getString("nomeristorante");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Menu del Ristorante "+nomeristorante);
+        toolbar.setTitle("Menu "+nomeristorante);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);

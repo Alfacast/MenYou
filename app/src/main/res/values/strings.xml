@@ -3,6 +3,8 @@
 
     <string name="app_name">MenYou</string>
     <string name="hint_email">Email</string>
+    <string name="hint_emailR">Ripeti Email</string>
+    <string name="hint_passwordR">Ripeti Password</string>
     <string name="hint_password">Password</string>
     <string name="hint_name">Fullname</string>
     <string name="btn_login">LOGIN</string>

@@ -100,6 +100,28 @@
                 android:textColor="@color/input_register"
                 android:textColorHint="@color/input_register_hint" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ripeti Email"
+                android:id="@+id/textView5"
+                android:layout_gravity="left|center_horizontal"
+                android:textSize="18dp"
+                android:layout_marginBottom="5dp" />
+
+            <EditText
+                android:id="@+id/ClienteEmailR"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_edittext"
+                android:hint="@string/hint_emailR"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/input_register"
+                android:textColorHint="@color/input_register_hint" />
+
             <EditText
                 android:id="@+id/ClientePassword"
                 android:layout_width="fill_parent"
@@ -112,6 +134,20 @@
                 android:singleLine="true"
                 android:textColor="@color/input_register"
                 android:textColorHint="@color/input_register_hint" />
+
+            <EditText
+                android:id="@+id/ClientePasswordR"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_edittext"
+                android:hint="@string/hint_passwordR"
+                android:inputType="textPassword"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColor="@color/input_register"
+                android:textColorHint="@color/input_register_hint" />
+
 
             <!-- Login Button -->
 

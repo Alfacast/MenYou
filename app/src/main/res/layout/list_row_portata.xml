@@ -39,6 +39,7 @@
         android:layout_below="@id/nomeportata"
         android:layout_marginTop="1dip"
         android:layout_toRightOf="@+id/thumbnailportata"
+        android:singleLine="true"
         android:textSize="@dimen/descrizione" />
 
     <!-- Categoria portata -->

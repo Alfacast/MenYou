@@ -1,3 +1,4 @@
+
 package com.alfacast.menyou.restaurant;
 
 import android.app.ProgressDialog;
@@ -9,11 +10,11 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
@@ -21,11 +22,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alfacast.menyou.login.R;
-import com.alfacast.menyou.login.activity.LoginActivity;
 import com.alfacast.menyou.login.app.AppConfig;
 import com.alfacast.menyou.login.app.AppController;
 import com.alfacast.menyou.login.helper.SQLiteHandlerRestaurant;
@@ -58,8 +57,10 @@ public class EditAccountRistoranteActivity extends AppCompatActivity {
     private EditText restaurantPartitaIva;
     private EditText restaurantSitoWeb;
     private EditText restaurantEmail;
+    private EditText restaurantEmailR;
     private EditText restaurantTel;
     private EditText restaurantPassword;
+    private EditText restaurantPasswordR;
     private Button btnInsertFoto;
     private ImageView viewImage;
 
@@ -81,8 +82,10 @@ public class EditAccountRistoranteActivity extends AppCompatActivity {
         restaurantPartitaIva = (EditText) findViewById(R.id.PartitaIva);
         restaurantSitoWeb = (EditText) findViewById(R.id.SitoWeb);
         restaurantEmail = (EditText) findViewById(R.id.RestaurantEmail);
+        restaurantEmailR = (EditText) findViewById(R.id.RestaurantEmailR);
         restaurantTel = (EditText) findViewById(R.id.RestaurantTel);
         restaurantPassword = (EditText) findViewById(R.id.RestaurantPassword);
+        restaurantPasswordR = (EditText) findViewById(R.id.RestaurantPasswordR);
         btnInsertFoto=(Button)findViewById(R.id.btnSelectPhoto);
         btnEdit = (Button) findViewById(R.id.btnEditAccount);
         viewImage=(ImageView)findViewById(R.id.viewImage);
@@ -110,6 +113,7 @@ public class EditAccountRistoranteActivity extends AppCompatActivity {
         restaurantPartitaIva.setText(partitaIva);
         restaurantSitoWeb.setText(sitoWeb);
         restaurantEmail.setText(email);
+        restaurantEmailR.setText(email);
         restaurantTel.setText(telefono);
 
         //decodifica immagine da db
@@ -133,8 +137,10 @@ public class EditAccountRistoranteActivity extends AppCompatActivity {
                 String partitaIva = restaurantPartitaIva.getText().toString().trim();
                 String sitoWeb = restaurantSitoWeb.getText().toString().trim();
                 String email = restaurantEmail.getText().toString().trim();
+                String emailR = restaurantEmailR.getText().toString().trim();
                 String tel = restaurantTel.getText().toString().trim();
                 String password = restaurantPassword.getText().toString().trim();
+                String passwordR = restaurantPasswordR.getText().toString().trim();
 
                 viewImage.buildDrawingCache();
                 Bitmap bitmap = viewImage.getDrawingCache();
@@ -143,14 +149,22 @@ public class EditAccountRistoranteActivity extends AppCompatActivity {
                 final byte[] image=stream.toByteArray();
                 String foto = Base64.encodeToString(image, Base64.NO_WRAP);
 
-                if (!nome.isEmpty() && !address.isEmpty() && !partitaIva.isEmpty() && !email.isEmpty() && !tel.isEmpty() && !password.isEmpty() && !foto.isEmpty()) {
-                    editRestaurant(nome, address, partitaIva, sitoWeb, email, tel, password, foto);
-                } else {
+
+                if (password.equals(passwordR) && email.equals(emailR)){
+
+                    if (!nome.isEmpty() && !address.isEmpty() && !partitaIva.isEmpty() && !email.isEmpty() && !tel.isEmpty() && !password.isEmpty() && !foto.isEmpty()) {
+                        editRestaurant(nome, address, partitaIva, sitoWeb, email, tel, password, foto);
+                    } else {
+                        Toast.makeText(getApplicationContext(),
+                                "Please enter your details!", Toast.LENGTH_LONG)
+                                .show();
+                    }
+
+                }else {
                     Toast.makeText(getApplicationContext(),
-                            "Please enter your details!", Toast.LENGTH_LONG)
+                            "Controlla che i campi di conferma siano compilati correttamente", Toast.LENGTH_LONG)
                             .show();
-                }
-            }
+                }}
         });
 
     }

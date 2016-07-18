@@ -1,3 +1,6 @@
+
+
+
 package com.alfacast.menyou.client;
 
 import android.app.ProgressDialog;
@@ -37,6 +40,8 @@ public class EditAccountClienteActivity extends AppCompatActivity {
     private EditText nameCliente;
     private EditText clienteEmail;
     private EditText clientePassword;
+    private EditText clienteEmailR;
+    private EditText clientePasswordR;
 
     private SQLiteHandlerUser db;
     private SessionManager session;
@@ -55,6 +60,8 @@ public class EditAccountClienteActivity extends AppCompatActivity {
         nameCliente = (EditText) findViewById(R.id.nameCliente);
         clienteEmail = (EditText) findViewById(R.id.ClienteEmail);
         clientePassword = (EditText) findViewById(R.id.ClientePassword);
+        clienteEmailR = (EditText) findViewById(R.id.ClienteEmailR);
+        clientePasswordR = (EditText) findViewById(R.id.ClientePasswordR);
         btnEdit = (Button) findViewById(R.id.btnEditAccount);
 
         // SqLite database handler
@@ -69,25 +76,38 @@ public class EditAccountClienteActivity extends AppCompatActivity {
         String uid = user.get("uid");
         String name = user.get("name");
         String email = user.get("email");
+        String emailR = user.get("email");
 
         // Displaying the user details on the screen
         uidCliente.setText(uid);
         nameCliente.setText(name);
         clienteEmail.setText(email);
+        clienteEmailR.setText(emailR);
 
         // Update Button Click event
         btnEdit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+
+
                 String uid = uidCliente.getText().toString().trim();
                 String nome = nameCliente.getText().toString().trim();
                 String email = clienteEmail.getText().toString().trim();
+                String emailR = clienteEmailR.getText().toString().trim();
                 String password = clientePassword.getText().toString().trim();
+                String passwordR = clientePasswordR.getText().toString().trim();
 
-                if (!uid.isEmpty() && !nome.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
-                    editCliente(uid, nome, email, password);
-                } else {
+                if (password.equals(passwordR)&&email.equals(emailR)){
+
+                    if (!uid.isEmpty() && !nome.isEmpty() && !email.isEmpty() && !password.isEmpty() && !passwordR.isEmpty()) {
+                        editCliente(uid, nome, email, password);
+                    } else {
+                        Toast.makeText(getApplicationContext(),
+                                "Please enter your details!", Toast.LENGTH_LONG)
+                                .show();
+                    }
+                }else {
                     Toast.makeText(getApplicationContext(),
-                            "Please enter your details!", Toast.LENGTH_LONG)
+                            "Controlla che i campi di conferma siano compilati correttamente", Toast.LENGTH_LONG)
                             .show();
                 }
             }

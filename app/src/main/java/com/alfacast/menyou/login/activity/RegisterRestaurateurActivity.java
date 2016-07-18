@@ -1,3 +1,5 @@
+
+
 package com.alfacast.menyou.login.activity;
 
 import android.app.Activity;
@@ -58,8 +60,10 @@ public class RegisterRestaurateurActivity extends Activity {
     private EditText inputPartitaIva;
     private EditText inputSitoWeb;
     private EditText inputRestaurantEmail;
+    private EditText inputRestaurantEmailR;
     private EditText inputRestaurantTel;
     private EditText inputRestaurantPassword;
+    private EditText inputRestaurantPasswordR;
     private ImageView viewImage;
     private Button btnInsertFoto;
     private ProgressDialog pDialog;
@@ -78,8 +82,10 @@ public class RegisterRestaurateurActivity extends Activity {
         inputPartitaIva = (EditText) findViewById(R.id.PartitaIva);
         inputSitoWeb = (EditText) findViewById(R.id.SitoWeb);
         inputRestaurantEmail = (EditText) findViewById(R.id.RestaurantEmail);
+        inputRestaurantEmailR = (EditText) findViewById(R.id.RestaurantEmailR);
         inputRestaurantTel = (EditText) findViewById(R.id.RestaurantTel);
         inputRestaurantPassword = (EditText) findViewById(R.id.RestaurantPassword);
+        inputRestaurantPasswordR = (EditText) findViewById(R.id.RestaurantPasswordR);
         btnInsertFoto=(Button)findViewById(R.id.btnSelectPhoto);
         viewImage=(ImageView)findViewById(R.id.viewImage);
         btnRegister = (Button) findViewById(R.id.btnRegister);
@@ -119,8 +125,10 @@ public class RegisterRestaurateurActivity extends Activity {
                 String partitaIva = inputPartitaIva.getText().toString().trim();
                 String sitoWeb = inputSitoWeb.getText().toString().trim();
                 String email = inputRestaurantEmail.getText().toString().trim();
+                String emailR = inputRestaurantEmailR.getText().toString().trim();
                 String tel = inputRestaurantTel.getText().toString().trim();
                 String password = inputRestaurantPassword.getText().toString().trim();
+                String passwordR = inputRestaurantPasswordR.getText().toString().trim();
 
                 viewImage.buildDrawingCache();
                 Bitmap bitmap = viewImage.getDrawingCache();
@@ -130,14 +138,21 @@ public class RegisterRestaurateurActivity extends Activity {
 
                 String foto = Base64.encodeToString(image, Base64.NO_WRAP);
 
-                if (!nome.isEmpty() && !address.isEmpty() && !partitaIva.isEmpty() && !email.isEmpty() && !tel.isEmpty() && !password.isEmpty() && !foto.isEmpty()) {
-                    registerRestaurant(nome, address, partitaIva, sitoWeb, email, tel, password, foto);
-                } else {
+                if (password.equals(passwordR) && email.equals(emailR)){
+
+
+                    if (!nome.isEmpty() && !address.isEmpty() && !partitaIva.isEmpty() && !email.isEmpty() && !tel.isEmpty() && !password.isEmpty() && !foto.isEmpty()) {
+                        registerRestaurant(nome, address, partitaIva, sitoWeb, email, tel, password, foto);
+                    } else {
+                        Toast.makeText(getApplicationContext(),
+                                "Please enter your details!", Toast.LENGTH_LONG)
+                                .show();
+                    }
+                }else {
                     Toast.makeText(getApplicationContext(),
-                            "Please enter your details!", Toast.LENGTH_LONG)
+                            "Controlla che i campi di conferma siano compilati correttamente", Toast.LENGTH_LONG)
                             .show();
-                }
-            }
+                }}
         });
 
         // Link to Login Screen
