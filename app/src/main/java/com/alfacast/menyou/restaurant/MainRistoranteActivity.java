@@ -49,6 +49,7 @@ public class MainRistoranteActivity extends AppCompatActivity
     // Portata json url
     private static final String url = "http://www.cinesofia.it/alfacast/youmenulogin/get_menu_ristorante.php?idristorante=";
     private ProgressDialog pDialog;
+    private TextView listaVuota;
     private List<ListaMenu> menuList = new ArrayList<ListaMenu>();
     private ListView listView;
     private CustomListMenuRistorante adapter;
@@ -79,6 +80,7 @@ public class MainRistoranteActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        listaVuota = (TextView) findViewById(R.id.listavuota);
         listView = (ListView) findViewById(R.id.list);
         adapter = new CustomListMenuRistorante(this, menuList);
         listView.setAdapter(adapter);
@@ -122,6 +124,12 @@ public class MainRistoranteActivity extends AppCompatActivity
                         // notifying list adapter about data changes
                         // so that it renders the list view with updated data
                         adapter.notifyDataSetChanged();
+
+                        if (adapter.isEmpty()){
+                            listaVuota.setVisibility(View.VISIBLE);
+                        }else {
+                            listaVuota.setVisibility(View.GONE);
+                        }
                     }
                 }, new Response.ErrorListener() {
             @Override
