@@ -71,10 +71,11 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
-            android:background="@color/btn_login_bg"
+            android:background="@drawable/rounded_login"
             android:text="@string/btn_login"
             android:textColor="@color/btn_login"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="@color/btn_login_bg" />
 
         <com.facebook.login.widget.LoginButton
             android:id="@+id/login_button"

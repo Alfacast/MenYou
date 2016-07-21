@@ -111,9 +111,10 @@
         <ImageView
             android:id="@+id/viewImage"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:visibility="invisible"
-            android:scaleType="centerCrop"/>
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"/>
 
         <Button
             android:id="@+id/btnInsertPortata"

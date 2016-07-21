@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:textColor="@color/prezzo"
+        android:textColor="@color/btn_login_bg"
         android:textSize="@dimen/prezzo" />
 
 </RelativeLayout>
