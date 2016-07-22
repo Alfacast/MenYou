@@ -35,6 +35,16 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_menu"
+            android:textSize="16dp"
+            android:id="@+id/listavuota"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone"
+            android:layout_marginTop="50dp" />
+
         <ListView
             android:id="@+id/list"
             android:layout_width="fill_parent"
