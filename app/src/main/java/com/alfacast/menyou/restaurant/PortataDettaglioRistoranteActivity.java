@@ -18,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alfacast.menyou.UrlConfig;
 import com.alfacast.menyou.login.R;
 import com.alfacast.menyou.login.app.AppController;
 import com.android.volley.Response;
@@ -36,9 +37,6 @@ public class PortataDettaglioRistoranteActivity extends AppCompatActivity {
     // Log tag
     private static final String TAG = PortataDettaglioRistoranteActivity.class.getSimpleName();
 
-    // Portata json url
-    private static final String url = "http://www.cinesofia.it/alfacast/youmenulogin/get_portata_dettaglio.php?idportata=";
-    private static final String urldel = "http://www.cinesofia.it/alfacast/youmenulogin/delete_portata.php?idportata=";
     private ProgressDialog pDialog;
 
     @Override
@@ -81,7 +79,7 @@ public class PortataDettaglioRistoranteActivity extends AppCompatActivity {
         pDialog.show();
 
         // Creating volley request obj
-        JsonArrayRequest portataReq = new JsonArrayRequest(url+idportata,
+        JsonArrayRequest portataReq = new JsonArrayRequest(UrlConfig.URL_PortataDettaglioRistoranteActivity_1+idportata,
 
                 new Response.Listener<JSONArray>() {
 
@@ -151,7 +149,7 @@ public class PortataDettaglioRistoranteActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int id) {
 
                                 // Creating volley request obj
-                                final JsonArrayRequest portataReq = new JsonArrayRequest(urldel + idportata,
+                                final JsonArrayRequest portataReq = new JsonArrayRequest(UrlConfig.URL_PortataDettaglioRistoranteActivity_2 + idportata,
 
                                         new Response.Listener<JSONArray>() {
 

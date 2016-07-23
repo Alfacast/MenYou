@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.alfacast.menyou.UrlConfig;
 import com.alfacast.menyou.adapter.CustomListAdapter;
 import com.alfacast.menyou.login.R;
 import com.alfacast.menyou.login.app.AppController;
@@ -38,8 +39,6 @@ public class TabMenu extends Fragment {
     // Log tag
     private static final String TAG = TabMenu.class.getSimpleName();
 
-    // Menu json url
-    private static final String url = "http://www.cinesofia.it/alfacast/youmenulogin/get_menu.php";
     private ProgressDialog pDialog;
     private List<ListaMenu> menuList = new ArrayList<ListaMenu>();
     private ListView listView;
@@ -60,7 +59,7 @@ public class TabMenu extends Fragment {
         pDialog.show();
 
         // Creating volley request obj
-        JsonArrayRequest menuReq = new JsonArrayRequest(url,
+        JsonArrayRequest menuReq = new JsonArrayRequest(UrlConfig.URL_TabMenu,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {

@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alfacast.menyou.UrlConfig;
 import com.alfacast.menyou.login.R;
 import com.alfacast.menyou.login.app.AppController;
 import com.android.volley.Response;
@@ -45,8 +46,6 @@ public class RistoranteDettaglioActivity extends AppCompatActivity implements On
     // Log tag
     private static final String TAG = RistoranteDettaglioActivity.class.getSimpleName();
 
-    // Portata json url
-    private static final String url = "http://www.cinesofia.it/alfacast/youmenulogin/get_ristorante_dettaglio.php?idristorante=";
     private ProgressDialog pDialog;
 
     //Our Map
@@ -101,7 +100,7 @@ public class RistoranteDettaglioActivity extends AppCompatActivity implements On
         pDialog.show();
 
         // Creating volley request obj
-        JsonArrayRequest ristoranteReq = new JsonArrayRequest(url + idristorante,
+        JsonArrayRequest ristoranteReq = new JsonArrayRequest(UrlConfig.Url_RistoranteDettaglioActivity + idristorante,
 
                 new Response.Listener<JSONArray>() {
 
@@ -155,7 +154,7 @@ public class RistoranteDettaglioActivity extends AppCompatActivity implements On
         final String idristorante = b.getString("idristorante");
 
         // Creating volley request obj
-        JsonArrayRequest ristoranteReq = new JsonArrayRequest(url + idristorante,
+        JsonArrayRequest ristoranteReq = new JsonArrayRequest(UrlConfig.Url_RistoranteDettaglioActivity + idristorante,
 
                 new Response.Listener<JSONArray>() {
 

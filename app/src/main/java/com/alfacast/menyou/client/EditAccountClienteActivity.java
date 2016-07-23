@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alfacast.menyou.login.R;
-import com.alfacast.menyou.login.app.AppConfig;
+import com.alfacast.menyou.UrlConfig;
 import com.alfacast.menyou.login.app.AppController;
 import com.alfacast.menyou.login.helper.SQLiteHandlerUser;
 import com.alfacast.menyou.login.helper.SessionManager;
@@ -120,7 +120,7 @@ public class EditAccountClienteActivity extends AppCompatActivity {
         String tag_string_req = "req_update";
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_USERUPDATE, new Response.Listener<String>() {
+                UrlConfig.URL_EditAccountClienteActivity, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
