@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alfacast.menyou.UrlConfig;
 import com.alfacast.menyou.login.R;
 import com.alfacast.menyou.login.app.AppController;
 import com.alfacast.menyou.model.ListaMenu;
@@ -42,9 +43,6 @@ public class CustomListMenuRistorante extends BaseAdapter {
 
     // Log tag
     private static final String TAG = CustomListMenuRistorante.class.getSimpleName();
-
-    // Portata json url
-    private static final String url = "http://www.cinesofia.it/alfacast/youmenulogin/delete_menu.php?idmenu=";
 
     private Activity activity;
     private LayoutInflater inflater;
@@ -129,7 +127,7 @@ public class CustomListMenuRistorante extends BaseAdapter {
                                 // se cliccato elimino il menu e lancio la mainactivity
                                 final String idDelMenu = idMenu.getText().toString();
                                 Log.d(TAG,"id menu: "+ idDelMenu);
-                                JsonArrayRequest menuReq = new JsonArrayRequest(url+idDelMenu,
+                                JsonArrayRequest menuReq = new JsonArrayRequest(UrlConfig.URL_ListMenuRistorante+idDelMenu,
                                         new Response.Listener<JSONArray>() {
 
                                             @Override

@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.alfacast.menyou.login.R;
-import com.alfacast.menyou.login.app.AppConfig;
+import com.alfacast.menyou.UrlConfig;
 import com.alfacast.menyou.login.app.AppController;
 import com.alfacast.menyou.login.helper.SQLiteHandlerRestaurant;
 import com.android.volley.Request;
@@ -95,7 +95,7 @@ public class InsertMenuActivity extends AppCompatActivity {
         showDialog();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_INSERTMENU, new Response.Listener<String>() {
+                UrlConfig.URL_InsertMenuActivity, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {

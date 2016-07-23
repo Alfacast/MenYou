@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.alfacast.menyou.UrlConfig;
 import com.alfacast.menyou.adapter.CustomListMenuRistorante;
 import com.alfacast.menyou.login.R;
 
@@ -46,8 +47,6 @@ public class MainRistoranteActivity extends AppCompatActivity
 
     private static final String TAG = MainRistoranteActivity.class.getSimpleName();
 
-    // Portata json url
-    private static final String url = "http://www.cinesofia.it/alfacast/youmenulogin/get_menu_ristorante.php?idristorante=";
     private ProgressDialog pDialog;
     private TextView listaVuota;
     private List<ListaMenu> menuList = new ArrayList<ListaMenu>();
@@ -91,7 +90,7 @@ public class MainRistoranteActivity extends AppCompatActivity
         pDialog.show();
 
         // Creating volley request obj
-        JsonArrayRequest menuReq = new JsonArrayRequest(url+idristorante,
+        JsonArrayRequest menuReq = new JsonArrayRequest(UrlConfig.URL_MainRistoranteActivity+idristorante,
 
                 new Response.Listener<JSONArray>() {
 

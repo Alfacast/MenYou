@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
+import com.alfacast.menyou.UrlConfig;
 import com.alfacast.menyou.login.R;
 import com.alfacast.menyou.login.app.AppController;
 import com.android.volley.Response;
@@ -40,8 +41,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     // Log tag
     private static final String TAG = RistoranteDettaglioActivity.class.getSimpleName();
 
-    // Portata json url
-    private static final String url = "http://www.cinesofia.it/alfacast/youmenulogin/get_ristoranti_map.php";
     private ProgressDialog pDialog;
 
     private GoogleMap mMap;
@@ -69,7 +68,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         final HashMap<Marker, Uri> markerData = new HashMap<>();
         final HashMap<Marker, Uri> markerData2 = new HashMap<>();
         // Creating volley request obj
-        final JsonArrayRequest ristoranteReq = new JsonArrayRequest(url,
+        final JsonArrayRequest ristoranteReq = new JsonArrayRequest(UrlConfig.URL_MapsActivity,
 
                 new Response.Listener<JSONArray>() {
 

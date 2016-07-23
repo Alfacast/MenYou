@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.alfacast.menyou.login.R;
-import com.alfacast.menyou.login.app.AppConfig;
+import com.alfacast.menyou.UrlConfig;
 import com.alfacast.menyou.login.app.AppController;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -64,7 +64,7 @@ public class EditMenuActivity extends AppCompatActivity {
                 showDialog();
 
                 // Creating volley request obj
-                final JsonArrayRequest menuReq = new JsonArrayRequest(AppConfig.URL_EDITMENU+idMenu+"&nomemenu="+newMenu,
+                final JsonArrayRequest menuReq = new JsonArrayRequest(UrlConfig.URL_EditMenuActivity +idMenu+"&nomemenu="+newMenu,
 
                         new Response.Listener<JSONArray>() {
 

@@ -30,7 +30,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.alfacast.menyou.login.R;
-import com.alfacast.menyou.login.app.AppConfig;
+import com.alfacast.menyou.UrlConfig;
 import com.alfacast.menyou.login.app.AppController;
 import com.alfacast.menyou.login.helper.SQLiteHandlerRestaurant;
 import com.alfacast.menyou.login.helper.SessionManager;
@@ -309,7 +309,7 @@ public class RegisterRestaurateurActivity extends Activity {
         showDialog();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_RESTAURANTREGISTER, new Response.Listener<String>() {
+                UrlConfig.URL_RegisterRestaurateurActivity, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {

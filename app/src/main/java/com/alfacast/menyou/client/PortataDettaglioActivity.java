@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alfacast.menyou.UrlConfig;
 import com.alfacast.menyou.login.R;
 import com.alfacast.menyou.login.app.AppController;
 import com.android.volley.Response;
@@ -29,8 +30,6 @@ public class PortataDettaglioActivity extends AppCompatActivity {
     // Log tag
     private static final String TAG = PortataDettaglioActivity.class.getSimpleName();
 
-    // Portata json url
-    private static final String url = "http://www.cinesofia.it/alfacast/youmenulogin/get_portata_dettaglio.php?idportata=";
     private ProgressDialog pDialog;
 
     @Override
@@ -84,7 +83,7 @@ public class PortataDettaglioActivity extends AppCompatActivity {
         pDialog.show();
 
         // Creating volley request obj
-        JsonArrayRequest portataReq = new JsonArrayRequest(url+idportata,
+        JsonArrayRequest portataReq = new JsonArrayRequest(UrlConfig.URL_PortataDettaglioActivity+idportata,
 
                 new Response.Listener<JSONArray>() {
 

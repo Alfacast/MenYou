@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.alfacast.menyou.UrlConfig;
 import com.alfacast.menyou.adapter.CustomListAdapter;
 import com.alfacast.menyou.login.R;
 import com.alfacast.menyou.login.app.AppController;
@@ -31,8 +32,6 @@ public class MenuRistoranteActivity extends AppCompatActivity {
 
     private static final String TAG = MenuRistoranteActivity.class.getSimpleName();
 
-    // Portata json url
-    private static final String url = "http://www.cinesofia.it/alfacast/youmenulogin/get_menu_ristorante.php?idristorante=";
     private ProgressDialog pDialog;
     private TextView listaVuota;
     private List<ListaMenu> menuList = new ArrayList<ListaMenu>();
@@ -69,7 +68,7 @@ public class MenuRistoranteActivity extends AppCompatActivity {
         pDialog.show();
 
         // Creating volley request obj
-        JsonArrayRequest menuReq = new JsonArrayRequest(url+idristorante,
+        JsonArrayRequest menuReq = new JsonArrayRequest(UrlConfig.URL_MenuRistoranteActivity+idristorante,
 
                 new Response.Listener<JSONArray>() {
 

@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.alfacast.menyou.UrlConfig;
 import com.alfacast.menyou.adapter.CustomListAdapterPortata;
 import com.alfacast.menyou.login.R;
 import com.alfacast.menyou.login.app.AppController;
@@ -36,10 +37,6 @@ public class PortataActivity extends AppCompatActivity {
     // Log tag
     private static final String TAG = PortataActivity.class.getSimpleName();
 
-    // Portata json url
-    private static final String url = "http://www.cinesofia.it/alfacast/youmenulogin/get_portata.php?idmenu=";
-    private static final String url2 = "http://www.cinesofia.it/alfacast/youmenulogin/get_categoria.php?idmenu=";
-    private static final String url3 = "http://www.cinesofia.it/alfacast/youmenulogin/get_portata_categoria.php?idmenu=";
     private ProgressDialog pDialog;
     private List<ListaPortata> portataList = new ArrayList<ListaPortata>();
     private ListView listView;
@@ -66,7 +63,7 @@ public class PortataActivity extends AppCompatActivity {
         horizontalList=new ArrayList<>();
 
         // Creating volley request obj
-        final JsonArrayRequest categoriaReq = new JsonArrayRequest(url2 + idmenu,
+        final JsonArrayRequest categoriaReq = new JsonArrayRequest(UrlConfig.URL_PortataActivity_2 + idmenu,
 
                 new Response.Listener<JSONArray>() {
 
@@ -132,7 +129,7 @@ public class PortataActivity extends AppCompatActivity {
         pDialog.show();
 
         // Creating volley request obj
-        JsonArrayRequest portataReq = new JsonArrayRequest(url+idmenu,
+        JsonArrayRequest portataReq = new JsonArrayRequest(UrlConfig.URL_PortataActivity_1+idmenu,
 
                 new Response.Listener<JSONArray>() {
 
@@ -179,7 +176,7 @@ public class PortataActivity extends AppCompatActivity {
 
 
         });
-        Log.d(TAG, "portataList è: "+ url);
+        Log.d(TAG, "portataList è: "+ UrlConfig.URL_PortataActivity_1);
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(portataReq);
@@ -254,7 +251,7 @@ public class PortataActivity extends AppCompatActivity {
 
 
                     // Creating volley request obj
-                    JsonArrayRequest portataCat = new JsonArrayRequest(url3+idmenu+"&categoria="+categoria,
+                    JsonArrayRequest portataCat = new JsonArrayRequest(UrlConfig.URL_PortataActivity_3+idmenu+"&categoria="+categoria,
 
                             new Response.Listener<JSONArray>() {
 
@@ -302,7 +299,6 @@ public class PortataActivity extends AppCompatActivity {
                         }
 
                     });
-                    Log.d(TAG, "portataList è: "+ url);
 
                     // Adding request to request queue
                     AppController.getInstance().addToRequestQueue(portataCat);

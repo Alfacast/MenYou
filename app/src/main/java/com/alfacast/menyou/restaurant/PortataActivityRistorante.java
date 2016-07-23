@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.alfacast.menyou.UrlConfig;
 import com.alfacast.menyou.adapter.CustomListAdapterPortata;
 import com.alfacast.menyou.login.R;
 import com.alfacast.menyou.login.app.AppController;
@@ -33,8 +34,6 @@ public class PortataActivityRistorante extends AppCompatActivity {
     // Log tag
     private static final String TAG = PortataActivityRistorante.class.getSimpleName();
 
-    // Portata json url
-    private static final String url = "http://www.cinesofia.it/alfacast/youmenulogin/get_portata.php?idmenu=";
     private ProgressDialog pDialog;
     private List<ListaPortata> portataList = new ArrayList<ListaPortata>();
     private ListView listView;
@@ -85,7 +84,7 @@ public class PortataActivityRistorante extends AppCompatActivity {
         pDialog.show();
 
         // Creating volley request obj
-        JsonArrayRequest portataReq = new JsonArrayRequest(url+idmenu,
+        JsonArrayRequest portataReq = new JsonArrayRequest(UrlConfig.URL_PortataActivityRistorante+idmenu,
 
                 new Response.Listener<JSONArray>() {
 

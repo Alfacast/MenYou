@@ -16,13 +16,11 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.Profile;
 import com.facebook.appevents.AppEventsLogger;
 import com.alfacast.menyou.login.R;
-import com.alfacast.menyou.login.app.AppConfig;
+import com.alfacast.menyou.UrlConfig;
 import com.alfacast.menyou.login.app.AppController;
 import com.alfacast.menyou.login.helper.SQLiteHandlerUser;
 import com.alfacast.menyou.login.helper.SQLiteHandlerRestaurant;
@@ -260,7 +258,7 @@ public class LoginActivity extends Activity {
         showDialog();
 
         StringRequest strReq = new StringRequest(Method.POST,
-                AppConfig.URL_REGISTER_FB, new Response.Listener<String>() {
+                UrlConfig.URL_LoginActivityFacebook, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -340,7 +338,7 @@ public class LoginActivity extends Activity {
         showDialog();
 
         StringRequest strReq = new StringRequest(Method.POST,
-                AppConfig.URL_LOGIN, new Response.Listener<String>() {
+                UrlConfig.URL_LoginActivity, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
