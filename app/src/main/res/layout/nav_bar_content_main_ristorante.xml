@@ -11,31 +11,25 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:gravity="center"
         android:orientation="vertical" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ristorante"
-            android:textSize="20dp" />
+            android:text="@string/no_menu"
+            android:textSize="16dp"
+            android:id="@+id/listavuota"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone"
+            android:layout_marginTop="50dp" />
 
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:textColor="@color/lbl_name"
-            android:textSize="24dp" />
-
-        <TextView
-            android:id="@+id/partitaIva"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="13dp" />
+            android:divider="@color/list_divider"
+            android:dividerHeight="1dp"
+            android:listSelector="@drawable/list_row_selector" />
 
 
     </LinearLayout>

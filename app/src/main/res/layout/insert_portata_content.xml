@@ -18,7 +18,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:paddingLeft="20dp"
             android:paddingRight="20dp">
@@ -111,9 +111,10 @@
         <ImageView
             android:id="@+id/viewImage"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:background="@drawable/rounded_spinner"
-            android:src="@drawable/ic_camera" />
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"/>
 
         <Button
             android:id="@+id/btnInsertPortata"

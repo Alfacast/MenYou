@@ -8,9 +8,12 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
 
-    <dimen name="title">17dp</dimen>
-    <dimen name="rating">15dip</dimen>
-    <dimen name="genre">13dip</dimen>
-    <dimen name="year">12dip</dimen>
+    <dimen name="menu">17dp</dimen>
+    <dimen name="ristorante">13dip</dimen>
+
+    <dimen name="portata">17dp</dimen>
+    <dimen name="descrizione">15dip</dimen>
+    <dimen name="categoria">13dip</dimen>
+    <dimen name="prezzo">12dip</dimen>
 
 </resources>

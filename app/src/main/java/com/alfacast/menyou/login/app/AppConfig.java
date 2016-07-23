@@ -12,6 +12,7 @@ public class AppConfig {
         // Server user register url
         //public static String URL_REGISTER = "http://10.0.3.2:80/youmenulogin/register.php";
         public static String URL_REGISTER = "http://www.cinesofia.it/alfacast/youmenulogin/register.php";
+        public static String URL_REGISTER_FB = "http://www.cinesofia.it/alfacast/youmenulogin/register_fb.php";
 
         // Server restaurant register url
         //public static String URL_RESTAURANTREGISTER = "http://10.0.3.2:80/youmenulogin/registerRistorante.php";
@@ -19,7 +20,11 @@ public class AppConfig {
 
         public static String URL_INSERTMENU = "http://www.cinesofia.it/alfacast/youmenulogin/insertMenu.php";
         public static String URL_INSERTPORTATA = "http://www.cinesofia.it/alfacast/youmenulogin/insertPortata.php";
-
+        //public static String URL_GETPORTATA = "http://www.cinesofia.it/alfacast/youmenulogin/get_portata.php";
+        public static String URL_EDITMENU = "http://www.cinesofia.it/alfacast/youmenulogin/editMenu.php?idmenu=";
+        public static String URL_RESTAURANTUPDATE = "http://www.cinesofia.it/alfacast/youmenulogin/updateRistorante.php";
+        public static String URL_USERUPDATE = "http://www.cinesofia.it/alfacast/youmenulogin/updateUser.php";
+        public static String URL_EDITPORTATA = "http://www.cinesofia.it/alfacast/youmenulogin/updatePortata.php";
 
     }
 

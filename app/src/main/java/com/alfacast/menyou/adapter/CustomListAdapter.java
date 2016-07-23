@@ -4,17 +4,20 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alfacast.menyou.login.R;
 import com.alfacast.menyou.login.app.AppController;
-import com.alfacast.menyou.model.Movie;
+import com.alfacast.menyou.model.ListaMenu;
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.NetworkImageView;
 
 /**
  * Created by Gabriele Bellissima on 08/06/2016.
@@ -22,22 +25,22 @@ import com.android.volley.toolbox.NetworkImageView;
 public class CustomListAdapter extends BaseAdapter {
     private Activity activity;
     private LayoutInflater inflater;
-    private List<Movie> movieItems;
+    private List<ListaMenu> menuItems;
     ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
-    public CustomListAdapter(Activity activity, List<Movie> movieItems) {
+    public CustomListAdapter(Activity activity, List<ListaMenu> menuItems) {
         this.activity = activity;
-        this.movieItems = movieItems;
+        this.menuItems = menuItems;
     }
 
     @Override
     public int getCount() {
-        return movieItems.size();
+        return menuItems.size();
     }
 
     @Override
     public Object getItem(int location) {
-        return movieItems.get(location);
+        return menuItems.get(location);
     }
 
     @Override
@@ -56,36 +59,30 @@ public class CustomListAdapter extends BaseAdapter {
 
         if (imageLoader == null)
             imageLoader = AppController.getInstance().getImageLoader();
-        NetworkImageView thumbNail = (NetworkImageView) convertView
-                .findViewById(R.id.thumbnail);
-        TextView title = (TextView) convertView.findViewById(R.id.title);
-        TextView rating = (TextView) convertView.findViewById(R.id.rating);
-        TextView genre = (TextView) convertView.findViewById(R.id.genre);
-        TextView year = (TextView) convertView.findViewById(R.id.releaseYear);
+        ImageView thumbNail = (ImageView) convertView.findViewById(R.id.thumbnail);
+        TextView nomeMenu = (TextView) convertView.findViewById(R.id.nomemenu);
+        TextView nomeRistorante = (TextView) convertView.findViewById(R.id.nomeristorante);
+        TextView idMenu = (TextView) convertView.findViewById(R.id.idmenu);
 
-        // getting movie data for the row
-        Movie m = movieItems.get(position);
+        // getting menu data for the row
+        ListaMenu m = menuItems.get(position);
 
-        // thumbnail image
-        thumbNail.setImageUrl(m.getThumbnailUrl(), imageLoader);
+        //Decodifica immmagine da db
+        byte[] decodedString = Base64.decode(String.valueOf(m.getThumbnail()), Base64.DEFAULT);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
-        // title
-        title.setText(m.getTitle());
+        thumbNail.setImageBitmap(decodedByte);
 
-        // rating
-        rating.setText("Rating: " + String.valueOf(m.getRating()));
+        // Set immagine senza decodifica
+        //thumbNail.setImageUrl(m.getThumbnailUrl(), imageLoader);
 
-        // genre
-        String genreStr = "";
-        for (String str : m.getGenre()) {
-            genreStr += str + ", ";
-        }
-        genreStr = genreStr.length() > 0 ? genreStr.substring(0,
-                genreStr.length() - 2) : genreStr;
-        genre.setText(genreStr);
+        // nome menu
+        nomeMenu.setText(m.getNomeMenu());
 
-        // release year
-        year.setText(String.valueOf(m.getYear()));
+        // nome ristorante
+        nomeRistorante.setText("Ristorante: " + String.valueOf(m.getNomeRistorante()));
+
+        idMenu.setText(m.getIdMenu());
 
         return convertView;
     }

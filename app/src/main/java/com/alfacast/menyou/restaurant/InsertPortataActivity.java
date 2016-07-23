@@ -6,7 +6,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -16,7 +17,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -27,20 +27,20 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.alfacast.menyou.login.R;
-import com.alfacast.menyou.login.app.AppConfig;
+import com.alfacast.menyou.UrlConfig;
 import com.alfacast.menyou.login.app.AppController;
 import com.alfacast.menyou.login.helper.SQLiteHandlerRestaurant;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.facebook.internal.Utility;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -77,7 +77,7 @@ public class InsertPortataActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         inputNamePortata = (EditText) findViewById(R.id.namePortata);
         btnInsertPortata = (Button) findViewById(R.id.btnInsertPortata);
@@ -90,6 +90,7 @@ public class InsertPortataActivity extends AppCompatActivity {
         viewImage=(ImageView)findViewById(R.id.viewImage);
         switchButton = (Switch) findViewById(R.id.switchButton);
 
+        //Imposta portata disponibile si/no
         switchButton.setChecked(true);
         switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -139,6 +140,7 @@ public class InsertPortataActivity extends AppCompatActivity {
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 85, stream);
                 final byte[] image=stream.toByteArray();
 
+                //Codifica foto su db
                 String foto = Base64.encodeToString(image, Base64.NO_WRAP);
 
                 // recupero id dalla tabella ristorante
@@ -146,11 +148,26 @@ public class InsertPortataActivity extends AppCompatActivity {
                 HashMap<String, String> a = dbr.getUserDetails();
                 final String id_ristorante = a.get("id_ristorante");
 
-                if (!nome.isEmpty()) {
-                    insertPortata(nome, categoria, descrizione, prezzo, opzioni, disponibile, foto, id_ristorante);
+                // recupero id menu dalla activity precedente
+                Intent i=getIntent();
+                Bundle b=i.getExtras();
+
+                final String idmenu=b.getString("idmenu");
+
+                if (!nome.isEmpty() && !categoria.isEmpty() && !descrizione.isEmpty() && !prezzo.isEmpty() && !disponibile.isEmpty() && !id_ristorante.isEmpty() && !idmenu.isEmpty()) {
+                    insertPortata(nome, categoria, descrizione, prezzo, opzioni, disponibile, foto, id_ristorante, idmenu);
+
+                    //Lancio PortataActivityRistorante
+                    Intent intent = new Intent(
+                            InsertPortataActivity.this,
+                            PortataActivityRistorante.class);
+                    intent.putExtras(b);
+                    startActivity(intent);
+                    finish();
+
                 } else {
                     Toast.makeText(getApplicationContext(),
-                            "Please enter portata name!", Toast.LENGTH_LONG)
+                            "Please enter portata data!", Toast.LENGTH_LONG)
                             .show();
                 }
             }
@@ -201,12 +218,29 @@ public class InsertPortataActivity extends AppCompatActivity {
                     }
                 }
                 try {
-                    Bitmap bitmap;
-                    BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
+                    //Imposta orientamento automatico foto da dati exif
+                    ExifInterface exif = new ExifInterface(f.getPath());
+                    int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
 
-                    bitmap = BitmapFactory.decodeFile(f.getAbsolutePath(),
-                            bitmapOptions);
+                    int angle = 0;
 
+                    if (orientation == ExifInterface.ORIENTATION_ROTATE_90) {
+                        angle = 90;
+                    }
+                    else if (orientation == ExifInterface.ORIENTATION_ROTATE_180) {
+                        angle = 180;
+                    }
+                    else if (orientation == ExifInterface.ORIENTATION_ROTATE_270) {
+                        angle = 270;
+                    }
+
+                    Matrix mat = new Matrix();
+                    mat.postRotate(angle);
+
+                    Bitmap bmp = BitmapFactory.decodeStream(new FileInputStream(f), null, null);
+                    Bitmap bitmap = Bitmap.createBitmap(bmp, 0, 0, bmp.getWidth(), bmp.getHeight(), mat, true);
+
+                    viewImage.setVisibility(View.VISIBLE);
                     viewImage.setImageBitmap(bitmap);
 
                     String path = android.os.Environment
@@ -240,9 +274,33 @@ public class InsertPortataActivity extends AppCompatActivity {
                 int columnIndex = c.getColumnIndex(filePath[0]);
                 String picturePath = c.getString(columnIndex);
                 c.close();
-                Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
-                Log.w("path of image from gallery......******************.........", picturePath+"");
-                viewImage.setImageBitmap(thumbnail);
+                try {
+                    //Imposta orientamento automatico foto da dati exif
+                    ExifInterface exif = new ExifInterface(picturePath);
+                    int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+
+                    int angle = 0;
+
+                    if (orientation == ExifInterface.ORIENTATION_ROTATE_90) {
+                        angle = 90;
+                    }
+                    else if (orientation == ExifInterface.ORIENTATION_ROTATE_180) {
+                        angle = 180;
+                    }
+                    else if (orientation == ExifInterface.ORIENTATION_ROTATE_270) {
+                        angle = 270;
+                    }
+
+                    Matrix mat = new Matrix();
+                    mat.postRotate(angle);
+
+                    Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
+                    Log.w("path gallery...", picturePath+"");
+                    viewImage.setVisibility(View.VISIBLE);
+                    viewImage.setImageBitmap(thumbnail);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -251,7 +309,7 @@ public class InsertPortataActivity extends AppCompatActivity {
      * Function to store user in MySQL database will post params(tag, name,
      * email, password) to register url
      * */
-    private void insertPortata(final String nome, final String categoria, final String descrizione, final String prezzo, final String opzioni, final String disponibile, final String foto, final String id_ristorante) {
+    private void insertPortata(final String nome, final String categoria, final String descrizione, final String prezzo, final String opzioni, final String disponibile, final String foto, final String id_ristorante, final String idmenu) {
         // Tag used to cancel the request
         String tag_string_req = "req_insert";
 
@@ -259,7 +317,7 @@ public class InsertPortataActivity extends AppCompatActivity {
         showDialog();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_INSERTPORTATA, new Response.Listener<String>() {
+                UrlConfig.URL_InsertPortataActivity, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -292,12 +350,6 @@ public class InsertPortataActivity extends AppCompatActivity {
 
                         Toast.makeText(getApplicationContext(), "Portata successfully created.", Toast.LENGTH_LONG).show();
 
-                        // Launch login activity
-                        Intent intent = new Intent(
-                                InsertPortataActivity.this,
-                                MainRistoranteActivity.class);
-                        startActivity(intent);
-                        finish();
                     } else {
 
                         // Error occurred in registration. Get the error
@@ -334,6 +386,7 @@ public class InsertPortataActivity extends AppCompatActivity {
                 params.put("disponibile", disponibile);
                 params.put("foto", foto);
                 params.put("id_ristorante", id_ristorante);
+                params.put("idmenu", idmenu);
 
                 return params;
             }
