@@ -8,16 +8,35 @@
         android:minSdkVersion="9"
         android:targetSdkVersion="21" />
 
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- Creating Permission to receive Google Maps -->
+    <permission
+        android:name="com.arshad.map.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+
+    <!-- Permission to receive Google Maps -->
+    <uses-permission android:name="com.arshad.map.permission.MAPS_RECEIVE" />
+
+    <!-- Maps API needs OpenGL ES 2.0. -->
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
 
     <application
-        android:name="com.alfacast.menyou.login.app.AppController"
+        android:name=".app.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/logomenyou"
         android:label="@string/app_name"
@@ -26,13 +45,24 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
+        <!-- Google Maps Fragment API Key Data -->
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyCxCHCepkPEhP9e5VM0JRH_AlqIVXsJUNM" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="android.app.default_searchable"
+            android:value="com.alfacast.menyou.client.CercaActivity" />
+
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
-            android:name="com.alfacast.menyou.login.activity.LoginActivity"
+            android:name=".activity.LoginActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
@@ -44,13 +74,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.alfacast.menyou.login.activity.RegisterUserActivity"
+            android:name=".activity.RegisterUserActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.alfacast.menyou.login.activity.RegisterRestaurateurActivity"
+            android:name=".activity.RegisterRestaurateurActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
@@ -75,8 +105,8 @@
         <activity
             android:name="com.alfacast.menyou.restaurant.InsertMenuActivity"
             android:label="@string/Insert_menu_name"
-            android:screenOrientation="portrait"
             android:parentActivityName="com.alfacast.menyou.restaurant.MainRistoranteActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -85,13 +115,120 @@
         <activity
             android:name="com.alfacast.menyou.restaurant.InsertPortataActivity"
             android:label="@string/Insert_portata_name"
+            android:launchMode="singleTop"
+            android:parentActivityName="com.alfacast.menyou.restaurant.PortataActivityRistorante"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.alfacast.menyou.restaurant.PortataActivityRistorante" />
+        </activity>
+        <activity
+            android:name="com.alfacast.menyou.client.PortataActivity"
+            android:label="@string/title_activity_portata"
+            android:parentActivityName="com.alfacast.menyou.client.MainClienteActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.alfacast.menyou.client.MainClienteActivity" />
+        </activity>
+        <activity
+            android:name="com.alfacast.menyou.restaurant.PortataActivityRistorante"
+            android:label="@string/title_activity_portata_activity_ristorante"
             android:parentActivityName="com.alfacast.menyou.restaurant.MainRistoranteActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.alfacast.menyou.restaurant.MainRistoranteActivity" />
+        </activity>
+        <activity
+            android:name="com.alfacast.menyou.client.PortataDettaglioActivity"
+            android:label="@string/title_activity_portata_dettaglio"
+            android:parentActivityName="com.alfacast.menyou.client.PortataActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.alfacast.menyou.restaurant.PortataDettaglioRistoranteActivity"
+            android:label="@string/title_activity_portata_dettaglio_ristorante"
+            android:parentActivityName="com.alfacast.menyou.restaurant.PortataActivityRistorante"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.alfacast.menyou.restaurant.EditMenuActivity"
+            android:label="@string/title_activity_edit_menu"
+            android:parentActivityName="com.alfacast.menyou.restaurant.MainRistoranteActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.alfacast.menyou.restaurant.MainRistoranteActivity" />
+        </activity>
+        <activity
+            android:name="com.alfacast.menyou.client.RistoranteDettaglioActivity"
+            android:label="@string/title_activity_ristorante_dettaglio"
+            android:parentActivityName="com.alfacast.menyou.client.RistoranteDettaglioActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.alfacast.menyou.client.MainClienteActivity" />
+        </activity>
+        <activity
+            android:name="com.alfacast.menyou.restaurant.EditAccountRistoranteActivity"
+            android:label="@string/title_activity_edit_account"
+            android:parentActivityName="com.alfacast.menyou.restaurant.EditAccountRistoranteActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.alfacast.menyou.restaurant.MainRistoranteActivity" />
+        </activity>
+        <activity
+            android:name="com.alfacast.menyou.client.EditAccountClienteActivity"
+            android:label="@string/title_activity_edit_account"
+            android:parentActivityName="com.alfacast.menyou.client.EditAccountClienteActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.alfacast.menyou.client.MainClienteActivity" />
+        </activity>
+        <activity
+            android:name="com.alfacast.menyou.restaurant.EditPortataActivity"
+            android:label="@string/title_activity_edit_portata"
+            android:parentActivityName="com.alfacast.menyou.restaurant.PortataDettaglioRistoranteActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.alfacast.menyou.restaurant.PortataDettaglioRistoranteActivity" />
+        </activity>
+        <activity
+            android:name="com.alfacast.menyou.client.CercaActivity"
+            android:launchMode="singleTop"
+            android:parentActivityName="com.alfacast.menyou.client.MainClienteActivity"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.alfacast.menyou.client.MainClienteActivity" />
+        </activity>
+        <activity
+            android:name="com.alfacast.menyou.client.MapsActivity"
+            android:label="@string/title_activity_maps">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.alfacast.menyou.client.MainClienteActivity" />
+        </activity>
+        <activity
+            android:name="com.alfacast.menyou.client.MenuRistoranteActivity"
+            android:label="@string/title_activity_menuristorante"
+            android:parentActivityName="com.alfacast.menyou.client.MainClienteActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.alfacast.menyou.client.MainClienteActivity" />
         </activity>
     </application>
 

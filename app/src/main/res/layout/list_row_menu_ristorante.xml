@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_row_selector"
+    android:padding="8dp" >
+
+    <TextView
+        android:id="@+id/idmenu"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <!-- Thumbnail Image -->
+    <ImageView
+        android:id="@+id/thumbnail"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/logo"
+        android:scaleType="centerCrop"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="8dp" />
+
+    <!-- Nome Menu -->
+    <TextView
+        android:id="@+id/nomemenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/thumbnail"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:textSize="@dimen/menu"
+        android:textStyle="bold" />
+
+    <!-- Nome Ristorante -->
+    <TextView
+        android:id="@+id/nomeristorante"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nomemenu"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:textColor="@color/ristorante"
+        android:textSize="@dimen/ristorante" />
+
+    <Button
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/btnDeleteMenu"
+        android:layout_below="@+id/nomeristorante"
+        android:background="@drawable/ic_delete"
+        android:focusable="false"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:id="@+id/btnEditMenu"
+        android:layout_alignBottom="@+id/btnDeleteMenu"
+        android:background="@drawable/ic_edit"
+        android:focusable="false"
+        android:layout_toLeftOf="@+id/btnDeleteMenu"
+        android:layout_toStartOf="@+id/btnDeleteMenu" />
+
+</RelativeLayout>

@@ -2,6 +2,7 @@ package com.alfacast.menyou.client;
 
 /**
  * Created by Gabriele Bellissima on 07/06/2016.
+ * Gestione dei Fragment (tab menu e ristoranti)
  */
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -20,10 +21,10 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                TabMenu tab1 = new TabMenu();
+                TabRistoranti tab1 = new TabRistoranti();
                 return tab1;
             case 1:
-                TabRistoranti tab2 = new TabRistoranti();
+                TabMenu tab2 = new TabMenu();
                 return tab2;
             default:
                 return null;

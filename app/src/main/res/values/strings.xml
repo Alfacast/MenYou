@@ -3,11 +3,15 @@
 
     <string name="app_name">MenYou</string>
     <string name="hint_email">Email</string>
+    <string name="hint_emailR">Ripeti Email</string>
+    <string name="hint_passwordR">Ripeti Password</string>
     <string name="hint_password">Password</string>
     <string name="hint_name">Fullname</string>
     <string name="btn_login">LOGIN</string>
     <string name="btn_register">REGISTER</string>
     <string name="btn_insert">INSERISCI</string>
+    <string name="btn_edit">MODIFICA</string>
+    <string name="btn_edit_portata">Modifica Portata</string>
     <string name="btn_link_to_register_client">Non sei registrato? Iscriviti ora.</string>
     <string name="btn_link_to_register_restaurateur">Vuoi inserire un Menu? Iscriviti ora.</string>
     <string name="btn_link_to_facebook">Login con Facebook</string>
@@ -26,6 +30,7 @@
     <string name="hint_fotoPortata">Foto</string>
     <string name="hint_restaurantAddress">Indirizzo</string>
     <string name="hint_partitaIva">Partita Iva</string>
+    <string name="hint_sitoWeb">Sito Web</string>
     <string name="hint_restaurantEmail">Email</string>
     <string name="hint_restaurantTel">Telefono</string>
     <string name="title_activity_main_ristorante">MainRistoranteActivity</string>
@@ -36,26 +41,31 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_main_cliente">MainClienteActivity</string>
     <string name="registra_attivita">Registra nuova attività</string>
+    <string name="modifica_account">Modifica Account</string>
     <string name="registra_cliente">Registra nuovo cliente</string>
     <string name="tutorial_name">Tutorial</string>
     <string name="Insert_menu_name">Inserisci Menu</string>
-    <string name="insert_menu">Inserisci nuovo menu</string>
-    <string name="insert_portata">Inserisci nuova portata</string>
+    <string name="insert_menu">Inserisci nuovo Menu</string>
+    <string name="edit_menu">Modifica Menu</string>
+    <string name="no_menu">Non è presente alcun menu.</string>
+
+    <string name="insert_portata">Inserisci nuova Portata</string>
     <string name="Insert_portata_name">Inserisci Portata</string>
 
     <string name="facebook_app_id">1046817178707165</string>
     <string name="title_activity_tutorial">TutorialActivity</string>
 
     <string name="select_category">Seleziona Categoria</string>
-    <string-array name="categoria">
-        <item>Seleziona Categoria</item>
-        <item>Antipasti</item>
-        <item>Primi</item>
-        <item>Secondi</item>
-        <item>Contorni</item>
-        <item>Dessert</item>
-        <item>Bevande</item>
-        <item>Altro</item>
-    </string-array>
+
+    <string name="title_activity_portata">Portate Menu</string>
+    <string name="title_activity_portata_activity_ristorante">Portate Menu</string>
+    <string name="title_activity_portata_dettaglio">Dettaglio Portata</string>
+    <string name="title_activity_portata_dettaglio_ristorante">Dettaglio Portata</string>
+    <string name="title_activity_edit_menu">Modifica Menu</string>
+    <string name="title_activity_ristorante_dettaglio">Dettaglio Ristorante</string>
+    <string name="title_activity_edit_account">Modifica Account</string>
+    <string name="title_activity_edit_portata">Modifica Portata</string>
+    <string name="title_activity_maps">Mappa Ristoranti</string>
+    <string name="title_activity_menuristorante">Menu Ristorante</string>
 
 </resources>

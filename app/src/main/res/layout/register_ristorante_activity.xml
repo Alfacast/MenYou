@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/bg_register_Restaurateur"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:gravity="center"
     android:padding="10dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#FFFFFF">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:paddingLeft="20dp"
         android:paddingRight="20dp" >
@@ -66,12 +66,38 @@
             android:textColorHint="@color/input_register_hint" />
 
         <EditText
+            android:id="@+id/SitoWeb"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/rounded_edittext"
+            android:hint="@string/hint_sitoWeb"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:inputType="textCapWords"
+            android:textColor="@color/input_register"
+            android:textColorHint="@color/input_register_hint" />
+
+        <EditText
             android:id="@+id/RestaurantEmail"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:background="@drawable/rounded_edittext"
             android:hint="@string/hint_restaurantEmail"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/input_register"
+            android:textColorHint="@color/input_register_hint" />
+
+        <EditText
+            android:id="@+id/RestaurantEmailR"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/rounded_edittext"
+            android:hint="@string/hint_emailR"
             android:padding="10dp"
             android:singleLine="true"
             android:inputType="textEmailAddress"
@@ -104,6 +130,21 @@
             android:textColor="@color/input_register"
             android:textColorHint="@color/input_register_hint" />
 
+
+        <EditText
+            android:id="@+id/RestaurantPasswordR"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/rounded_edittext"
+            android:hint="@string/hint_passwordR"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textColor="@color/input_register"
+            android:textColorHint="@color/input_register_hint" />
+
+
         <Button
             android:id="@+id/btnSelectPhoto"
             android:layout_width="match_parent"
@@ -113,9 +154,10 @@
         <ImageView
             android:id="@+id/viewImage"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:background="@drawable/rounded_spinner"
-            android:src="@drawable/ic_camera" />
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"/>
 
         <!-- Login Button -->
 
@@ -124,7 +166,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
-            android:background="#ea4c88"
+            android:background="@color/btn_login_bg"
             android:text="@string/btn_register"
             android:textColor="@color/white" />
 
@@ -138,7 +180,6 @@
             android:background="@null"
             android:text="@string/btn_link_to_login"
             android:textAllCaps="false"
-            android:textColor="@color/white"
             android:textSize="15dp" />
     </LinearLayout>
     </ScrollView>

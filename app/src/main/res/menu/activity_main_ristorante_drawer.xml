@@ -8,10 +8,6 @@
             android:icon="@drawable/ic_account"
             android:title="Account" />
         <item
-            android:id="@+id/nav_menu"
-            android:icon="@drawable/ic_menu"
-            android:title="I miei Menu" />
-        <item
             android:id="@+id/nav_menu_add"
             android:icon="@drawable/ic_menu_add"
             android:title="Aggiungi Menu" />

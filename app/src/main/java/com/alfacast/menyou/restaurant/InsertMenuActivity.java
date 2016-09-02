@@ -1,6 +1,5 @@
 package com.alfacast.menyou.restaurant;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.alfacast.menyou.login.R;
-import com.alfacast.menyou.login.app.AppConfig;
+import com.alfacast.menyou.UrlConfig;
 import com.alfacast.menyou.login.app.AppController;
 import com.alfacast.menyou.login.helper.SQLiteHandlerRestaurant;
 import com.android.volley.Request;
@@ -96,7 +95,7 @@ public class InsertMenuActivity extends AppCompatActivity {
         showDialog();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_INSERTMENU, new Response.Listener<String>() {
+                UrlConfig.URL_InsertMenuActivity, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -112,21 +111,25 @@ public class InsertMenuActivity extends AppCompatActivity {
                         String uid = jObj.getString("uid");
 
                         JSONObject menu = jObj.getJSONObject("menu");
+                        String id = menu.getString("id");
                         String nome = menu.getString("nome");
                         String id_ristorante = menu.getString("id_ristorante");
 
                         String created_at = menu
                                 .getString("created_at");
 
-                        // Inserting row in users table
+                        // Inserting row in menu table
                         db.addMenu(nome, uid, created_at, id_ristorante);
 
                         Toast.makeText(getApplicationContext(), "Menu successfully created.", Toast.LENGTH_LONG).show();
 
-                        // Launch login activity
+                        // Launch Insert portata activity
+                        Bundle b= new Bundle();
+                        b.putString("idmenu", id);
                         Intent intent = new Intent(
                                 InsertMenuActivity.this,
                                 InsertPortataActivity.class);
+                        intent.putExtras(b);
                         startActivity(intent);
                         finish();
                     } else {
@@ -151,7 +154,7 @@ public class InsertMenuActivity extends AppCompatActivity {
                         error.getMessage(), Toast.LENGTH_LONG).show();
                 hideDialog();
             }
-        }) {
+        }){
 
             @Override
             protected Map<String, String> getParams() {

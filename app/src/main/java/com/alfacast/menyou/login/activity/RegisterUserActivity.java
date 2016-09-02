@@ -1,3 +1,5 @@
+
+
 package com.alfacast.menyou.login.activity;
 
 import android.app.Activity;
@@ -16,7 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.alfacast.menyou.login.R;
-import com.alfacast.menyou.login.app.AppConfig;
+import com.alfacast.menyou.UrlConfig;
 import com.alfacast.menyou.login.app.AppController;
 import com.alfacast.menyou.login.helper.SQLiteHandlerUser;
 import com.alfacast.menyou.login.helper.SessionManager;
@@ -33,7 +35,9 @@ public class RegisterUserActivity extends Activity {
     private Button btnLinkToLogin;
     private EditText inputFullName;
     private EditText inputEmail;
+    private EditText inputEmailR;
     private EditText inputPassword;
+    private EditText inputPasswordR;
     private ProgressDialog pDialog;
     private SessionManager session;
     private SQLiteHandlerUser db;
@@ -46,6 +50,8 @@ public class RegisterUserActivity extends Activity {
         inputFullName = (EditText) findViewById(R.id.name);
         inputEmail = (EditText) findViewById(R.id.email);
         inputPassword = (EditText) findViewById(R.id.password);
+        inputEmailR = (EditText) findViewById(R.id.emailR);
+        inputPasswordR = (EditText) findViewById(R.id.passwordR);
         btnRegister = (Button) findViewById(R.id.btnRegister);
         btnLinkToLogin = (Button) findViewById(R.id.btnLinkToLoginScreen);
 
@@ -74,12 +80,21 @@ public class RegisterUserActivity extends Activity {
                 String name = inputFullName.getText().toString().trim();
                 String email = inputEmail.getText().toString().trim();
                 String password = inputPassword.getText().toString().trim();
+                String emailR = inputEmailR.getText().toString().trim();
+                String passwordR = inputPasswordR.getText().toString().trim();
 
-                if (!name.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
-                    registerUser(name, email, password);
+                if (password.equals(passwordR) && email.equals(emailR)) {
+
+                    if (!name.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
+                        registerUser(name, email, password);
+                    } else {
+                        Toast.makeText(getApplicationContext(),
+                                "Please enter your details!", Toast.LENGTH_LONG)
+                                .show();
+                    }
                 } else {
                     Toast.makeText(getApplicationContext(),
-                            "Please enter your details!", Toast.LENGTH_LONG)
+                            "Controlla che i campi di conferma siano compilati correttamente", Toast.LENGTH_LONG)
                             .show();
                 }
             }
@@ -111,7 +126,7 @@ public class RegisterUserActivity extends Activity {
         showDialog();
 
         StringRequest strReq = new StringRequest(Method.POST,
-                AppConfig.URL_REGISTER, new Response.Listener<String>() {
+                UrlConfig.URL_RegisterUserActivity, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -129,8 +144,7 @@ public class RegisterUserActivity extends Activity {
                         JSONObject user = jObj.getJSONObject("user");
                         String name = user.getString("name");
                         String email = user.getString("email");
-                        String created_at = user
-                                .getString("created_at");
+                        String created_at = user.getString("created_at");
 
                         // Inserting row in users table
                         db.addUser(name, email, uid, created_at);

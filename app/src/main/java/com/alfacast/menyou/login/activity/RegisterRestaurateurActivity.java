@@ -1,3 +1,5 @@
+
+
 package com.alfacast.menyou.login.activity;
 
 import android.app.Activity;
@@ -7,6 +9,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -26,7 +30,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.alfacast.menyou.login.R;
-import com.alfacast.menyou.login.app.AppConfig;
+import com.alfacast.menyou.UrlConfig;
 import com.alfacast.menyou.login.app.AppController;
 import com.alfacast.menyou.login.helper.SQLiteHandlerRestaurant;
 import com.alfacast.menyou.login.helper.SessionManager;
@@ -36,6 +40,7 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -53,9 +58,12 @@ public class RegisterRestaurateurActivity extends Activity {
     private EditText inputNameRestaurant;
     private EditText inputAddress;
     private EditText inputPartitaIva;
+    private EditText inputSitoWeb;
     private EditText inputRestaurantEmail;
+    private EditText inputRestaurantEmailR;
     private EditText inputRestaurantTel;
     private EditText inputRestaurantPassword;
+    private EditText inputRestaurantPasswordR;
     private ImageView viewImage;
     private Button btnInsertFoto;
     private ProgressDialog pDialog;
@@ -72,9 +80,12 @@ public class RegisterRestaurateurActivity extends Activity {
         inputNameRestaurant = (EditText) findViewById(R.id.nameRestaurant);
         inputAddress = (EditText) findViewById(R.id.RestaurantAddress);
         inputPartitaIva = (EditText) findViewById(R.id.PartitaIva);
+        inputSitoWeb = (EditText) findViewById(R.id.SitoWeb);
         inputRestaurantEmail = (EditText) findViewById(R.id.RestaurantEmail);
+        inputRestaurantEmailR = (EditText) findViewById(R.id.RestaurantEmailR);
         inputRestaurantTel = (EditText) findViewById(R.id.RestaurantTel);
         inputRestaurantPassword = (EditText) findViewById(R.id.RestaurantPassword);
+        inputRestaurantPasswordR = (EditText) findViewById(R.id.RestaurantPasswordR);
         btnInsertFoto=(Button)findViewById(R.id.btnSelectPhoto);
         viewImage=(ImageView)findViewById(R.id.viewImage);
         btnRegister = (Button) findViewById(R.id.btnRegister);
@@ -112,9 +123,12 @@ public class RegisterRestaurateurActivity extends Activity {
                 String nome = inputNameRestaurant.getText().toString().trim();
                 String address = inputAddress.getText().toString().trim();
                 String partitaIva = inputPartitaIva.getText().toString().trim();
+                String sitoWeb = inputSitoWeb.getText().toString().trim();
                 String email = inputRestaurantEmail.getText().toString().trim();
+                String emailR = inputRestaurantEmailR.getText().toString().trim();
                 String tel = inputRestaurantTel.getText().toString().trim();
                 String password = inputRestaurantPassword.getText().toString().trim();
+                String passwordR = inputRestaurantPasswordR.getText().toString().trim();
 
                 viewImage.buildDrawingCache();
                 Bitmap bitmap = viewImage.getDrawingCache();
@@ -124,14 +138,21 @@ public class RegisterRestaurateurActivity extends Activity {
 
                 String foto = Base64.encodeToString(image, Base64.NO_WRAP);
 
-                if (!nome.isEmpty() && !address.isEmpty() && !partitaIva.isEmpty() && !email.isEmpty() && !tel.isEmpty() && !password.isEmpty() && !foto.isEmpty()) {
-                    registerRestaurant(nome, address, partitaIva, email, tel, password, foto);
-                } else {
+                if (password.equals(passwordR) && email.equals(emailR)){
+
+
+                    if (!nome.isEmpty() && !address.isEmpty() && !partitaIva.isEmpty() && !email.isEmpty() && !tel.isEmpty() && !password.isEmpty() && !foto.isEmpty()) {
+                        registerRestaurant(nome, address, partitaIva, sitoWeb, email, tel, password, foto);
+                    } else {
+                        Toast.makeText(getApplicationContext(),
+                                "Please enter your details!", Toast.LENGTH_LONG)
+                                .show();
+                    }
+                }else {
                     Toast.makeText(getApplicationContext(),
-                            "Please enter your details!", Toast.LENGTH_LONG)
+                            "Controlla che i campi di conferma siano compilati correttamente", Toast.LENGTH_LONG)
                             .show();
-                }
-            }
+                }}
         });
 
         // Link to Login Screen
@@ -189,12 +210,29 @@ public class RegisterRestaurateurActivity extends Activity {
                     }
                 }
                 try {
-                    Bitmap bitmap;
-                    BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
+                    //Imposta orientamento automatico foto da dati exif
+                    ExifInterface exif = new ExifInterface(f.getPath());
+                    int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
 
-                    bitmap = BitmapFactory.decodeFile(f.getAbsolutePath(),
-                            bitmapOptions);
+                    int angle = 0;
 
+                    if (orientation == ExifInterface.ORIENTATION_ROTATE_90) {
+                        angle = 90;
+                    }
+                    else if (orientation == ExifInterface.ORIENTATION_ROTATE_180) {
+                        angle = 180;
+                    }
+                    else if (orientation == ExifInterface.ORIENTATION_ROTATE_270) {
+                        angle = 270;
+                    }
+
+                    Matrix mat = new Matrix();
+                    mat.postRotate(angle);
+
+                    Bitmap bmp = BitmapFactory.decodeStream(new FileInputStream(f), null, null);
+                    Bitmap bitmap = Bitmap.createBitmap(bmp, 0, 0, bmp.getWidth(), bmp.getHeight(), mat, true);
+
+                    viewImage.setVisibility(View.VISIBLE);
                     viewImage.setImageBitmap(bitmap);
 
                     String path = android.os.Environment
@@ -228,9 +266,33 @@ public class RegisterRestaurateurActivity extends Activity {
                 int columnIndex = c.getColumnIndex(filePath[0]);
                 String picturePath = c.getString(columnIndex);
                 c.close();
-                Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
-                Log.w("path gallery...", picturePath+"");
-                viewImage.setImageBitmap(thumbnail);
+                try {
+                    //Imposta orientamento automatico foto da dati exif
+                    ExifInterface exif = new ExifInterface(picturePath);
+                    int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+
+                    int angle = 0;
+
+                    if (orientation == ExifInterface.ORIENTATION_ROTATE_90) {
+                        angle = 90;
+                    }
+                    else if (orientation == ExifInterface.ORIENTATION_ROTATE_180) {
+                        angle = 180;
+                    }
+                    else if (orientation == ExifInterface.ORIENTATION_ROTATE_270) {
+                        angle = 270;
+                    }
+
+                    Matrix mat = new Matrix();
+                    mat.postRotate(angle);
+
+                    Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
+                    Log.w("path gallery...", picturePath+"");
+                    viewImage.setVisibility(View.VISIBLE);
+                    viewImage.setImageBitmap(thumbnail);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -239,7 +301,7 @@ public class RegisterRestaurateurActivity extends Activity {
      * Function to store user in MySQL database will post params(tag, name,
      * email, password) to register url
      * */
-    private void registerRestaurant(final String nome, final String address, final String partitaIva,final String email, final String tel, final String password, final String foto) {
+    private void registerRestaurant(final String nome, final String address, final String partitaIva, final String sitoWeb, final String email, final String tel, final String password, final String foto) {
         // Tag used to cancel the request
         String tag_string_req = "req_register";
 
@@ -247,7 +309,7 @@ public class RegisterRestaurateurActivity extends Activity {
         showDialog();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_RESTAURANTREGISTER, new Response.Listener<String>() {
+                UrlConfig.URL_RegisterRestaurateurActivity, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -267,6 +329,7 @@ public class RegisterRestaurateurActivity extends Activity {
                         String nome = user.getString("nome");
                         String address = user.getString("address");
                         String partitaIva = user.getString("partitaIva");
+                        String sitoWeb = user.getString("sitoWeb");
                         String email = user.getString("email");
                         String tel = user.getString("telefono");
                         String foto = user.getString("foto");
@@ -275,7 +338,7 @@ public class RegisterRestaurateurActivity extends Activity {
                                 .getString("created_at");
 
                         // Inserting row in users table
-                        db.addUser(id_database, nome, address, partitaIva, email, tel, foto, uid, created_at);
+                        db.addUser(id_database, nome, address, partitaIva, sitoWeb, email, tel, foto, uid, created_at);
 
                         Toast.makeText(getApplicationContext(), "User successfully registered. Try login now!", Toast.LENGTH_LONG).show();
 
@@ -316,6 +379,7 @@ public class RegisterRestaurateurActivity extends Activity {
                 params.put("nome", nome);
                 params.put("address", address);
                 params.put("partitaIva", partitaIva);
+                params.put("sitoWeb", sitoWeb);
                 params.put("email", email);
                 params.put("telefono", tel);
                 params.put("password", password);
