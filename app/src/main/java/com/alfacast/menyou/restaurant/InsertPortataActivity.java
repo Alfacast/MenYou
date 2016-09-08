@@ -1,8 +1,10 @@
 package com.alfacast.menyou.restaurant;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,12 +14,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -30,11 +36,15 @@ import com.alfacast.menyou.login.R;
 import com.alfacast.menyou.UrlConfig;
 import com.alfacast.menyou.login.app.AppController;
 import com.alfacast.menyou.login.helper.SQLiteHandlerRestaurant;
+import com.alfacast.menyou.model.ListaCategoria;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -45,13 +55,15 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
- * Created by MacPro on 04/05/16.
+ * Created by Pietro Fantuzzi on 29/07/16.
  */
-public class InsertPortataActivity extends AppCompatActivity {
+public class InsertPortataActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private static final String TAG = InsertPortataActivity.class.getSimpleName();
     private Button btnInsertPortata;
     private EditText inputNamePortata;
@@ -66,13 +78,19 @@ public class InsertPortataActivity extends AppCompatActivity {
     private String switchOn = "Si";
     private String switchOff = "No";
     private ProgressDialog pDialog;
+   // private ProgressDialog ppDialog;
     private SQLiteHandlerPortata db;
     private SQLiteHandlerRestaurant dbr;
 
+    private ArrayList<ListaCategoria> categoriesList;
+
+    private int PICK_IMAGE_REQUEST;
+
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.insert_portata_activity);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -86,9 +104,21 @@ public class InsertPortataActivity extends AppCompatActivity {
         inputPrezzoPortata = (EditText) findViewById(R.id.prezzoPortata);
         inputOpzioniPortata = (EditText) findViewById(R.id.opzioniPortata);
         inputDisponibilePortata = (EditText) findViewById(R.id.disponibilePortata);
-        btnInsertFoto=(Button)findViewById(R.id.btnSelectPhoto);
-        viewImage=(ImageView)findViewById(R.id.viewImage);
+        btnInsertFoto = (Button) findViewById(R.id.btnSelectPhoto);
+        viewImage = (ImageView) findViewById(R.id.viewImage);
         switchButton = (Switch) findViewById(R.id.switchButton);
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            btnInsertFoto.setEnabled(false);
+            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE }, 0);
+        }
+
+        ///////spinner
+        categoriesList = new ArrayList<ListaCategoria>();
+
+        // spinner item select listener
+        inputCategoriaPortata.setOnItemSelectedListener(this);
+        populateSpinner();
 
         //Imposta portata disponibile si/no
         switchButton.setChecked(true);
@@ -109,11 +139,14 @@ public class InsertPortataActivity extends AppCompatActivity {
             inputDisponibilePortata.setText(switchOff);
         }
 
-
+/*
         // Progress dialog
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
 
+        ppDialog = new ProgressDialog(this);
+        ppDialog.setCancelable(false);
+*/
         // SQLite database handler
         db = new SQLiteHandlerPortata(getApplicationContext());
 
@@ -136,9 +169,9 @@ public class InsertPortataActivity extends AppCompatActivity {
 
                 viewImage.buildDrawingCache();
                 Bitmap bitmap = viewImage.getDrawingCache();
-                ByteArrayOutputStream stream=new ByteArrayOutputStream();
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 85, stream);
-                final byte[] image=stream.toByteArray();
+                final byte[] image = stream.toByteArray();
 
                 //Codifica foto su db
                 String foto = Base64.encodeToString(image, Base64.NO_WRAP);
@@ -149,10 +182,10 @@ public class InsertPortataActivity extends AppCompatActivity {
                 final String id_ristorante = a.get("id_ristorante");
 
                 // recupero id menu dalla activity precedente
-                Intent i=getIntent();
-                Bundle b=i.getExtras();
+                Intent i = getIntent();
+                Bundle b = i.getExtras();
 
-                final String idmenu=b.getString("idmenu");
+                final String idmenu = b.getString("idmenu");
 
                 if (!nome.isEmpty() && !categoria.isEmpty() && !descrizione.isEmpty() && !prezzo.isEmpty() && !disponibile.isEmpty() && !id_ristorante.isEmpty() && !idmenu.isEmpty()) {
                     insertPortata(nome, categoria, descrizione, prezzo, opzioni, disponibile, foto, id_ristorante, idmenu);
@@ -175,29 +208,119 @@ public class InsertPortataActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == 0) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                btnInsertFoto.setEnabled(true);
+            }
+        }
+    }
+
+    /**
+     * Adding spinner data
+     * */
+    private void populateSpinner() {
+
+         // Creating volley request obj
+            final JsonArrayRequest categoriaReq = new JsonArrayRequest(UrlConfig.URL_InsertSpinner,
+
+                    new Response.Listener<JSONArray>() {
+
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            Log.d(TAG, "response" + response.toString());
+                            hidePDialog();
+
+                            // Parsing json
+                            for (int i = 0; i < response.length(); i++) {
+                                try {
+
+                                    JSONObject obj = response.getJSONObject(i);
+                                    ListaCategoria categoria = new ListaCategoria();
+                                    categoria.setCategoria(obj.getString("categoria"));
+
+                                    categoriesList.add(categoria);
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            List<String> lables = new ArrayList<String>();
+
+                            Log.d(TAG, " categoria :" + categoriesList.toString());
+
+                            for (int i = 0; i < categoriesList.size(); i++) {
+
+                                lables.add(categoriesList.get(i).getCategoria());
+                            }
+                            // Creating adapter for spinner
+                            ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(InsertPortataActivity.this,
+                                    android.R.layout.simple_spinner_item, lables);
+
+                            // Drop down layout style - list view with radio button
+                            spinnerAdapter
+                                    .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                            // attaching data adapter to spinner
+                            inputCategoriaPortata.setAdapter(spinnerAdapter);
+
+                            spinnerAdapter.notifyDataSetChanged();
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    VolleyLog.d(TAG, "Error: " + error.getMessage());
+                    hidePDialog();
+                }
+            });
+
+            // Adding request to request queue
+            AppController.getInstance().addToRequestQueue(categoriaReq);
+
+    }
+
     private void selectImage() {
 
-        final CharSequence[] options = { "Scatta una foto", "Seleziona dalla galleria","Annulla" };
+        final CharSequence[] options = {"Scatta una foto", "Seleziona dalla galleria", "Annulla"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(InsertPortataActivity.this);
         builder.setTitle("Aggiungi foto");
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                if (options[item].equals("Scatta una foto"))
-                {
+                if (options[item].equals("Scatta una foto")) {
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    File f = new File(android.os.Environment.getExternalStorageDirectory(), "temp.jpg");
+                    File f = new File(Environment.getExternalStorageDirectory(), "temp.jpg");
                     intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
                     startActivityForResult(intent, 1);
-                }
-                else if (options[item].equals("Seleziona dalla galleria"))
-                {
-                    Intent intent = new   Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+                } else if (options[item].equals("Seleziona dalla galleria")) {
+                    /*
+                    Intent intent = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(intent, 2);
+                     */
+
+                    /*
+                   Intent intent = new Intent();
+                    // Show only images, no videos or anything else
+                    intent.setType("image/*");
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    // Always show the chooser (if there are multiple options available)
+                    startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+                    */
+
+
+                    Intent intent = new Intent();
+                    intent.setType("image/*");
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
                     startActivityForResult(intent, 2);
 
-                }
-                else if (options[item].equals("Annulla")) {
+                    //startActivityForResult(Intent.createChooser(intent, "Bla bla"), PICK_IMAGE_REQUEST);
+
+                } else if (options[item].equals("Annulla")) {
                     dialog.dismiss();
                 }
             }
@@ -226,24 +349,28 @@ public class InsertPortataActivity extends AppCompatActivity {
 
                     if (orientation == ExifInterface.ORIENTATION_ROTATE_90) {
                         angle = 90;
-                    }
-                    else if (orientation == ExifInterface.ORIENTATION_ROTATE_180) {
+                    } else if (orientation == ExifInterface.ORIENTATION_ROTATE_180) {
                         angle = 180;
-                    }
-                    else if (orientation == ExifInterface.ORIENTATION_ROTATE_270) {
+                    } else if (orientation == ExifInterface.ORIENTATION_ROTATE_270) {
                         angle = 270;
                     }
 
-                    Matrix mat = new Matrix();
-                    mat.postRotate(angle);
+                    int maxHeight = 2000;
+                    int maxWidth = 2000;
 
                     Bitmap bmp = BitmapFactory.decodeStream(new FileInputStream(f), null, null);
+                    float scale = Math.min(((float)maxHeight / bmp.getWidth()), ((float)maxWidth / bmp.getHeight()));
+
+                    Matrix mat = new Matrix();
+                    mat.postRotate(angle);
+                    mat.postScale(scale, scale);
+
                     Bitmap bitmap = Bitmap.createBitmap(bmp, 0, 0, bmp.getWidth(), bmp.getHeight(), mat, true);
 
                     viewImage.setVisibility(View.VISIBLE);
                     viewImage.setImageBitmap(bitmap);
 
-                    String path = android.os.Environment
+                    String path = Environment
                             .getExternalStorageDirectory()
                             + File.separator
                             + "Phoenix" + File.separator + "default";
@@ -268,8 +395,8 @@ public class InsertPortataActivity extends AppCompatActivity {
             } else if (requestCode == 2) {
 
                 Uri selectedImage = data.getData();
-                String[] filePath = { MediaStore.Images.Media.DATA };
-                Cursor c = getContentResolver().query(selectedImage,filePath, null, null, null);
+                String[] filePath = {MediaStore.Images.Media.DATA};
+                Cursor c = getContentResolver().query(selectedImage, filePath, null, null, null);
                 c.moveToFirst();
                 int columnIndex = c.getColumnIndex(filePath[0]);
                 String picturePath = c.getString(columnIndex);
@@ -283,21 +410,27 @@ public class InsertPortataActivity extends AppCompatActivity {
 
                     if (orientation == ExifInterface.ORIENTATION_ROTATE_90) {
                         angle = 90;
-                    }
-                    else if (orientation == ExifInterface.ORIENTATION_ROTATE_180) {
+                    } else if (orientation == ExifInterface.ORIENTATION_ROTATE_180) {
                         angle = 180;
-                    }
-                    else if (orientation == ExifInterface.ORIENTATION_ROTATE_270) {
+                    } else if (orientation == ExifInterface.ORIENTATION_ROTATE_270) {
                         angle = 270;
                     }
 
-                    Matrix mat = new Matrix();
-                    mat.postRotate(angle);
+                    int maxHeight = 2000;
+                    int maxWidth = 2000;
 
                     Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
-                    Log.w("path gallery...", picturePath+"");
+                    float scale = Math.min(((float)maxHeight / thumbnail.getWidth()), ((float)maxWidth / thumbnail.getHeight()));
+
+                    Matrix mat = new Matrix();
+                    mat.postRotate(angle);
+                    mat.postScale(scale, scale);
+
+                    Bitmap bitmap = Bitmap.createBitmap(thumbnail, 0, 0, thumbnail.getWidth(), thumbnail.getHeight(), mat, true);
+
+                    Log.w("path gallery...", picturePath + "");
                     viewImage.setVisibility(View.VISIBLE);
-                    viewImage.setImageBitmap(thumbnail);
+                    viewImage.setImageBitmap(bitmap);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -308,13 +441,14 @@ public class InsertPortataActivity extends AppCompatActivity {
     /**
      * Function to store user in MySQL database will post params(tag, name,
      * email, password) to register url
-     * */
+     */
     private void insertPortata(final String nome, final String categoria, final String descrizione, final String prezzo, final String opzioni, final String disponibile, final String foto, final String id_ristorante, final String idmenu) {
         // Tag used to cancel the request
         String tag_string_req = "req_insert";
 
+        pDialog = new ProgressDialog(this);
         pDialog.setMessage("Insert ...");
-        showDialog();
+        pDialog.show();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 UrlConfig.URL_InsertPortataActivity, new Response.Listener<String>() {
@@ -322,7 +456,7 @@ public class InsertPortataActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "Insert Response: " + response.toString());
-                hideDialog();
+                hidePDialog();
 
                 try {
                     JSONObject jObj = new JSONObject(response);
@@ -370,7 +504,7 @@ public class InsertPortataActivity extends AppCompatActivity {
                 Log.e(TAG, "Insert Error: " + error.getMessage());
                 Toast.makeText(getApplicationContext(),
                         error.getMessage(), Toast.LENGTH_LONG).show();
-                hideDialog();
+                hidePDialog();
             }
         }) {
 
@@ -397,14 +531,44 @@ public class InsertPortataActivity extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        hidePDialog();
+    }
+/*
     private void showDialog() {
         if (!pDialog.isShowing())
             pDialog.show();
     }
 
-    private void hideDialog() {
-        if (pDialog.isShowing())
-            pDialog.dismiss();
+    private void showPPDialog(){
+        if (!ppDialog.isShowing())
+            ppDialog.show();
     }
+*/
+    private void hidePDialog() {
+        if (pDialog != null) {
+            pDialog.dismiss();
+            pDialog = null;
+        }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        /*
+        Toast.makeText(
+                getApplicationContext(),
+                parent.getItemAtPosition(position).toString() + " Selected" ,
+                Toast.LENGTH_LONG).show();
+                */
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
 }
 

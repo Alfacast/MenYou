@@ -23,12 +23,12 @@
             android:paddingRight="20dp">
 
             <Spinner
-                android:id="@+id/categoriaPortata"
+                android:id="@+id/spinFood"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:padding="10dp"
-                android:entries="@array/categoria"/>
+                android:padding="10dp"/>
+
 
             <TextView
                 android:layout_width="wrap_content"

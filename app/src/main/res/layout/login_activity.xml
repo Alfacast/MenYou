@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/sfondo"
@@ -17,8 +18,8 @@
         android:layout_weight="0.65">
 
         <ImageView
-            android:layout_width="227dp"
-            android:layout_height="110dp"
+            android:layout_width="162dp"
+            android:layout_height="58dp"
             android:id="@+id/imageView"
             android:src="@drawable/logo_login"
             android:visibility="visible"

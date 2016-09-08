@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -134,9 +135,12 @@ public class PortataDettaglioRistoranteActivity extends AppCompatActivity {
         btnDeletePortata.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                        view.getContext());
+                AlertDialog.Builder alertDialogBuilder;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    alertDialogBuilder = new AlertDialog.Builder(view.getContext(), android.R.style.Theme_Material_Light_Dialog_Alert);
+                } else {
+                    alertDialogBuilder = new AlertDialog.Builder(view.getContext());
+                }
 
                 // set title
                 alertDialogBuilder.setTitle("Elimina Portata");

@@ -28,8 +28,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:padding="10dp"
-            android:entries="@array/categoria"/>
+            android:padding="10dp" />
+            <!--
+            android:entries="@array/categoria"/>-->
 
         <EditText
             android:id="@+id/namePortata"
@@ -40,7 +41,7 @@
             android:hint="@string/hint_namePortata"
             android:padding="10dp"
             android:singleLine="true"
-            android:inputType="textCapWords"
+            android:inputType="text"
             android:textColor="@color/input_register"
             android:textColorHint="@color/input_register_hint" />
 
@@ -49,6 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_marginBottom="10dp"
+            android:layout_gravity="center_horizontal"
             android:background="@drawable/rounded_edittext"
             android:hint="@string/hint_descrizionePortata"
             android:inputType="text|textMultiLine"
@@ -57,6 +59,7 @@
             android:singleLine="true"
             android:textColor="@color/input_register"
             android:textColorHint="@color/input_register_hint" />
+
 
         <EditText
             android:id="@+id/prezzoPortata"

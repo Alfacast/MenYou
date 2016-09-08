@@ -1,5 +1,7 @@
 package com.alfacast.menyou;
 
+import java.net.URL;
+
 /**
  * Created by MacPro on 02/05/16.
  */
@@ -50,6 +52,8 @@ public class UrlConfig {
 
         public static String URL_PortataDettaglioRistoranteActivity_1 = URL_Site+"get_portata_dettaglio.php?idportata=";
         public static String URL_PortataDettaglioRistoranteActivity_2 = URL_Site+"delete_portata.php?idportata=";
+
+        public static String URL_InsertSpinner = URL_Site+"get_categoria_spinner.php";
 
     }
 

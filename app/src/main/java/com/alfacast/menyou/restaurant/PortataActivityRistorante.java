@@ -46,7 +46,7 @@ public class PortataActivityRistorante extends AppCompatActivity {
 
         // recupero id menu dalla activity precedente
         Intent intent=getIntent();
-        Bundle b=intent.getExtras();
+        Bundle b =  intent.getExtras();
 
         final String idmenu=b.getString("idmenu");
         Log.d(TAG,"id menu: "+ idmenu);
@@ -61,8 +61,8 @@ public class PortataActivityRistorante extends AppCompatActivity {
 
                 //Lancio InsertPortataActivity
 
-                Intent i=getIntent();
-                Bundle b=i.getExtras();
+                Intent i = getIntent();
+                Bundle b = i.getExtras();
 
                 Intent intent = new Intent(
                         PortataActivityRistorante.this,
@@ -72,6 +72,7 @@ public class PortataActivityRistorante extends AppCompatActivity {
                 finish();
             }
         });
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         listView = (ListView) findViewById(R.id.list);
@@ -113,7 +114,6 @@ public class PortataActivityRistorante extends AppCompatActivity {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-
                         }
 
                         // notifying list adapter about data changes

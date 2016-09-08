@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
@@ -111,8 +112,12 @@ public class CustomListMenuRistorante extends BaseAdapter {
         btnDeleteMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                        v.getContext());
+                AlertDialog.Builder alertDialogBuilder;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    alertDialogBuilder = new AlertDialog.Builder(v.getContext(), android.R.style.Theme_Material_Light_Dialog_Alert);
+                } else {
+                    alertDialogBuilder = new AlertDialog.Builder(v.getContext());
+                }
 
                 // set title
                 alertDialogBuilder.setTitle("Elimina Menu");

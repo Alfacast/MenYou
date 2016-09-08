@@ -3,6 +3,7 @@ package com.alfacast.menyou.restaurant;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -223,7 +224,12 @@ public class MainRistoranteActivity extends AppCompatActivity
                     TutorialActivity.class);
             startActivity(i);
         } else if (id == R.id.btnLogout) {
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            AlertDialog.Builder alertDialogBuilder;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                alertDialogBuilder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Light_Dialog_Alert);
+            } else {
+                alertDialogBuilder = new AlertDialog.Builder(this);
+            }
 
             // set title
             alertDialogBuilder.setTitle("Logout");

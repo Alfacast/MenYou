@@ -3,6 +3,7 @@ package com.alfacast.menyou.client;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -148,7 +149,12 @@ public class MainClienteActivity extends AppCompatActivity
             startActivity(i);
         } else if (id == R.id.btnLogout) {
 
-                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                    AlertDialog.Builder alertDialogBuilder;
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        alertDialogBuilder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Light_Dialog_Alert);
+                    } else {
+                        alertDialogBuilder = new AlertDialog.Builder(this);
+                    }
 
                     // set title
                     alertDialogBuilder.setTitle("Logout");

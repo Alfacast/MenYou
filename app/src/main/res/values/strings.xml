@@ -56,19 +56,7 @@
     <string name="title_activity_tutorial">TutorialActivity</string>
 
     <string name="select_category">Seleziona Categoria</string>
-    <string-array name="categoria">
-        <item>Seleziona Categoria</item>
-        <item>Antipasti</item>
-        <item>Piatto Unico</item>
-        <item>Primi</item>
-        <item>Secondi</item>
-        <item>Pizza</item>
-        <item>Contorni</item>
-        <item>Dessert</item>
-        <item>Bevande</item>
-        <item>Street Food</item>
-        <item>Altro</item>
-    </string-array>
+
     <string name="title_activity_portata">Portate Menu</string>
     <string name="title_activity_portata_activity_ristorante">Portate Menu</string>
     <string name="title_activity_portata_dettaglio">Dettaglio Portata</string>

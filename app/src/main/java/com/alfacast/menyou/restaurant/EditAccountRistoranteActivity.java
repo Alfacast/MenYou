@@ -1,9 +1,11 @@
 
 package com.alfacast.menyou.restaurant;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,6 +15,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -89,6 +93,11 @@ public class EditAccountRistoranteActivity extends AppCompatActivity {
         btnInsertFoto=(Button)findViewById(R.id.btnSelectPhoto);
         btnEdit = (Button) findViewById(R.id.btnEditAccount);
         viewImage=(ImageView)findViewById(R.id.viewImage);
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            btnInsertFoto.setEnabled(false);
+            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE }, 0);
+        }
 
         // SqLite database handler
         db = new SQLiteHandlerRestaurant(getApplicationContext());
@@ -169,6 +178,16 @@ public class EditAccountRistoranteActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == 0) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                btnInsertFoto.setEnabled(true);
+            }
+        }
+    }
+
     private void selectImage() {
 
         final CharSequence[] options = { "Scatta una foto", "Seleziona dalla galleria","Annulla" };
@@ -228,10 +247,16 @@ public class EditAccountRistoranteActivity extends AppCompatActivity {
                         angle = 270;
                     }
 
-                    Matrix mat = new Matrix();
-                    mat.postRotate(angle);
+                    int maxHeight = 2000;
+                    int maxWidth = 2000;
 
                     Bitmap bmp = BitmapFactory.decodeStream(new FileInputStream(f), null, null);
+                    float scale = Math.min(((float)maxHeight / bmp.getWidth()), ((float)maxWidth / bmp.getHeight()));
+
+                    Matrix mat = new Matrix();
+                    mat.postRotate(angle);
+                    mat.postScale(scale, scale);
+
                     Bitmap bitmap = Bitmap.createBitmap(bmp, 0, 0, bmp.getWidth(), bmp.getHeight(), mat, true);
 
                     viewImage.setImageBitmap(bitmap);
@@ -284,12 +309,20 @@ public class EditAccountRistoranteActivity extends AppCompatActivity {
                         angle = 270;
                     }
 
-                    Matrix mat = new Matrix();
-                    mat.postRotate(angle);
+                    int maxHeight = 2000;
+                    int maxWidth = 2000;
 
                     Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
-                    Log.w("path gallery...", picturePath+"");
-                    viewImage.setImageBitmap(thumbnail);
+                    float scale = Math.min(((float)maxHeight / thumbnail.getWidth()), ((float)maxWidth / thumbnail.getHeight()));
+
+                    Matrix mat = new Matrix();
+                    mat.postRotate(angle);
+                    mat.postScale(scale, scale);
+
+                    Bitmap bitmap = Bitmap.createBitmap(thumbnail, 0, 0, thumbnail.getWidth(), thumbnail.getHeight(), mat, true);
+
+                    Log.w("path gallery...", picturePath + "");
+                    viewImage.setImageBitmap(bitmap);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
