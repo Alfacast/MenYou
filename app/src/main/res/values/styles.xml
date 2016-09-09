@@ -18,6 +18,7 @@
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">#b70000</item>
+        <item name="colorPrimaryDark">#b70000</item>
         <item name="colorAccent">#ffffff</item>
     </style>
 
