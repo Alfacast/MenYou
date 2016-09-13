@@ -70,7 +70,7 @@ public class PortataActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         Log.d(TAG,"response" + response.toString());
-                        hidePDialog();
+                        //hidePDialog();
 
                         // Parsing json
                         for (int i = 0; i < response.length(); i++) {
@@ -101,7 +101,7 @@ public class PortataActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
-                hidePDialog();
+                //hidePDialog();
 
             }
 
@@ -258,7 +258,7 @@ public class PortataActivity extends AppCompatActivity {
                                 @Override
                                 public void onResponse(JSONArray response) {
                                     Log.d(TAG, response.toString());
-                                    hidePDialog();
+                                    //hidePDialog();
 
                                     // Parsing json
                                     for (int i = 0; i < response.length(); i++) {
@@ -294,7 +294,7 @@ public class PortataActivity extends AppCompatActivity {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             VolleyLog.d(TAG, "Error: " + error.getMessage());
-                            hidePDialog();
+                            //hidePDialog();
 
                         }
 
