@@ -1,13 +1,22 @@
 package com.alfacast.menyou.login.activity;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.alfacast.menyou.client.MainClienteActivity;
@@ -49,6 +58,7 @@ public class LoginActivity extends Activity {
     private Button btnRegisterRestaurateur; //Button for Restaurateur
     private EditText inputEmail;
     private EditText inputPassword;
+    private LinearLayout layout;
     private ProgressDialog pDialog;
     private SessionManager session;
     private SQLiteHandlerUser db;
@@ -61,6 +71,10 @@ public class LoginActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //nascondo la status bar
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
         callbackManager = CallbackManager.Factory.create();
@@ -72,6 +86,17 @@ public class LoginActivity extends Activity {
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLinkToRegister = (Button) findViewById(R.id.btnLinkToRegisterScreen);
         btnRegisterRestaurateur = (Button) findViewById(R.id.btnLinkToRegisterRestaurateur);
+        layout = (LinearLayout) findViewById(R.id.layout);
+
+        layout.setOnTouchListener(new View.OnTouchListener()
+        {
+            @Override
+            public boolean onTouch(View view, MotionEvent ev)
+            {
+                hideKeyboard(view);
+                return false;
+            }
+        });
 
         //Button login con Facebook
         loginButton = (LoginButton)findViewById(R.id.login_button);
@@ -203,6 +228,12 @@ public class LoginActivity extends Activity {
             }
         });
 
+    }
+
+    protected void hideKeyboard(View view)
+    {
+        InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
     @Override
