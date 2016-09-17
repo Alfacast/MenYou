@@ -68,4 +68,27 @@
     <string name="title_activity_maps">Mappa Ristoranti</string>
     <string name="title_activity_menuristorante">Menu Ristorante</string>
 
+    <!-- Tutorial String -->
+
+    <string name="next">AVANTI</string>
+    <string name="skip">SALTA</string>
+    <string name="start">FINITO</string>
+
+    <string name="slide_1_title">Inserisci le credenziali</string>
+    <string name="slide_1_desc">Effettua il login o registrati al circuito di MenYou</string>
+
+    <string name="slide_2_title">Aggiungi un menu</string>
+    <string name="slide_2_desc">Dal menu laterale seleziona "Aggiungi menu"</string>
+
+    <string name="slide_3_title">Crea il menu</string>
+    <string name="slide_3_desc">Digita il nome del tuo menu e fai tap su inserisci per crearlo</string>
+
+    <string name="slide_4_title">Inserisci una portata!</string>
+    <string name="slide_4_desc">Compila i campi ed inserisci la prima portata del menu</string>
+
+    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
+    <string name="play_again">Play Again</string>
+
+    <!-- Tutorial String end -->
+
 </resources>

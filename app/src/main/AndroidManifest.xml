@@ -97,6 +97,7 @@
         <activity
             android:name="com.alfacast.menyou.restaurant.TutorialActivity"
             android:label="@string/tutorial_name"
+            android:screenOrientation="portrait"
             android:parentActivityName="com.alfacast.menyou.restaurant.MainRistoranteActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data

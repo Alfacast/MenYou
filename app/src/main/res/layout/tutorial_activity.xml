@@ -1,26 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context="com.alfacast.menyou.restaurant.TutorialActivity">
+    tools:showIn="@layout/tutorial_activity">
 
-    <android.support.design.widget.AppBarLayout
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:id="@+id/layoutDots"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dots_height"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/dots_margin_bottom"
+        android:gravity="center"
+        android:orientation="horizontal"></LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:alpha=".5"
+        android:layout_above="@id/layoutDots"
+        android:background="@android:color/white" />
+
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@null"
+        android:text="@string/next"
+        android:textColor="@android:color/white" />
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/btn_login_bg"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+    <Button
+        android:id="@+id/btn_skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="@null"
+        android:text="@string/skip"
+        android:textColor="@android:color/white" />
 
-    </android.support.design.widget.AppBarLayout>
-
-    <include layout="@layout/tutorial_content" />
-
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>
