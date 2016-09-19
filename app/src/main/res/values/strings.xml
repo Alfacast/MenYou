@@ -86,6 +86,15 @@
     <string name="slide_4_title">Inserisci una portata!</string>
     <string name="slide_4_desc">Compila i campi ed inserisci la prima portata del menu</string>
 
+    <string name="slide_5_title">I tuoi menu</string>
+    <string name="slide_5_desc">Nella schermata principale troverai i menu da te inseriti che potrai modificare o eliminare</string>
+
+    <string name="slide_6_title">Le tue portate</string>
+    <string name="slide_6_desc">Entrando all interno del menu puoi visualizzarne le portate ed inserirne di nuove</string>
+
+    <string name="slide_7_title">Modifica una portata</string>
+    <string name="slide_7_desc">Facendo tap su una portata puoi visualizzarne i dettagli e decidere se modificarla o eliminarla</string>
+
     <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
     <string name="play_again">Play Again</string>
 
