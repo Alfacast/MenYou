@@ -2,6 +2,7 @@ package com.alfacast.menyou.restaurant;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -21,11 +22,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -67,6 +72,7 @@ public class EditPortataActivity extends AppCompatActivity {
     private Switch switchButton;
     private String switchOn = "Si";
     private String switchOff = "No";
+    private LinearLayout layout;
     private ProgressDialog pDialog;
     private SQLiteHandlerPortata db;
     private SQLiteHandlerRestaurant dbr;
@@ -91,6 +97,17 @@ public class EditPortataActivity extends AppCompatActivity {
         btnSelectPhoto=(Button)findViewById(R.id.btnSelectPhoto);
         viewImage=(ImageView)findViewById(R.id.viewImage);
         switchButton = (Switch) findViewById(R.id.switchButton);
+        layout = (LinearLayout) findViewById(R.id.layout_edit_portata);
+
+        layout.setOnTouchListener(new View.OnTouchListener()
+        {
+            @Override
+            public boolean onTouch(View view, MotionEvent ev)
+            {
+                hideKeyboard(view);
+                return false;
+            }
+        });
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             btnSelectPhoto.setEnabled(false);
@@ -210,6 +227,12 @@ public class EditPortataActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    protected void hideKeyboard(View view)
+    {
+        InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
     @Override

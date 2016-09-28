@@ -4,12 +4,16 @@ package com.alfacast.menyou.login.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.alfacast.menyou.client.MainClienteActivity;
@@ -38,6 +42,7 @@ public class RegisterUserActivity extends Activity {
     private EditText inputEmailR;
     private EditText inputPassword;
     private EditText inputPasswordR;
+    private LinearLayout layout;
     private ProgressDialog pDialog;
     private SessionManager session;
     private SQLiteHandlerUser db;
@@ -54,6 +59,17 @@ public class RegisterUserActivity extends Activity {
         inputPasswordR = (EditText) findViewById(R.id.passwordR);
         btnRegister = (Button) findViewById(R.id.btnRegister);
         btnLinkToLogin = (Button) findViewById(R.id.btnLinkToLoginScreen);
+        layout = (LinearLayout) findViewById(R.id.layout_register_cliente);
+
+        layout.setOnTouchListener(new View.OnTouchListener()
+        {
+            @Override
+            public boolean onTouch(View view, MotionEvent ev)
+            {
+                hideKeyboard(view);
+                return false;
+            }
+        });
 
         // Progress dialog
         pDialog = new ProgressDialog(this);
@@ -111,6 +127,12 @@ public class RegisterUserActivity extends Activity {
             }
         });
 
+    }
+
+    protected void hideKeyboard(View view)
+    {
+        InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
     /**

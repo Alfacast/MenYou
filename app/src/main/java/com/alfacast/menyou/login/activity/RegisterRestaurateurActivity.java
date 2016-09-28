@@ -5,6 +5,7 @@ package com.alfacast.menyou.login.activity;
 import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -22,10 +23,13 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Base64;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.alfacast.menyou.client.MainClienteActivity;
@@ -70,6 +74,7 @@ public class RegisterRestaurateurActivity extends Activity {
     private EditText inputRestaurantPasswordR;
     private ImageView viewImage;
     private Button btnInsertFoto;
+    private LinearLayout layout;
     private ProgressDialog pDialog;
     private SessionManager session;
     private SQLiteHandlerRestaurant db;
@@ -94,6 +99,17 @@ public class RegisterRestaurateurActivity extends Activity {
         viewImage=(ImageView)findViewById(R.id.viewImage);
         btnRegister = (Button) findViewById(R.id.btnRegister);
         btnLinkToLogin = (Button) findViewById(R.id.btnLinkToLoginScreen);
+        layout = (LinearLayout) findViewById(R.id.layout_register_ristorante);
+
+        layout.setOnTouchListener(new View.OnTouchListener()
+        {
+            @Override
+            public boolean onTouch(View view, MotionEvent ev)
+            {
+                hideKeyboard(view);
+                return false;
+            }
+        });
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             btnInsertFoto.setEnabled(false);
@@ -174,6 +190,12 @@ public class RegisterRestaurateurActivity extends Activity {
                 finish();
             }
         });
+    }
+
+    protected void hideKeyboard(View view)
+    {
+        InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
     @Override

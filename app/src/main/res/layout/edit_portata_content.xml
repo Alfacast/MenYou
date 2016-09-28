@@ -20,7 +20,10 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:paddingLeft="20dp"
-            android:paddingRight="20dp">
+            android:paddingRight="20dp"
+            android:id="@+id/layout_edit_portata"
+            android:visibility="visible"
+            android:weightSum="1">
 
             <Spinner
                 android:id="@+id/spinFood"

@@ -1,17 +1,18 @@
-
-
-
 package com.alfacast.menyou.client;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +43,7 @@ public class EditAccountClienteActivity extends AppCompatActivity {
     private EditText clientePassword;
     private EditText clienteEmailR;
     private EditText clientePasswordR;
+    private LinearLayout layout;
 
     private SQLiteHandlerUser db;
     private SessionManager session;
@@ -63,6 +65,17 @@ public class EditAccountClienteActivity extends AppCompatActivity {
         clienteEmailR = (EditText) findViewById(R.id.ClienteEmailR);
         clientePasswordR = (EditText) findViewById(R.id.ClientePasswordR);
         btnEdit = (Button) findViewById(R.id.btnEditAccount);
+        layout = (LinearLayout) findViewById(R.id.layout_account_cliente);
+
+        layout.setOnTouchListener(new View.OnTouchListener()
+        {
+            @Override
+            public boolean onTouch(View view, MotionEvent ev)
+            {
+                hideKeyboard(view);
+                return false;
+            }
+        });
 
         // SqLite database handler
         db = new SQLiteHandlerUser(getApplicationContext());
@@ -113,6 +126,12 @@ public class EditAccountClienteActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    protected void hideKeyboard(View view)
+    {
+        InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
     private void editCliente(final String uid, final String nome, final String email, final String password) {

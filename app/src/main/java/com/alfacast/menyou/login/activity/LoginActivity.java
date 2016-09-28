@@ -1,13 +1,10 @@
 package com.alfacast.menyou.login.activity;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
