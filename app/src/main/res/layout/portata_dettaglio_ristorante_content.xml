@@ -9,122 +9,151 @@
     tools:context="com.alfacast.menyou.restaurant.PortataDettaglioRistoranteActivity"
     tools:showIn="@layout/portata_dettaglio_ristorante_activity">
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <TextView
-        android:id="@+id/idportata"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone" />
-
-    <ImageView
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/foto"
-        android:adjustViewBounds="true" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/nomeportata"
-        android:layout_below="@+id/foto"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:textSize="20dp"
-        android:textIsSelectable="false"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/idportata"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/descrizioneportata"
-        android:layout_below="@+id/nomeportata"
-        android:layout_centerHorizontal="true"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/categoria"
-        android:layout_below="@+id/opzioniPortata"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:paddingLeft="16dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:id="@+id/foto"
+                android:scaleType="centerCrop" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/prezzo"
-        android:layout_below="@+id/opzioniPortata"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:paddingRight="16dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/img_gradient" />
+        </FrameLayout>
 
-    <!-- Thumbnail Image -->
-    <ImageView
-        android:id="@+id/thumbnailportata"
-        android:layout_below="@id/categoria"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:scaleType="centerCrop"
-        android:layout_alignParentLeft="true"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="16dp" />
+        <RelativeLayout
+            android:id="@+id/img_gradient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="top"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:layout_marginTop="190dp">
 
-    <TextView
-        android:id="@+id/nomeristorante"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/thumbnailportata"
-        android:layout_toRightOf="@+id/thumbnailportata"
-        android:textSize="@dimen/portata"
-        android:textStyle="bold" />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnDeletePortata"
+                android:src="@drawable/ic_delete_white"
+                android:background="@null"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="5dp" />
 
-    <TextView
-        android:id="@+id/indirizzo"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/nomeristorante"
-        android:autoLink = "all"
-        android:linksClickable="true"
-        android:layout_marginTop="5dip"
-        android:layout_toRightOf="@+id/thumbnailportata"
-        android:textSize="@dimen/categoria" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/nomeportata"
+                android:textSize="20dp"
+                android:textColor="@android:color/white"
+                android:textIsSelectable="false"
+                android:textStyle="bold"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/btnDeletePortata"
+                android:layout_toEndOf="@+id/btnDeletePortata"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp" />
 
-    <TextView
-        android:id="@+id/telefono"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/indirizzo"
-        android:layout_marginTop="5dp"
-        android:layout_toRightOf="@+id/thumbnailportata"
-        android:textColor="@color/categoria"
-        android:textSize="@dimen/categoria" />
+            <TextView
+                android:id="@+id/nomeristorante"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textColor="#576586"
+                android:textSize="@dimen/portata"
+                android:textStyle="bold"
+                android:layout_below="@+id/nomeportata" />
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnDeletePortata"
-        android:src="@drawable/ic_delete"
-        android:layout_above="@+id/descrizioneportata"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+            <TextView
+                android:id="@+id/indirizzo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="5dp"
+                android:autoLink = "all"
+                android:linksClickable="true"
+                android:layout_alignParentBottom="true"
+                android:textSize="@dimen/categoria" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/opzioniPortata"
-        android:layout_below="@+id/descrizioneportata"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp" />
+            <TextView
+                android:id="@+id/telefono"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/categoria"
+                android:textSize="@dimen/categoria"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@+id/indirizzo"
+                android:layout_toEndOf="@+id/indirizzo" />
 
-</RelativeLayout>
+            <ImageView
+                android:id="@+id/thumbnailportata"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginBottom="10dp"
+                android:scaleType="centerCrop"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/descrizioneportata"
+            android:layout_below="@+id/img_gradient"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/opzioniPortata"
+            android:text="Opzioni:"
+            android:layout_below="@+id/descrizioneportata"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="16dp"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/categoria"
+            android:layout_below="@+id/opzioniPortata"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:paddingLeft="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/prezzo"
+            android:textColor="@color/bg_login"
+            android:layout_below="@+id/opzioniPortata"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:paddingRight="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp" />
+
+    </RelativeLayout>
 </ScrollView>
