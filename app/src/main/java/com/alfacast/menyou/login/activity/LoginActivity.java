@@ -17,13 +17,19 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.alfacast.menyou.client.MainClienteActivity;
+import com.alfacast.menyou.client.MainFacebookActivity;
+import com.alfacast.menyou.client.MapsActivity;
 import com.alfacast.menyou.restaurant.MainRistoranteActivity;
 import com.android.volley.Request.Method;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.facebook.AccessToken;
+import com.facebook.AccessTokenTracker;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.Profile;
+import com.facebook.ProfileTracker;
 import com.facebook.appevents.AppEventsLogger;
 import com.alfacast.menyou.login.R;
 import com.alfacast.menyou.UrlConfig;
@@ -61,20 +67,49 @@ public class LoginActivity extends Activity {
     private SQLiteHandlerUser db;
     private SQLiteHandlerRestaurant dbr;
 
+    private AccessTokenTracker accessTokenTracker;
+    private ProfileTracker profileTracker;
     private CallbackManager callbackManager;
     private LoginButton loginButton;
 
+    //Facebook login button
+    private FacebookCallback<LoginResult> callback = new FacebookCallback<LoginResult>() {
+        @Override
+        public void onSuccess(LoginResult loginResult) {
+            Profile profile = Profile.getCurrentProfile();
+            nextActivity(profile);
+        }
+        @Override
+        public void onCancel() {        }
+        @Override
+        public void onError(FacebookException e) {      }
+    };
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        FacebookSdk.sdkInitialize(getApplicationContext());
         super.onCreate(savedInstanceState);
 
         //nascondo la status bar
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
         callbackManager = CallbackManager.Factory.create();
+        accessTokenTracker = new AccessTokenTracker() {
+            @Override
+            protected void onCurrentAccessTokenChanged(AccessToken oldToken, AccessToken newToken) {
+            }
+        };
+
+        profileTracker = new ProfileTracker() {
+            @Override
+            protected void onCurrentProfileChanged(Profile oldProfile, Profile newProfile) {
+                nextActivity(newProfile);
+            }
+        };
+        accessTokenTracker.startTracking();
+        profileTracker.startTracking();
 
         setContentView(R.layout.login_activity);
 
@@ -98,22 +133,13 @@ public class LoginActivity extends Activity {
         //Button login con Facebook
         loginButton = (LoginButton)findViewById(R.id.login_button);
 
-        // Callback registration
-        loginButton.setReadPermissions(Arrays.asList("email"));
-
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+        callback = new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                /*Intent intent = new Intent(LoginActivity.this,MainClienteActivity.class);
-                startActivity(intent);
-                finish();
-                    Toast.makeText(getApplicationContext(),"User ID:  " +
-                            loginResult.getAccessToken().getUserId() + "\n" +
-                            "Auth Token: " + loginResult.getAccessToken().getToken(), Toast.LENGTH_LONG)
-                            .show();*/
-                System.out.println("onSuccess");
-                String accessToken = loginResult.getAccessToken().getToken();
-                Log.i("accessToken", accessToken);
+                AccessToken accessToken = loginResult.getAccessToken();
+                Profile profile = Profile.getCurrentProfile();
+                nextActivity(profile);
+                Toast.makeText(getApplicationContext(), "Logging in...", Toast.LENGTH_SHORT).show();
 
                 GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
 
@@ -152,7 +178,12 @@ public class LoginActivity extends Activity {
                         "Tentativo di login fallito", Toast.LENGTH_LONG)
                         .show();
             }
-        });
+        };
+
+        // Callback registration
+        loginButton.setReadPermissions(Arrays.asList("email"));
+        loginButton.setReadPermissions("user_friends");
+        loginButton.registerCallback(callbackManager, callback);
 
         // Progress dialog
         pDialog = new ProgressDialog(this);
@@ -234,9 +265,41 @@ public class LoginActivity extends Activity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+    protected void onResume() {
+        super.onResume();
+        //Facebook login
+        Profile profile = Profile.getCurrentProfile();
+        nextActivity(profile);
+    }
+
+    @Override
+    protected void onPause() {
+
+        super.onPause();
+    }
+
+    protected void onStop() {
+        super.onStop();
+        //Facebook login
+        accessTokenTracker.stopTracking();
+        profileTracker.stopTracking();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int responseCode, Intent intent) {
+        super.onActivityResult(requestCode, responseCode, intent);
+        //Facebook login
+        callbackManager.onActivityResult(requestCode, responseCode, intent);
+    }
+
+    private void nextActivity(Profile profile){
+        if(profile != null){
+            Intent main = new Intent(LoginActivity.this, MainFacebookActivity.class);
+            main.putExtra("name", profile.getFirstName());
+            main.putExtra("surname", profile.getLastName());
+            main.putExtra("imageUrl", profile.getProfilePictureUri(200,200).toString());
+            startActivity(main);
+        }
     }
 
     private Bundle getFacebookData(JSONObject object) {
@@ -309,12 +372,6 @@ public class LoginActivity extends Activity {
                         // Inserting row in users table
                         db.addUser(name, email, uid, created_at);
 
-                        // Launch login activity
-                        /*Intent intent = new Intent(
-                                LoginActivity.this,
-                                MainClienteActivity.class);
-                        startActivity(intent);
-                        finish();*/
                     } else {
 
                         // Error occurred in registration. Get the error

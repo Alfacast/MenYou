@@ -97,8 +97,8 @@
         <activity
             android:name="com.alfacast.menyou.restaurant.TutorialActivity"
             android:label="@string/tutorial_name"
-            android:screenOrientation="portrait"
             android:parentActivityName="com.alfacast.menyou.restaurant.MainRistoranteActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -232,6 +232,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.alfacast.menyou.client.MainClienteActivity" />
         </activity>
+        <activity
+            android:name="com.alfacast.menyou.client.MainFacebookActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
