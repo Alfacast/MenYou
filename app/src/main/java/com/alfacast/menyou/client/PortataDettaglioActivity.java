@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
@@ -25,7 +26,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.facebook.login.LoginManager;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
+
 public class PortataDettaglioActivity extends AppCompatActivity {
+
+    private ShareDialog mShareDialog;
 
     // Log tag
     private static final String TAG = PortataDettaglioActivity.class.getSimpleName();
@@ -52,6 +59,8 @@ public class PortataDettaglioActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
+        mShareDialog = new ShareDialog(this);
+
         final ImageView foto = (ImageView) findViewById(R.id.foto);
         final ImageView thumbNailPortata = (ImageView) findViewById(R.id.thumbnailportata);
         final TextView nomePortata = (TextView) findViewById(R.id.nomeportata);
@@ -63,6 +72,14 @@ public class PortataDettaglioActivity extends AppCompatActivity {
         final TextView categoria = (TextView) findViewById(R.id.categoria);
         final TextView prezzo = (TextView) findViewById(R.id.prezzo);
         final TextView idPortata = (TextView) findViewById(R.id.idportata);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShareLinkContent content = new ShareLinkContent.Builder().build();
+                mShareDialog.show(content);
+            }
+        });
 
         nomeRistorante.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
