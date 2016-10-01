@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -26,8 +27,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.facebook.CallbackManager;
 import com.facebook.login.LoginManager;
 import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.model.SharePhoto;
+import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareDialog;
 
 public class PortataDettaglioActivity extends AppCompatActivity {
@@ -68,15 +72,22 @@ public class PortataDettaglioActivity extends AppCompatActivity {
         final TextView idRistorante = (TextView) findViewById(R.id.idristorante);
         final TextView indirizzo = (TextView) findViewById(R.id.indirizzo);
         final TextView telefono = (TextView) findViewById(R.id.telefono);
+        final TextView sitoWeb = (TextView) findViewById(R.id.sitoweb);
         final TextView descrizionePortata = (TextView) findViewById(R.id.descrizioneportata);
         final TextView categoria = (TextView) findViewById(R.id.categoria);
         final TextView prezzo = (TextView) findViewById(R.id.prezzo);
         final TextView idPortata = (TextView) findViewById(R.id.idportata);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ShareLinkContent content = new ShareLinkContent.Builder().build();
+                String contentTitle = nomePortata.getText().toString()+" al "+nomeRistorante.getText().toString();
+                ShareLinkContent content = new ShareLinkContent.Builder()
+                        .setContentTitle(contentTitle)
+                        .setContentDescription(descrizionePortata.getText().toString())
+                        .setContentUrl(Uri.parse(sitoWeb.getText().toString()))
+                        .build();
                 mShareDialog.show(content);
             }
         });
@@ -122,6 +133,7 @@ public class PortataDettaglioActivity extends AppCompatActivity {
                                 idRistorante.setText(obj.getString("idristorante"));
                                 indirizzo.setText(obj.getString("indirizzo"));
                                 telefono.setText(obj.getString("telefono"));
+                                sitoWeb.setText(obj.getString("sitoweb"));
                                 idPortata.setText(obj.getString("id"));
 
                                 //decodifica immagine da db

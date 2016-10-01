@@ -137,9 +137,6 @@ public class LoginActivity extends Activity {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 AccessToken accessToken = loginResult.getAccessToken();
-                Profile profile = Profile.getCurrentProfile();
-                nextActivity(profile);
-                Toast.makeText(getApplicationContext(), "Logging in...", Toast.LENGTH_SHORT).show();
 
                 GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
 
@@ -179,10 +176,8 @@ public class LoginActivity extends Activity {
                         .show();
             }
         };
-
-        // Callback registration
-        loginButton.setReadPermissions(Arrays.asList("email"));
-        loginButton.setReadPermissions("user_friends");
+        // Callback registration (permessi utente FB)
+        loginButton.setReadPermissions(Arrays.asList("email","user_friends"));
         loginButton.registerCallback(callbackManager, callback);
 
         // Progress dialog
@@ -299,6 +294,7 @@ public class LoginActivity extends Activity {
             main.putExtra("surname", profile.getLastName());
             main.putExtra("imageUrl", profile.getProfilePictureUri(200,200).toString());
             startActivity(main);
+            finish();
         }
     }
 
@@ -410,6 +406,9 @@ public class LoginActivity extends Activity {
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+
+        Profile profile = Profile.getCurrentProfile();
+        nextActivity(profile);
     }
 
     /**
