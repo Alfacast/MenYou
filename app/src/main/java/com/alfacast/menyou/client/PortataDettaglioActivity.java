@@ -83,6 +83,9 @@ public class PortataDettaglioActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String contentTitle = nomePortata.getText().toString()+" al "+nomeRistorante.getText().toString();
+                if (sitoWeb.getText().toString().equals("")) {
+                    sitoWeb.setText(UrlConfig.URL_Dominio);
+                }
                 ShareLinkContent content = new ShareLinkContent.Builder()
                         .setContentTitle(contentTitle)
                         .setContentDescription(descrizionePortata.getText().toString())

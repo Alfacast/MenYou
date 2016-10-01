@@ -6,6 +6,8 @@ import java.net.URL;
  * Created by MacPro on 02/05/16.
  */
 public class UrlConfig {
+        public static String URL_Dominio = "http://alfacast.altervista.org/";
+
         public static String URL_Site = "http://www.cinesofia.it/alfacast/youmenulogin/";
 
         public static String URL_LoginActivity = URL_Site+"login.php";
