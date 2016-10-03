@@ -26,6 +26,13 @@
     <android.support.design.widget.FloatingActionButton android:id="@+id/fab"
         android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:layout_gravity="bottom|end" android:layout_margin="@dimen/fab_margin"
-        app:backgroundTint="@color/com_facebook_blue" android:src="@drawable/ic_share" />
+        app:backgroundTint="@color/bg_login" android:src="@drawable/ic_share" />
+
+    <com.facebook.share.widget.ShareButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="@dimen/fab_margin"
+        android:id="@+id/fb_share_button"/>
 
 </android.support.design.widget.CoordinatorLayout>

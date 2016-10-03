@@ -1,14 +1,20 @@
 package com.alfacast.menyou.client;
 
 import android.app.ProgressDialog;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -32,7 +38,11 @@ import com.facebook.login.LoginManager;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.model.SharePhoto;
 import com.facebook.share.model.SharePhotoContent;
+import com.facebook.share.widget.ShareButton;
 import com.facebook.share.widget.ShareDialog;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PortataDettaglioActivity extends AppCompatActivity {
 
@@ -78,10 +88,10 @@ public class PortataDettaglioActivity extends AppCompatActivity {
         final TextView prezzo = (TextView) findViewById(R.id.prezzo);
         final TextView idPortata = (TextView) findViewById(R.id.idportata);
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-
-        fab.setOnClickListener(new View.OnClickListener() {
+        final ShareButton shareButton = (ShareButton)findViewById(R.id.fb_share_button);
+        shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 String contentTitle = nomePortata.getText().toString()+" al "+nomeRistorante.getText().toString();
                 if (sitoWeb.getText().toString().equals("")) {
                     sitoWeb.setText(UrlConfig.URL_Dominio);
@@ -92,6 +102,20 @@ public class PortataDettaglioActivity extends AppCompatActivity {
                         .setContentUrl(Uri.parse(sitoWeb.getText().toString()))
                         .build();
                 mShareDialog.show(content);
+            }
+        });
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String contentTitle = nomePortata.getText().toString()+" al "+nomeRistorante.getText().toString();
+
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, contentTitle+" "+sitoWeb.getText().toString());
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, descrizionePortata.getText().toString());
+                startActivity(Intent.createChooser(sharingIntent, "Condividi con"));
+
             }
         });
 
