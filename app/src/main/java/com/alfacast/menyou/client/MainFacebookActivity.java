@@ -15,22 +15,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.alfacast.menyou.login.R;
 import com.alfacast.menyou.login.activity.LoginActivity;
 import com.alfacast.menyou.login.helper.SQLiteHandlerUser;
-import com.alfacast.menyou.login.helper.SessionManager;
 import com.facebook.login.LoginManager;
 
 public class MainFacebookActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = MainFacebookActivity.class.getSimpleName();
+    private SQLiteHandlerUser db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_facebook);
+
+        db = new SQLiteHandlerUser(getApplicationContext());
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -171,6 +172,7 @@ public class MainFacebookActivity extends AppCompatActivity
 
     public void logout(){
         LoginManager.getInstance().logOut();
+        db.deleteUsers();
         Intent login = new Intent(MainFacebookActivity.this, LoginActivity.class);
         startActivity(login);
         finish();

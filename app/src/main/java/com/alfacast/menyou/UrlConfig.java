@@ -1,7 +1,5 @@
 package com.alfacast.menyou;
 
-import java.net.URL;
-
 /**
  * Created by MacPro on 02/05/16.
  */

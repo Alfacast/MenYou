@@ -18,7 +18,6 @@ import android.widget.Toast;
 
 import com.alfacast.menyou.client.MainClienteActivity;
 import com.alfacast.menyou.client.MainFacebookActivity;
-import com.alfacast.menyou.client.MapsActivity;
 import com.alfacast.menyou.restaurant.MainRistoranteActivity;
 import com.android.volley.Request.Method;
 import com.android.volley.Response;
