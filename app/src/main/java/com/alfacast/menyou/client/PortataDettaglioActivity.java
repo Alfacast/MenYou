@@ -12,12 +12,18 @@ import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alfacast.menyou.UrlConfig;
 import com.alfacast.menyou.login.R;
 import com.alfacast.menyou.login.app.AppController;
+import com.alfacast.menyou.login.helper.SQLiteHandlerUser;
+import com.alfacast.menyou.restaurant.InsertMenuActivity;
+import com.alfacast.menyou.restaurant.InsertPortataActivity;
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
@@ -27,13 +33,20 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.android.volley.toolbox.StringRequest;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareButton;
 import com.facebook.share.widget.ShareDialog;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.alfacast.menyou.login.R.drawable.preferiti;
+
 public class PortataDettaglioActivity extends AppCompatActivity {
 
     private ShareDialog mShareDialog;
+    private SQLiteHandlerUser db;
 
     // Log tag
     private static final String TAG = PortataDettaglioActivity.class.getSimpleName();
@@ -53,6 +66,10 @@ public class PortataDettaglioActivity extends AppCompatActivity {
         final String idportata=b.getString("idportata");
         final String nomeportata=c.getString("nomeportata");
         Log.d(TAG,"id portata: "+ idportata);
+
+        db = new SQLiteHandlerUser(getApplicationContext());
+        HashMap<String, String> a = db.getUserDetails();
+        final String uiduser = a.get("uid");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(nomeportata);
@@ -124,6 +141,8 @@ public class PortataDettaglioActivity extends AppCompatActivity {
         pDialog.setMessage("Loading...");
         pDialog.show();
 
+        getPreferito(idportata,uiduser);
+
         // Creating volley request obj
         JsonArrayRequest portataReq = new JsonArrayRequest(UrlConfig.URL_PortataDettaglioActivity+idportata,
 
@@ -177,6 +196,67 @@ public class PortataDettaglioActivity extends AppCompatActivity {
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(portataReq);
+    }
+
+    private void getPreferito(final String idportata, final String uiduser) {
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                UrlConfig.URL_GetPreferiti, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, response.toString());
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+                    if (!error) {
+
+                        JSONObject preferito = jObj.getJSONObject("preferito");
+                        String id = preferito.getString("id_portata");
+                        Log.d(TAG,"id portata activity: "+idportata);
+
+                        if (id.equals(idportata)){
+                            CheckBox preferiti = (CheckBox) findViewById(R.id.preferiti);
+                            preferiti.setChecked(true);
+                        }
+
+                    } else {
+
+                        // Error occurred in registration. Get the error
+                        // message
+                        String errorMsg = jObj.getString("error_msg");
+                        Toast.makeText(getApplicationContext(),
+                                errorMsg, Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Insert Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }){
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting params to register url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("idportata", idportata);
+                params.put("uiduser", uiduser);
+
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq);
     }
 
     @Override

@@ -16,6 +16,8 @@ public class UrlConfig {
 
         public static String URL_RegisterRestaurateurActivity = URL_Site+"registerRistorante.php";
 
+        public static String URL_GetPreferiti = URL_Site+"get_preferito.php";
+
         public static String URL_InsertMenuActivity = URL_Site+"insertMenu.php";
 
         public static String URL_InsertPortataActivity = URL_Site+"insertPortata.php";
