@@ -137,7 +137,9 @@ public class MainClienteActivity extends AppCompatActivity
                     EditAccountClienteActivity.class);
             startActivity(i);
         } else if (id == R.id.nav_preferiti) {
-
+            Intent i = new Intent(getApplicationContext(),
+                    PreferitiActivity.class);
+            startActivity(i);
         } else if (id == R.id.nav_map) {
             Intent i = new Intent(getApplicationContext(),
                     MapsActivity.class);

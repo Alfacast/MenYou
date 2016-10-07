@@ -18,9 +18,15 @@ public class UrlConfig {
 
         public static String URL_GetPreferiti = URL_Site+"get_preferito.php";
 
+        public static String URL_Preferiti = URL_Site+"get_preferiti.php?uiduser=";
+
         public static String URL_InsertMenuActivity = URL_Site+"insertMenu.php";
 
         public static String URL_InsertPortataActivity = URL_Site+"insertPortata.php";
+
+        public static String URL_InsertPreferito = URL_Site+"insertPreferito.php";
+
+        public static String URL_DeletePreferito = URL_Site+"delete_preferito.php?idportata=";
 
         public static String URL_EditMenuActivity = URL_Site+"editMenu.php?idmenu=";
 

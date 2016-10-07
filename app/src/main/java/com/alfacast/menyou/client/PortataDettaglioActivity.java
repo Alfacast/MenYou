@@ -13,6 +13,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -92,6 +93,46 @@ public class PortataDettaglioActivity extends AppCompatActivity {
         final TextView prezzo = (TextView) findViewById(R.id.prezzo);
         final TextView idPortata = (TextView) findViewById(R.id.idportata);
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        final CheckBox preferiti = (CheckBox) findViewById(R.id.preferiti);
+        preferiti.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (preferiti.isChecked()){
+                    insertPreferito(idportata,uiduser);
+                }else{
+                    JsonArrayRequest prefReq = new JsonArrayRequest(UrlConfig.URL_DeletePreferito+idportata+"&uiduser="+uiduser,
+                            new Response.Listener<JSONArray>() {
+
+                                @Override
+                                public void onResponse(JSONArray response) {
+                                    Log.d(TAG, response.toString());
+
+                                    // Parsing json
+                                    try {
+
+                                        JSONObject obj = response.getJSONObject(0);
+
+                                        String message = obj.getString("message");
+                                        Log.d(TAG,"messaggio json: "+ message);
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            VolleyLog.d(TAG, "Error: " + error.getMessage());
+
+                        }
+
+                    });
+                    // Adding request to request queue
+                    AppController.getInstance().addToRequestQueue(prefReq);
+                }
+            }
+        });
+
         final ShareButton shareButton = (ShareButton)findViewById(R.id.fb_share_button);
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -215,8 +256,8 @@ public class PortataDettaglioActivity extends AppCompatActivity {
                         String id = preferito.getString("id_portata");
                         Log.d(TAG,"id portata activity: "+idportata);
 
+                        CheckBox preferiti = (CheckBox) findViewById(R.id.preferiti);
                         if (id.equals(idportata)){
-                            CheckBox preferiti = (CheckBox) findViewById(R.id.preferiti);
                             preferiti.setChecked(true);
                         }
 
@@ -257,6 +298,67 @@ public class PortataDettaglioActivity extends AppCompatActivity {
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(strReq);
+    }
+
+    private void insertPreferito(final String idportata, final String uiduser) {
+        // Tag used to cancel the request
+        String tag_string_req = "req_insert";
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                UrlConfig.URL_InsertPreferito, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Insert Response: " + response.toString());
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+                    if (!error) {
+
+                        JSONObject preferito = jObj.getJSONObject("preferito");
+                        String id_portata = preferito.getString("id_portata");
+                        String uid_user = preferito.getString("uid_user");
+
+                        Toast.makeText(getApplicationContext(), "Portata aggiunta ai preferiti.", Toast.LENGTH_LONG).show();
+
+                    } else {
+
+                        // Error occurred in registration. Get the error
+                        // message
+                        String errorMsg = jObj.getString("error_msg");
+                        Toast.makeText(getApplicationContext(),
+                                errorMsg, Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Insert Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }){
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting params to register url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("idportata", idportata);
+                params.put("uiduser", uiduser);
+
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
     @Override
