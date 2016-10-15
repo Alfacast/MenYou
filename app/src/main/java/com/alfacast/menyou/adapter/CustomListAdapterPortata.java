@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -65,6 +66,7 @@ public class CustomListAdapterPortata extends BaseAdapter {
         TextView categoria = (TextView) convertView.findViewById(R.id.categoria);
         TextView prezzo = (TextView) convertView.findViewById(R.id.prezzo);
         TextView idPortata = (TextView) convertView.findViewById(R.id.idportata);
+        CheckBox preferiti = (CheckBox) convertView.findViewById(R.id.preferiti);
 
         // getting portata data for the row
         ListaPortata p = portataItems.get(position);
@@ -89,7 +91,19 @@ public class CustomListAdapterPortata extends BaseAdapter {
 
         idPortata.setText(p.getIdPortata());
 
+        if(p.isCheckbox()){
+            preferiti.setChecked(true);
+        }
+        else {
+            preferiti.setChecked(false);
+        }
+
         return convertView;
     }
-
+    public void setCheckBox(int position){
+        //Update status of checkbox
+        ListaPortata p = portataItems.get(position);
+        p.setCheckbox(!p.isCheckbox());
+        notifyDataSetChanged();
+    }
 }

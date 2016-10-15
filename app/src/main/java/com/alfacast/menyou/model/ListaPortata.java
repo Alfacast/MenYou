@@ -10,17 +10,19 @@ public class ListaPortata {
     private String categoria;
     private String prezzo;
     private String idPortata;
+    boolean checkbox;
 
     public ListaPortata() {
     }
 
-    public ListaPortata(String nomePortata, String thumbnailPortata, String descrizionePortata, String idPortata, String categoria, String prezzo) {
+    public ListaPortata(String nomePortata, String thumbnailPortata, String descrizionePortata, String idPortata, String categoria, String prezzo, boolean status) {
         this.nomePortata = nomePortata;
         this.thumbnailPortata = thumbnailPortata;
         this.descrizionePortata = descrizionePortata;
         this.categoria = categoria;
         this.prezzo = prezzo;
         this.idPortata = idPortata;
+        this.checkbox = status;
     }
 
     public String getNomePortata() {
@@ -77,6 +79,14 @@ public class ListaPortata {
 
     public void setIdPortata(String idPortata) {
         this.idPortata = idPortata;
+    }
+
+    public boolean isCheckbox() {
+        return checkbox;
+    }
+
+    public void setCheckbox(boolean checkbox) {
+        this.checkbox = checkbox;
     }
 
 }

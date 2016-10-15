@@ -33,7 +33,7 @@ import java.util.List;
 public class PreferitiActivity extends AppCompatActivity {
 
     // Log tag
-    private static final String TAG = PortataActivity.class.getSimpleName();
+    private static final String TAG = PreferitiActivity.class.getSimpleName();
 
     private ProgressDialog pDialog;
     private List<ListaPortata> portataList = new ArrayList<ListaPortata>();
@@ -90,6 +90,7 @@ public class PreferitiActivity extends AppCompatActivity {
                                 portata.setCategoria(obj.getString("categoria"));
                                 portata.setPrezzo(obj.getString("prezzo"));
                                 portata.setIdPortata(obj.getString("id"));
+                                portata.setCheckbox(true);
 
                                 // adding portata to portata array
                                 portataList.add(portata);

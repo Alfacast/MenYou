@@ -63,4 +63,15 @@
         android:textColor="@color/btn_login_bg"
         android:textSize="@dimen/prezzo" />
 
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/preferiti"
+        android:layout_above="@+id/descrizioneportata"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:button="@drawable/preferiti"
+        android:focusable="false"
+        android:focusableInTouchMode="false" />
+
 </RelativeLayout>

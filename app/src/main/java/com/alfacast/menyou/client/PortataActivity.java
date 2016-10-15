@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ import com.alfacast.menyou.UrlConfig;
 import com.alfacast.menyou.adapter.CustomListAdapterPortata;
 import com.alfacast.menyou.login.R;
 import com.alfacast.menyou.login.app.AppController;
+import com.alfacast.menyou.login.helper.SQLiteHandlerUser;
 import com.alfacast.menyou.model.ListaPortata;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -30,6 +32,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class PortataActivity extends AppCompatActivity {
@@ -37,6 +40,7 @@ public class PortataActivity extends AppCompatActivity {
     // Log tag
     private static final String TAG = PortataActivity.class.getSimpleName();
 
+    private SQLiteHandlerUser db;
     private ProgressDialog pDialog;
     private List<ListaPortata> portataList = new ArrayList<ListaPortata>();
     private ListView listView;
@@ -57,6 +61,10 @@ public class PortataActivity extends AppCompatActivity {
 
         final String idmenu=b.getString("idmenu");
         Log.d(TAG,"id menu: "+ idmenu);
+
+        db = new SQLiteHandlerUser(getApplicationContext());
+        HashMap<String, String> a = db.getUserDetails();
+        final String uiduser = a.get("uid");
 
         //creo il menu orizzontale per le categorie
         horizontal_recycler_view= (RecyclerView) findViewById(R.id.horizontal_recycler_view);
@@ -151,6 +159,14 @@ public class PortataActivity extends AppCompatActivity {
                                 portata.setCategoria(obj.getString("categoria"));
                                 portata.setPrezzo(obj.getString("prezzo"));
                                 portata.setIdPortata(obj.getString("id"));
+
+                                String uiduserjson = obj.getString("uiduser");
+                                Log.d(TAG, "uiduserjson è: "+ uiduserjson);
+                                Log.d(TAG, "uiduser è: "+ uiduser);
+
+                                if (uiduser.equals(uiduserjson)){
+                                    portata.setCheckbox(true);
+                                }
 
                                 // adding portata to portata array
                                 portataList.add(portata);
