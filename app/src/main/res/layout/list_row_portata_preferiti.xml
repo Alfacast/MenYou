@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_row_selector"
+    android:padding="8dp" >
+
+    <TextView
+        android:id="@+id/idportata"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <!-- Thumbnail Image -->
+    <ImageView
+        android:id="@+id/thumbnailportata"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/logo"
+        android:scaleType="centerCrop"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="8dp" />
+
+    <!-- Nome portata -->
+    <TextView
+        android:id="@+id/nomeportata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/thumbnailportata"
+        android:layout_toRightOf="@+id/thumbnailportata"
+        android:textSize="@dimen/portata"
+        android:textStyle="bold" />
+
+    <!-- Descrizione portata -->
+    <TextView
+        android:id="@+id/descrizioneportata"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nomeportata"
+        android:layout_marginTop="1dip"
+        android:layout_toRightOf="@+id/thumbnailportata"
+        android:singleLine="true"
+        android:textSize="@dimen/descrizione" />
+
+    <!-- Categoria portata -->
+    <TextView
+        android:id="@+id/categoria"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/descrizioneportata"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/thumbnailportata"
+        android:textColor="@color/categoria"
+        android:textSize="@dimen/categoria" />
+
+    <!-- Prezzo portata -->
+    <TextView
+        android:id="@+id/prezzo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/btn_login_bg"
+        android:textSize="@dimen/prezzo" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/preferiti2"
+        android:layout_above="@+id/descrizioneportata"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:button="@drawable/preferiti"
+        android:focusable="false"
+        android:focusableInTouchMode="false" />
+
+</RelativeLayout>

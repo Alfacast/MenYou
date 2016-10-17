@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.alfacast.menyou.UrlConfig;
 import com.alfacast.menyou.adapter.CustomListAdapterPortata;
+import com.alfacast.menyou.adapter.CustomListAdapterPortataPreferiti;
 import com.alfacast.menyou.login.R;
 import com.alfacast.menyou.login.app.AppController;
 import com.alfacast.menyou.login.helper.SQLiteHandlerUser;
@@ -38,7 +39,7 @@ public class PreferitiActivity extends AppCompatActivity {
     private ProgressDialog pDialog;
     private List<ListaPortata> portataList = new ArrayList<ListaPortata>();
     private ListView listView;
-    private CustomListAdapterPortata adapter;
+    private CustomListAdapterPortataPreferiti adapter;
     private SQLiteHandlerUser db;
 
     @Override
@@ -57,7 +58,7 @@ public class PreferitiActivity extends AppCompatActivity {
 
         //creo la listView verticale per le portate
         listView = (ListView) findViewById(R.id.list);
-        adapter = new CustomListAdapterPortata(this, portataList);
+        adapter = new CustomListAdapterPortataPreferiti(this, portataList);
         listView.setAdapter(adapter);
 
         Log.d(TAG, "adapter è: "+ adapter);
