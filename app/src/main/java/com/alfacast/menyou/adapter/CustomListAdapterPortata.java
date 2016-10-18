@@ -129,7 +129,7 @@ public class CustomListAdapterPortata extends BaseAdapter {
 
         preferiti.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 if (((CheckBox)v).isChecked()){
                     // Tag used to cancel the request
                     String tag_string_req = "req_insert";
@@ -149,6 +149,8 @@ public class CustomListAdapterPortata extends BaseAdapter {
                                     JSONObject preferito = jObj.getJSONObject("preferito");
                                     String id_portata = preferito.getString("id_portata");
                                     String uid_user = preferito.getString("uid_user");
+
+                                    Toast.makeText(v.getContext(), "Portata aggiunta ai preferiti.", Toast.LENGTH_LONG).show();
 
                                 } else {
 
